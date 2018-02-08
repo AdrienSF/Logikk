@@ -1,28 +1,74 @@
-function makeGate() {
-  // create a new div element
-  var newGate = document.createElement("div");
-  newGate.id = "gate";
+class Gate {
+  // type may be INPUT, AND, OR, XOR, NOT
+  constructor(type) {
+    this.type = type;
+    this.inputs = [];
+    this.output = null;
+  }
 
-  var newGateHeader = document.createElement("div");
-  newGateHeader.innerHTML = "Hi";
-  newGateHeader.id = "gateheader";
-
-  var content = document.createTextNode("Hi");
-  newGate.appendChild(newGateHeader);
-  newGate.appendChild(content);
-
-  var currentDiv = document.getElementById("canvas");
-  currentDiv.appendChild(newGate);
-
-  dragElement(newGate, newGateHeader);
+  // recursive function goes here
+  // to get state
 }
 
-function dragElement(gate, header) {
+// HTML div <-> Gate instance map
+let htmlToGate = new Map();
+let gateToHtml = new Map();
+
+// Create a new gate
+function makeGate(type) {
+  // create a new div element
+  var gateDiv = document.createElement("div");
+  gateDiv.id = "gate";
+
+  // create a new gate instance
+  var gateInstance = new Gate(type);
+
+  htmlToGate.set(gateDiv, gateInstance);
+  gateToHtml.set(gateInstance, gateDiv);
+
+  var gateHeader = document.createElement("div");
+  gateHeader.innerHTML = type;
+  gateHeader.id = "gateheader";
+
+  var inputs = document.createElement("div");
+  inputs.className = "column";
+  inputs.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"true\" ondrop=\"dropped(event)\" width=\"16\" height=\"16\">";
+
+  var output = document.createElement("div");
+  output.className = "column";
+  output.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" ondrop=\"dropped(event)\" width=\"16\" height=\"16\">";
+
+  gateDiv.appendChild(gateHeader);
+  gateDiv.appendChild(inputs);
+  gateDiv.appendChild(output);
+
+  var canvas = document.getElementById("canvas");
+  canvas.appendChild(gateDiv);
+
+  setDraggable(gateDiv, gateHeader);
+}
+
+
+// TODO: https://www.w3schools.com/html/html5_draganddrop.asp drag drop in/out
+
+// Create an element draggable, removable
+function setDraggable(gate, header) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
   header.onmousedown = dragMouseDown;
+  header.addEventListener('contextmenu', removeGate);
+
+  function removeGate(e) {
+    e.preventDefault();
+
+    gateToHtml.delete(htmlToGate.get(gate));
+    htmlToGate.delete(gate);
+
+    gate.parentNode.removeChild(gate);
+  }
 
   function dragMouseDown(e) {
+    e.preventDefault();
     e = e || window.event;
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
