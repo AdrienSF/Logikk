@@ -21,7 +21,8 @@
   if (!empty($_POST))
   {
     $uid = test_input($_POST["username"]);
-    $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    //$pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    $pass = $_POST["password"];
     $query = "SELECT * FROM ".$table." WHERE Username = '".$uid."' AND Password='".$pass."'";
     $res = $mysql->query($query);
     if ($res->num_rows == 0)
@@ -31,7 +32,7 @@
     }
     else
     {
-      $send_to = "/logikk/home.html";
+      $send_to = "/logikk/home.php";
       
       $cookie_name = "username";
       $cookie_value = "$uid";

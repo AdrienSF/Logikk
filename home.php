@@ -1,6 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
+<?php
+  // database connection details
+  $servername = "dbhost.cs.man.ac.uk";
+  $username = "a54832bs";
+  $password = "jSgsSnTMF96ceUKm";
+  $db_name="2017_comp10120_m4";
+  $alert = "";
 
+  // Create connection
+  $mysql = new mysqli($servername, $username, $password,$db_name);
+?>
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -78,9 +88,20 @@
                     <img src="images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                <?php?>
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                  <?php
+                    $user = $_COOKIE['username'];
+                  ?> 
+                    <div class="name" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <?php 
+                      $query = "SELECT Name FROM user_info WHERE
+                      Username='$user'";
+                      $result = $mysql->query($query);
+                      $row = $result->fetch_assoc();
+                      echo $row["Name"];
+                    ?>
+                    </div>
+                    <div class="email"><?php echo $row["Email"]; ?></div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
