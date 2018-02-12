@@ -94,14 +94,15 @@
                     <div class="name" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <?php 
-                      $query = "SELECT Name FROM user_info WHERE
+                      $query = "SELECT * FROM user_info WHERE
                       Username='$user'";
                       $result = $mysql->query($query);
                       $row = $result->fetch_assoc();
                       echo $row["Name"];
+                      $email = $row["Email"];
                     ?>
                     </div>
-                    <div class="email"><?php echo $row["Email"]; ?></div>
+                    <div class="email"><?php echo $email; ?></div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
