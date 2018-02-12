@@ -19,51 +19,13 @@
     <title> Login </title>
   </head>
 
-<?php
-  $servername = "localhost";
-  $username = "username";
-  $password = "password";
-  $send_to = htmlspecialchars($_SERVER["PHP_SELF"]);
-  // Create connection
-  $mysql = new mysqli($servername, $username, $password);
-
-  // Check connection
-  if ($mysql->connect_error) {
-      die("Connection failed: " . $mysql->connect_error);
-  }
-
-  if (!empty($_POST))
-  {
-    $user = test_input($_POST["username"]);
-    $pass = test_input($_POST["password"]);
-    $query = "SELECT * FROM yourTable WHERE user = '$uid' AND pass = '$pass''"
-    $res = $mysql->query($query);
-    if ($res->num_rows == 0)
-    {
-      $send_to = htmlspecialchars($_SERVER["PHP_SELF"]);
-    }
-    else
-    {
-      $send_to = "home.html";
-    }
-  }
-
-
-  function test_input($data) 
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-?>
 
 <div class="container">
   <div class="row">
     <div class="Absolute-Center is-Responsive">
       <div id="logo-container"><h3 class="text-center">LogiKK</h3></div>
       <div class="col-sm-12 col-md-10 col-md-offset-1">
-        <form method="post" action="<?php echo $send_to; ?>" id="loginForm">
+        <form method="post" action="loginVerify.php" id="loginForm">
           <div class="form-group input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input class="form-control" type="text" name='username' placeholder="username"/>
