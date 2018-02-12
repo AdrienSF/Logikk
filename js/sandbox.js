@@ -73,8 +73,9 @@ function dropped(e) {
   var targetGate = htmlToGate.get(targetNode);
 
   sourceGate.output = targetNode;
-  targetGate.inputs += sourceNode;
+  targetGate.inputs.push(sourceNode);
   console.log(targetGate.inputs);
+  console.log(sourceGate.output);
 }
 //w3schools also uses a drag() function, but I don't understand it's purpose:
 /*
