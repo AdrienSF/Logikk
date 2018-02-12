@@ -6,6 +6,7 @@
   $username = "a54832bs";
   $password = "jSgsSnTMF96ceUKm";
   $table="2017_comp10120_m4";
+  $alert = "";
 
   // Create connection
   $mysql = new mysqli($servername, $username, $password);
@@ -24,6 +25,7 @@
     $res = $mysql->query($query);
     if ($res->num_rows == 0)
     {
+      $alert = "Incorrect Username or password!";
       $send_to = "index.php";
     }
     else
@@ -33,6 +35,7 @@
   }
   else
   {
+    $alert = "Incorrect Username or password!";
     $send_to = "index.php";
   }
   
@@ -47,5 +50,11 @@
   
 ?>
 <meta http-equiv="refresh" content="0;url=<?php echo $send_to?>"/>
+<script>
+if(!(<?php echo $alert?> == ""))
+{
+  alert(<?php echo $alert?>);
+}
+</script>
 </head>
 
