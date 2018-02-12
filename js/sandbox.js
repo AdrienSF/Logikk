@@ -32,11 +32,11 @@ function makeGate(type) {
 
   var inputs = document.createElement("div");
   inputs.className = "column";
-  inputs.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"true\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+  inputs.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
 
   var output = document.createElement("div");
   output.className = "column";
-  output.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+  output.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
 
   gateDiv.appendChild(gateHeader);
   gateDiv.appendChild(inputs);
@@ -51,14 +51,19 @@ function makeGate(type) {
 
 // TODO: https://www.w3schools.com/html/html5_draganddrop.asp drag drop in/out
 //below is inserted from ^
-function allowDrop(ev) {
-    ev.preventDefault();
+function allowDrop(e) {
+  // prevent default handling of drop
+  e.preventDefault();
 }
 
-function dropped(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
+function dropped(e) {
+  e.preventDefault();
+
+  var sourceNode = e.dataTransfer.mozSourceNode.parentNode.parentNode;
+  var targetNode = e.target.parentNode.parentNode;
+
+  console.log(e.target.parentNode.parentNode);
+  console.log(e.dataTransfer.mozSourceNode.parentNode.parentNode);
 }
 //w3schools also uses a drag() function, but I don't understand it's purpose:
 /*
