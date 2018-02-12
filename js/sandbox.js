@@ -50,6 +50,12 @@ function makeGate(type) {
   setupGate(gateDiv, gateHeader);
 }
 
+function disconnectGates(source, target) {
+  // source outputs into target
+  target.inputs.splice(target.inputs.indexOf(source), 1);
+  source.output = null;
+}
+
 function drawLines() {
   function getPos(e) {
     var rect = e.getBoundingClientRect();
@@ -67,16 +73,28 @@ function drawLines() {
     if(gates[i].output) {
       var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
-      var pos1 = getPos((gateToHtml.get(gates[i])).querySelector("#nodeout"));
-      var pos2 = getPos((gateToHtml.get(gates[i].output)).querySelector("#nodein"));
+      var sourceInstance = gates[i];
+      var targetInstance = gates[i].output;
+
+      var sourceGate = gateToHtml.get(gates[i]);
+      var targetGate = gateToHtml.get(gates[i].output);
+
+      var pos1 = getPos(sourceGate.querySelector("#nodeout"));
+      var pos2 = getPos(targetGate.querySelector("#nodein"));
       var svgpos = getPos(svgcanvas);
 
       line.setAttribute('x1', pos1.x - svgpos.x + 8);
       line.setAttribute('y1', pos1.y - svgpos.y + 8);
       line.setAttribute('x2', pos2.x - svgpos.x + 8);
       line.setAttribute('y2', pos2.y - svgpos.y + 8);
-      line.setAttribute('stroke', 'black');
-      line.setAttribute('stroke-width', '2');
+      line.setAttribute('stroke', 'gray');
+      line.setAttribute('stroke-width', '4');
+
+      /* THIS WORKS BUT NOT RIGHT LINES... comment for now
+      line.addEventListener('click', function (event) {
+        disconnectGates(sourceInstance, targetInstance);
+        drawLines();
+      }, true); */
 
       svgcanvas.appendChild(line);
     }
@@ -119,7 +137,6 @@ function setupGate(gate, header) {
 
   function removeGate(e) {
     e.preventDefault();
-
 
     var gateInstance = htmlToGate.get(gate);
 
