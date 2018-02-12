@@ -62,8 +62,19 @@ function dropped(e) {
   var sourceNode = e.dataTransfer.mozSourceNode.parentNode.parentNode;
   var targetNode = e.target.parentNode.parentNode;
 
-  console.log(e.target.parentNode.parentNode);
-  console.log(e.dataTransfer.mozSourceNode.parentNode.parentNode);
+  if(sourceNode === targetNode) {
+    console.log("wtf");
+    return;
+  }
+
+  // sourceNode is the output
+  // targetNode is the input
+  var sourceGate = htmlToGate.get(sourceNode);
+  var targetGate = htmlToGate.get(targetNode);
+
+  sourceGate.output = targetNode;
+  targetGate.inputs += sourceNode;
+  console.log(targetGate.inputs);
 }
 //w3schools also uses a drag() function, but I don't understand it's purpose:
 /*
