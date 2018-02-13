@@ -1,3 +1,9 @@
+let INPUT  = "INPUT";
+let AND    = "AND";
+let OR     = "OR";
+let XOR    = "XOR";
+let NOT    = "NOT";
+
 class Gate {
   // type may be INPUT, AND, OR, XOR, NOT
   constructor(type) {
@@ -31,17 +37,18 @@ function makeGate(type) {
   var gateHeaderNode = document.createElement("div");
   gateHeaderNode.innerHTML = type;
   gateHeaderNode.id = "gateheader";
+    gateNode.appendChild(gateHeaderNode);
 
-  var inputsNode = document.createElement("div");
-  inputsNode.className = "column";
-  inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+  if(type != INPUT) {
+    var inputsNode = document.createElement("div");
+    inputsNode.className = "column";
+    inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+    gateNode.appendChild(inputsNode);
+  }
 
   var outputNode = document.createElement("div");
   outputNode.className = "column";
   outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
-
-  gateNode.appendChild(gateHeaderNode);
-  gateNode.appendChild(inputsNode);
   gateNode.appendChild(outputNode);
 
   var canvas = document.getElementById("canvas");
@@ -179,7 +186,7 @@ function setupGate(gateNode, headerNode) {
     // set the element's new position:
     gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
     gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
-
+    
     drawLines();
   }
 
