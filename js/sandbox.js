@@ -9,8 +9,12 @@ class Gate {
   // type may be IN, AND, OR, XOR, NOT
   constructor(type) {
     this.type = type;
+
     this.inputs = [];
     this.outputs = [];
+
+    if(this.type == IN)
+      this.state = false;
   }
 
   getState() {
@@ -20,7 +24,7 @@ class Gate {
 
     if(type == IN) {
       // EDIT THIS, make inputs toggle-able
-      return true;
+      return this.state;
     }
 
     if(inputs.length == 0) {
@@ -66,6 +70,10 @@ function makeGate(type) {
   var gateNode = document.createElement("div");
   gateNode.id = "gate";
 
+  // position the node
+  gateNode.style.top = (gateNode.offsetTop + 250) + "px";
+  gateNode.style.left = (gateNode.offsetLeft + 50) + "px";
+
   // create a new gate instance
   var gateInst = new Gate(type);
   gates.push(gateInst);
@@ -78,7 +86,7 @@ function makeGate(type) {
   var gateHeaderNode = document.createElement("div");
   gateHeaderNode.innerHTML = type;
   gateHeaderNode.id = "gateheader";
-    gateNode.appendChild(gateHeaderNode);
+  gateNode.appendChild(gateHeaderNode);
 
   if(type != IN) {
     var inputsNode = document.createElement("div");
@@ -196,7 +204,12 @@ function dropped(e) {
 }
 
 function createTruthTable() {
-  
+  var table = document.getElementById("truthtable");
+
+  var inputsInst = [];
+  for(var i = 0; i < gates.length; i++) {
+    if(gates[i].type == IN) inputsInst.push(gates[i]);
+  }
 }
 
 // Create an element draggable, removable
