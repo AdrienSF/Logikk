@@ -159,8 +159,11 @@ function drawLines() {
       line.setAttribute('y1', lineStartPos.y - svgpos.y + 8);
       line.setAttribute('x2', lineEndPos.x - svgpos.x + 8);
       line.setAttribute('y2', lineEndPos.y - svgpos.y + 8);
-      line.setAttribute('stroke', 'gray');
       line.setAttribute('stroke-width', '4');
+
+      var state = sourceInst.getState();
+      if(state) line.setAttribute('stroke', 'red');
+      else line.setAttribute('stroke', 'black');
 
       svgcanvas.appendChild(line);
     }
@@ -215,7 +218,8 @@ function createTruthTable() {
 // Create an element draggable, removable
 function setupGate(gateNode, headerNode) {
   headerNode.onmousedown = dragMouseDown;
-  headerNode.addEventListener('contextmenu', removeGate);
+  if(htmlToGate.get(gateNode).type != OUT)
+    headerNode.addEventListener('contextmenu', removeGate);
 
   function removeGate(e) {
     e.preventDefault();
