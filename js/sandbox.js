@@ -9,7 +9,7 @@ class Gate {
   constructor(type) {
     this.type = type;
     this.inputs = [];
-    this.output = null;
+    this.outputs = [];
   }
 
   // recursive function goes here
@@ -60,7 +60,7 @@ function makeGate(type) {
 function disconnectGates(sourceInst, targetInst) {
   // source outputs into target
   targetInst.inputs.splice(targetInst.inputs.indexOf(sourceInst), 1);
-  sourceInst.output = null;
+  sourceInst.outputs.splice(sourceInst.outputs.indexOf(targetInst), 1);
 }
 
 function drawLines() {
@@ -77,14 +77,14 @@ function drawLines() {
     svgcanvas.removeChild(svgcanvas.firstChild);
 
   for(var i = 0; i < gates.length; i++) {
-    if(gates[i].output) {
+    for(var j = 0; j < gates[i].outputs.length; j++) {
       var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
       var sourceInst = gates[i];
-      var targetInst = gates[i].output;
+      var targetInst = gates[i].outputs[j];
 
       var sourceNode = gateToHtml.get(gates[i]);
-      var targetNode = gateToHtml.get(gates[i].output);
+      var targetNode = gateToHtml.get(gates[i].outputs[j]);
 
       var lineStartPos = getPos(sourceNode.querySelector("#nodeout"));
       var lineEndPos = getPos(targetNode.querySelector("#nodein"));
@@ -122,10 +122,7 @@ function dropped(e) {
   var sourceInst = htmlToGate.get(sourceNode);
   var targetInst = htmlToGate.get(targetNode);
 
-  if(sourceInst.output)
-    disconnectGates(sourceInst, sourceInst.output);
-
-  sourceInst.output = targetInst;
+  sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
 
   drawLines();
@@ -142,11 +139,11 @@ function setupGate(gateNode, headerNode) {
     var gateInst = htmlToGate.get(gateNode);
 
     // remove all connections to other gates
-    if(gateInst.output)
-      gateInst.output.inputs.splice(gateInst.output.inputs.indexOf(gateInst), 1);
+    for(var i = 0; i < gateInst.outputs.length; i++)
+      gateInst.outputs[i].inputs.splice(gateInst.outputs[i].inputs.indexOf(gateInst), 1);
 
     for(var i = 0; i < gateInst.inputs.length; i++)
-      gateInst.inputs[i].output = null;
+      gateInst.inputs[i].outputs.splice(gateInst.inputs[i].outputs.indexOf(gateInst), 1);
 
     // remove this from gates array
     for(var i = 0; i < gates.length; i++) {
@@ -186,7 +183,7 @@ function setupGate(gateNode, headerNode) {
     // set the element's new position:
     gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
     gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
-    
+
     drawLines();
   }
 
