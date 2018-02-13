@@ -10,7 +10,7 @@ class Gate {
   // to get state
 }
 
-// HTML div <-> Gate instance map
+// HTML node <-> Gate instance map
 let htmlToGate = new Map();
 let gateToHtml = new Map();
 let gates = [];
@@ -18,83 +18,77 @@ let gates = [];
 // Create a new gate
 function makeGate(type) {
   // create a new div element
-  var gateDiv = document.createElement("div");
-  gateDiv.id = "gate";
+  var gateNode = document.createElement("div");
+  gateNode.id = "gate";
 
   // create a new gate instance
-  var gateInstance = new Gate(type);
-  gates.push(gateInstance);
+  var gateInst = new Gate(type);
+  gates.push(gateInst);
 
-  htmlToGate.set(gateDiv, gateInstance);
-  gateToHtml.set(gateInstance, gateDiv);
+  htmlToGate.set(gateNode, gateInst);
+  gateToHtml.set(gateInst, gateNode);
 
-  var gateHeader = document.createElement("div");
-  gateHeader.innerHTML = type;
-  gateHeader.id = "gateheader";
+  var gateHeaderNode = document.createElement("div");
+  gateHeaderNode.innerHTML = type;
+  gateHeaderNode.id = "gateheader";
 
-  var inputs = document.createElement("div");
-  inputs.className = "column";
-  inputs.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+  var inputsNode = document.createElement("div");
+  inputsNode.className = "column";
+  inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
 
-  var output = document.createElement("div");
-  output.className = "column";
-  output.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+  var outputNode = document.createElement("div");
+  outputNode.className = "column";
+  outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
 
-  gateDiv.appendChild(gateHeader);
-  gateDiv.appendChild(inputs);
-  gateDiv.appendChild(output);
+  gateNode.appendChild(gateHeaderNode);
+  gateNode.appendChild(inputsNode);
+  gateNode.appendChild(outputNode);
 
   var canvas = document.getElementById("canvas");
-  canvas.appendChild(gateDiv);
+  canvas.appendChild(gateNode);
 
-  setupGate(gateDiv, gateHeader);
+  setupGate(gateNode, gateHeaderNode);
 }
 
-function disconnectGates(source, target) {
+function disconnectGates(sourceInst, targetInst) {
   // source outputs into target
-  target.inputs.splice(target.inputs.indexOf(source), 1);
-  source.output = null;
+  targetInst.inputs.splice(targetInst.inputs.indexOf(sourceInst), 1);
+  sourceInst.output = null;
 }
 
 function drawLines() {
   function getPos(e) {
+    // returns pos on screen
     var rect = e.getBoundingClientRect();
     return {x: rect.left, y: rect.top};
   }
 
   var svgcanvas = document.getElementById("svgcanvas");
 
+  // clear canvas children
   while (svgcanvas.firstChild)
     svgcanvas.removeChild(svgcanvas.firstChild);
 
   for(var i = 0; i < gates.length; i++) {
-    // <line x1="20" y1="100" x2="100" y2="500" stroke-width="2" stroke="black"/>
-
     if(gates[i].output) {
       var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
-      var sourceInstance = gates[i];
-      var targetInstance = gates[i].output;
+      var sourceInst = gates[i];
+      var targetInst = gates[i].output;
 
-      var sourceGate = gateToHtml.get(gates[i]);
-      var targetGate = gateToHtml.get(gates[i].output);
+      var sourceNode = gateToHtml.get(gates[i]);
+      var targetNode = gateToHtml.get(gates[i].output);
 
-      var pos1 = getPos(sourceGate.querySelector("#nodeout"));
-      var pos2 = getPos(targetGate.querySelector("#nodein"));
+      var lineStartPos = getPos(sourceNode.querySelector("#nodeout"));
+      var lineEndPos = getPos(targetNode.querySelector("#nodein"));
       var svgpos = getPos(svgcanvas);
 
-      line.setAttribute('x1', pos1.x - svgpos.x + 8);
-      line.setAttribute('y1', pos1.y - svgpos.y + 8);
-      line.setAttribute('x2', pos2.x - svgpos.x + 8);
-      line.setAttribute('y2', pos2.y - svgpos.y + 8);
+      line.setAttribute('x1', lineStartPos.x - svgpos.x + 8);
+      line.setAttribute('y1', lineStartPos.y - svgpos.y + 8);
+      line.setAttribute('x2', lineEndPos.x - svgpos.x + 8);
+      line.setAttribute('y2', lineEndPos.y - svgpos.y + 8);
       line.setAttribute('stroke', 'gray');
       line.setAttribute('stroke-width', '4');
-
-      /* THIS WORKS BUT NOT RIGHT LINES... comment for now
-      line.addEventListener('click', function (event) {
-        disconnectGates(sourceInstance, targetInstance);
-        drawLines();
-      }, true); */
 
       svgcanvas.appendChild(line);
     }
@@ -118,51 +112,52 @@ function dropped(e) {
 
   // sourceNode is the output
   // targetNode is the input
-  var sourceGate = htmlToGate.get(sourceNode);
-  var targetGate = htmlToGate.get(targetNode);
+  var sourceInst = htmlToGate.get(sourceNode);
+  var targetInst = htmlToGate.get(targetNode);
 
-  sourceGate.output = targetGate;
-  targetGate.inputs.push(sourceGate);
+  if(sourceInst.output)
+    disconnectGates(sourceInst, sourceInst.output);
+
+  sourceInst.output = targetInst;
+  targetInst.inputs.push(sourceInst);
 
   drawLines();
 }
 
-
 // Create an element draggable, removable
-function setupGate(gate, header) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-  header.onmousedown = dragMouseDown;
-  header.addEventListener('contextmenu', removeGate);
+function setupGate(gateNode, headerNode) {
+  headerNode.onmousedown = dragMouseDown;
+  headerNode.addEventListener('contextmenu', removeGate);
 
   function removeGate(e) {
     e.preventDefault();
 
-    var gateInstance = htmlToGate.get(gate);
+    var gateInst = htmlToGate.get(gateNode);
 
     // remove all connections to other gates
-    if(gateInstance.output)
-      gateInstance.output.inputs.splice(gateInstance.output.inputs.indexOf(gateInstance), 1);
+    if(gateInst.output)
+      gateInst.output.inputs.splice(gateInst.output.inputs.indexOf(gateInst), 1);
 
-    for(var i = 0; i < gateInstance.inputs.length; i++)
-      gateInstance.inputs[i].output = null;
+    for(var i = 0; i < gateInst.inputs.length; i++)
+      gateInst.inputs[i].output = null;
 
     // remove this from gates array
     for(var i = 0; i < gates.length; i++) {
-      if(gates[i] == gateInstance) {
+      if(gates[i] == gateInst) {
         gates.splice(i, 1);
         break;
       }
     }
 
-    gateToHtml.delete(gateInstance);
-    htmlToGate.delete(gate);
+    gateToHtml.delete(gateInst);
+    htmlToGate.delete(gateNode);
 
-    gate.parentNode.removeChild(gate);
+    gate.parentNode.removeChild(gateNode);
 
     drawLines();
   }
 
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   function dragMouseDown(e) {
     e.preventDefault();
     e = e || window.event;
@@ -182,8 +177,8 @@ function setupGate(gate, header) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    gate.style.top = (gate.offsetTop - pos2) + "px";
-    gate.style.left = (gate.offsetLeft - pos1) + "px";
+    gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
+    gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
 
     drawLines();
   }
