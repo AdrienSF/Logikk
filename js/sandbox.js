@@ -93,6 +93,30 @@ function makeGate(type) {
     inputsNode.className = "column";
     inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(inputsNode);
+  } else {
+    var toggleNode = document.createElement("div");
+    toggleNode.className = "column";
+
+    var toggleButton = document.createElement("input");
+    toggleButton.type = "button";
+    toggleButton.value = "F";
+    toggleButton.width = 16;
+    toggleButton.height = 16;
+
+    toggleButton.addEventListener("click", function() {
+      if(toggleButton.value == "F") {
+        toggleButton.value = "T";
+        gateInst.state = true;
+      } else {
+        toggleButton.value = "F";
+        gateInst.state = false;
+      }
+
+      update();
+    });
+
+    toggleNode.appendChild(toggleButton);
+    gateNode.appendChild(toggleNode);
   }
 
   if(type != OUT) {
@@ -106,6 +130,11 @@ function makeGate(type) {
   canvas.appendChild(gateNode);
 
   setupGate(gateNode, gateHeaderNode);
+}
+
+function update() {
+  drawLines();
+  createTruthTable();
 }
 
 function disconnectGates(sourceInst, targetInst) {
@@ -123,8 +152,7 @@ function clearAll() {
   while(cnv.firstChild)
     cnv.removeChild(cnv.firstChild);
 
-  drawLines();
-
+  update();
   makeGate(OUT);
 }
 
@@ -209,16 +237,46 @@ function dropped(e) {
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
 
-  drawLines();
+  update();
 }
 
 function createTruthTable() {
-  var table = document.getElementById("truthtable");
-
   var inputsInst = [];
   for(var i = 0; i < gates.length; i++) {
     if(gates[i].type == IN) inputsInst.push(gates[i]);
   }
+
+  // CLEAR TABLE FIRST
+
+/*
+  for (j = 1; j <= inputInst.length; j++) {
+    var inputCell = document.createElement("td");
+    var inputText = document.createTextNode("input" + j);
+    inputCell.appendChild(inputText);
+    document.getElementById("TThead").appendChild(inputCell);
+  }
+  //display out in table header
+  var outCell = document.createElement("td");
+  var outText = document.createTextNode("out");
+  outCell.appendChild(outText);
+  document.getElementById("TThead").appendChild(outCell);
+
+  //display table body
+  for (i = 1; i <= Math.pow(2, inputGates); i++) {
+    var stateRow = document.createElement("tr");
+    for (j = 1; j <= inputGates; j++) {
+      var stateCell = document.createElement("td");
+      var stateText = document.createTextNode("" + i + "," + j);
+      stateCell.appendChild(stateText);
+      stateRow.appendChild(stateCell);
+    }
+    var outStateCell = document.createElement("td");
+    var outStateText = document.createTextNode("out" + i);
+    outStateCell.appendChild(outStateText);
+    stateRow.appendChild(outStateCell);
+
+    document.getElementById("TTbody").appendChild(stateRow);
+  }*/
 }
 
 // Create an element draggable, removable
@@ -252,7 +310,7 @@ function setupGate(gateNode, headerNode) {
 
     gate.parentNode.removeChild(gateNode);
 
-    drawLines();
+    update();
   }
 
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -278,7 +336,7 @@ function setupGate(gateNode, headerNode) {
     gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
     gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
 
-    drawLines();
+    update();
   }
 
   function closeDragElement() {
@@ -286,7 +344,7 @@ function setupGate(gateNode, headerNode) {
     document.onmouseup = null;
     document.onmousemove = null;
 
-    drawLines();
+    update();
   }
 }
 
