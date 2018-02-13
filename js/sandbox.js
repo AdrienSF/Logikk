@@ -1,35 +1,84 @@
-let INPUT  = "INPUT";
+let IN     = "IN";
+let OUT    = "OUT";
 let AND    = "AND";
 let OR     = "OR";
 let XOR    = "XOR";
 let NOT    = "NOT";
 
 class Gate {
-  // type may be INPUT, AND, OR, XOR, NOT
+  // type may be IN, AND, OR, XOR, NOT
   constructor(type) {
     this.type = type;
+
     this.inputs = [];
     this.outputs = [];
+
+    if(this.type == IN)
+      this.state = false;
   }
 
-  // recursive function goes here
-  // to get state
+  getState() {
+    var type = this.type;
+    var inputs = this.inputs;
+    var outputs = this.outputs;
+
+    if(type == IN) {
+      // EDIT THIS, make inputs toggle-able
+      return this.state;
+    }
+
+    if(inputs.length == 0) {
+      console.log("Can't evaluate, no inputs");
+      return false;
+    }
+
+    if(type == AND) {
+      for(var i = 0; i < inputs.length; i++)
+        if(!inputs[i].getState()) return false;
+      return true;
+    }
+
+    if(type == OR) {
+      for(var i = 0; i < inputs.length; i++)
+        if(inputs[i].getState()) return true;
+      return false;
+    }
+
+    if(type == XOR) {
+      var count = 0;
+      for(var i = 0; i < inputs.length; i++)
+        if(inputs[i].getState()) count++;
+      return count == 1;
+    }
+
+    if(type == NOT) {
+      return !inputs[0].getState();
+    }
+  }
 }
 
 // HTML node <-> Gate instance map
 let htmlToGate = new Map();
 let gateToHtml = new Map();
 let gates = [];
+// outInst is the output gate instance
+let outInst = null;
 
-// Create a new gate
+// create a new gate
 function makeGate(type) {
   // create a new div element
   var gateNode = document.createElement("div");
   gateNode.id = "gate";
 
+  // position the node
+  gateNode.style.top = (gateNode.offsetTop + 250) + "px";
+  gateNode.style.left = (gateNode.offsetLeft + 50) + "px";
+
   // create a new gate instance
   var gateInst = new Gate(type);
   gates.push(gateInst);
+  if(type == OUT)
+    outInst = gateInst;
 
   htmlToGate.set(gateNode, gateInst);
   gateToHtml.set(gateInst, gateNode);
@@ -37,19 +86,21 @@ function makeGate(type) {
   var gateHeaderNode = document.createElement("div");
   gateHeaderNode.innerHTML = type;
   gateHeaderNode.id = "gateheader";
-    gateNode.appendChild(gateHeaderNode);
+  gateNode.appendChild(gateHeaderNode);
 
-  if(type != INPUT) {
+  if(type != IN) {
     var inputsNode = document.createElement("div");
     inputsNode.className = "column";
     inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(inputsNode);
   }
 
-  var outputNode = document.createElement("div");
-  outputNode.className = "column";
-  outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
-  gateNode.appendChild(outputNode);
+  if(type != OUT) {
+    var outputNode = document.createElement("div");
+    outputNode.className = "column";
+    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+    gateNode.appendChild(outputNode);
+  }
 
   var canvas = document.getElementById("canvas");
   canvas.appendChild(gateNode);
@@ -61,6 +112,20 @@ function disconnectGates(sourceInst, targetInst) {
   // source outputs into target
   targetInst.inputs.splice(targetInst.inputs.indexOf(sourceInst), 1);
   sourceInst.outputs.splice(sourceInst.outputs.indexOf(targetInst), 1);
+}
+
+function clearAll() {
+  htmlToGate.clear();
+  gateToHtml.clear();
+  gates = [];
+
+  var cnv = document.getElementById("canvas");
+  while(cnv.firstChild)
+    cnv.removeChild(cnv.firstChild);
+
+  drawLines();
+
+  makeGate(OUT);
 }
 
 function drawLines() {
@@ -94,8 +159,11 @@ function drawLines() {
       line.setAttribute('y1', lineStartPos.y - svgpos.y + 8);
       line.setAttribute('x2', lineEndPos.x - svgpos.x + 8);
       line.setAttribute('y2', lineEndPos.y - svgpos.y + 8);
-      line.setAttribute('stroke', 'gray');
       line.setAttribute('stroke-width', '4');
+
+      var state = sourceInst.getState();
+      if(state) line.setAttribute('stroke', 'red');
+      else line.setAttribute('stroke', 'black');
 
       svgcanvas.appendChild(line);
     }
@@ -113,14 +181,30 @@ function dropped(e) {
   var targetNode = e.target.parentNode.parentNode;
 
   if(sourceNode === targetNode) {
-    console.log("wtf");
+    console.log("Can't connect gate to itself");
     return;
   }
 
-  // sourceNode is the output
-  // targetNode is the input
+  // sourceInst outputs into targetInst
   var sourceInst = htmlToGate.get(sourceNode);
   var targetInst = htmlToGate.get(targetNode);
+
+  if(sourceInst.outputs.includes(targetInst)) {
+    console.log("This connection already exists");
+    return;
+  }
+
+  if(targetInst.type == NOT && targetInst.inputs.length > 0) {
+    // NOT can only have at most one input
+    console.log("NOT can only have one input");
+    return;
+  }
+
+  if(targetInst.type == OUT && targetInst.inputs.length > 0) {
+    // OUT can only have at most one input
+    console.log("OUT can only have one input");
+    return;
+  }
 
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
@@ -128,10 +212,20 @@ function dropped(e) {
   drawLines();
 }
 
+function createTruthTable() {
+  var table = document.getElementById("truthtable");
+
+  var inputsInst = [];
+  for(var i = 0; i < gates.length; i++) {
+    if(gates[i].type == IN) inputsInst.push(gates[i]);
+  }
+}
+
 // Create an element draggable, removable
 function setupGate(gateNode, headerNode) {
   headerNode.onmousedown = dragMouseDown;
-  headerNode.addEventListener('contextmenu', removeGate);
+  if(htmlToGate.get(gateNode).type != OUT)
+    headerNode.addEventListener('contextmenu', removeGate);
 
   function removeGate(e) {
     e.preventDefault();
@@ -196,33 +290,5 @@ function setupGate(gateNode, headerNode) {
   }
 }
 
-//display inputGates.length inputs on table header
-var inputGates = 4;
-for (j = 1; j <= inputGates; j++) {
-  var inputCell = document.createElement("td");
-  var inputText = document.createTextNode("input" + j);
-  inputCell.appendChild(inputText);
-  document.getElementById("TThead").appendChild(inputCell);
-}
-//display out in table header
-var outCell = document.createElement("td");
-var outText = document.createTextNode("out");
-outCell.appendChild(outText);
-document.getElementById("TThead").appendChild(outCell);
-
-//display table body
-for (i = 1; i <= Math.pow(2, inputGates); i++) {
-  var stateRow = document.createElement("tr");
-  for (j = 1; j <= inputGates; j++) {
-    var stateCell = document.createElement("td");
-    var stateText = document.createTextNode("" + i + "," + j);
-    stateCell.appendChild(stateText);
-    stateRow.appendChild(stateCell);
-  }
-  var outStateCell = document.createElement("td");
-  var outStateText = document.createTextNode("out" + i);
-  outStateCell.appendChild(outStateText);
-  stateRow.appendChild(outStateCell);
-
-  document.getElementById("TTbody").appendChild(stateRow);
-}
+// to create out gate
+clearAll();
