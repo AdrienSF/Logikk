@@ -1,27 +1,66 @@
-let INPUT  = "INPUT";
+let IN     = "IN";
+let OUT    = "OUT";
 let AND    = "AND";
 let OR     = "OR";
 let XOR    = "XOR";
 let NOT    = "NOT";
 
 class Gate {
-  // type may be INPUT, AND, OR, XOR, NOT
+  // type may be IN, AND, OR, XOR, NOT
   constructor(type) {
     this.type = type;
     this.inputs = [];
     this.outputs = [];
   }
 
-  // recursive function goes here
-  // to get state
+  getState() {
+    var type = this.type;
+    var inputs = this.inputs;
+    var outputs = this.outputs;
+
+    if(type == IN) {
+      // EDIT THIS, make inputs toggle-able
+      return true;
+    }
+
+    if(inputs.length == 0) {
+      console.log("Can't evaluate, no inputs");
+      return false;
+    }
+
+    if(type == AND) {
+      for(var i = 0; i < inputs.length; i++)
+        if(!inputs[i].getState()) return false;
+      return true;
+    }
+
+    if(type == OR) {
+      for(var i = 0; i < inputs.length; i++)
+        if(inputs[i].getState()) return true;
+      return false;
+    }
+
+    if(type == XOR) {
+      var count = 0;
+      for(var i = 0; i < inputs.length; i++)
+        if(inputs[i].getState()) count++;
+      return count == 1;
+    }
+
+    if(type == NOT) {
+      return !inputs[0].getState();
+    }
+  }
 }
 
 // HTML node <-> Gate instance map
 let htmlToGate = new Map();
 let gateToHtml = new Map();
 let gates = [];
+// outInst is the output gate instance
+let outInst = null;
 
-// Create a new gate
+// create a new gate
 function makeGate(type) {
   // create a new div element
   var gateNode = document.createElement("div");
@@ -30,6 +69,8 @@ function makeGate(type) {
   // create a new gate instance
   var gateInst = new Gate(type);
   gates.push(gateInst);
+  if(type == OUT)
+    outInst = gateInst;
 
   htmlToGate.set(gateNode, gateInst);
   gateToHtml.set(gateInst, gateNode);
@@ -39,17 +80,19 @@ function makeGate(type) {
   gateHeaderNode.id = "gateheader";
     gateNode.appendChild(gateHeaderNode);
 
-  if(type != INPUT) {
+  if(type != IN) {
     var inputsNode = document.createElement("div");
     inputsNode.className = "column";
     inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(inputsNode);
   }
 
-  var outputNode = document.createElement("div");
-  outputNode.className = "column";
-  outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
-  gateNode.appendChild(outputNode);
+  if(type != OUT) {
+    var outputNode = document.createElement("div");
+    outputNode.className = "column";
+    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+    gateNode.appendChild(outputNode);
+  }
 
   var canvas = document.getElementById("canvas");
   canvas.appendChild(gateNode);
@@ -61,6 +104,20 @@ function disconnectGates(sourceInst, targetInst) {
   // source outputs into target
   targetInst.inputs.splice(targetInst.inputs.indexOf(sourceInst), 1);
   sourceInst.outputs.splice(sourceInst.outputs.indexOf(targetInst), 1);
+}
+
+function clearAll() {
+  htmlToGate.clear();
+  gateToHtml.clear();
+  gates = [];
+
+  var cnv = document.getElementById("canvas");
+  while(cnv.firstChild)
+    cnv.removeChild(cnv.firstChild);
+
+  drawLines();
+
+  makeGate(OUT);
 }
 
 function drawLines() {
@@ -113,19 +170,33 @@ function dropped(e) {
   var targetNode = e.target.parentNode.parentNode;
 
   if(sourceNode === targetNode) {
-    console.log("wtf");
+    console.log("Can't connect gate to itself");
     return;
   }
 
-  // sourceNode is the output
-  // targetNode is the input
+  // sourceInst outputs into targetInst
   var sourceInst = htmlToGate.get(sourceNode);
   var targetInst = htmlToGate.get(targetNode);
+
+  if(sourceInst.outputs.includes(targetInst)) {
+    console.log("This connection already exists");
+    return;
+  }
+
+  if(targetInst.type == NOT && targetInst.inputs.length > 0) {
+    // NOT can only have at most one input
+    console.log("NOT can only have one input");
+    return;
+  }
 
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
 
   drawLines();
+}
+
+function createTruthTable() {
+  
 }
 
 // Create an element draggable, removable
@@ -195,3 +266,6 @@ function setupGate(gateNode, headerNode) {
     drawLines();
   }
 }
+
+// to create out gate
+clearAll();
