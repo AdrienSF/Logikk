@@ -200,6 +200,12 @@ function dropped(e) {
     return;
   }
 
+  if(targetInst.type == OUT && targetInst.inputs.length > 0) {
+    // OUT can only have at most one input
+    console.log("OUT can only have one input");
+    return;
+  }
+
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
 
