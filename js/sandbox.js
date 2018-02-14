@@ -299,7 +299,7 @@ function setupGate(gateNode, headerNode) {
     gateToHtml.delete(gateInst);
     htmlToGate.delete(gateNode);
 
-    gate.parentNode.removeChild(gateNode);
+    gateNode.parentNode.removeChild(gateNode);
 
     update();
   }
@@ -314,6 +314,11 @@ function setupGate(gateNode, headerNode) {
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
+
+    // put this as last node -> on top of others
+    var parent = gateNode.parentNode;
+    parent.removeChild(gateNode);
+    parent.appendChild(gateNode);
   }
 
   function elementDrag(e) {
@@ -326,7 +331,6 @@ function setupGate(gateNode, headerNode) {
     // set the element's new position:
     gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
     gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
-
     update();
   }
 
