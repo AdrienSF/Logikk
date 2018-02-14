@@ -17,6 +17,12 @@ class Gate {
       this.state = false;
   }
 
+  getStatePrecalculated() {
+    // use this after running getState if nothing has changed
+    // saves computing power and time
+    return this.state;
+  }
+
   getState() {
     var type = this.type;
     var inputs = this.inputs;
@@ -28,18 +34,23 @@ class Gate {
 
     if(inputs.length == 0) {
       console.log("Can't evaluate, no inputs");
+      this.state = false;
       return false;
     }
 
     if(type == AND) {
+      this.state = false;
       for(var i = 0; i < inputs.length; i++)
         if(!inputs[i].getState()) return false;
+      this.state = true;
       return true;
     }
 
     if(type == OR) {
+      this.state = true;
       for(var i = 0; i < inputs.length; i++)
         if(inputs[i].getState()) return true;
+      this.state = false;
       return false;
     }
 
@@ -47,10 +58,12 @@ class Gate {
       var count = 0;
       for(var i = 0; i < inputs.length; i++)
         if(inputs[i].getState()) count++;
+      this.state = count == 1;
       return count == 1;
     }
 
     if(type == NOT) {
+      this.state = !inputs[0].getState();
       return !inputs[0].getState();
     }
   }
@@ -132,6 +145,11 @@ function makeGate(type) {
 }
 
 function update() {
+  // this updates their state instance variable so we can use precalculated state
+  // that way we dont do unecessary calculations
+  for(var i = 0; i < gates.length; i++)
+    gates[i].getState();
+
   drawLines();
   createTruthTable();
 }
@@ -188,7 +206,7 @@ function drawLines() {
       line.setAttribute('y2', lineEndPos.y - svgpos.y + 8);
       line.setAttribute('stroke-width', '4');
 
-      var state = sourceInst.getState();
+      var state = sourceInst.getStatePrecalculated();
       if(state) line.setAttribute('stroke', 'red');
       else line.setAttribute('stroke', 'black');
 
@@ -205,13 +223,14 @@ function allowDrop(e) {
 function hasCycles(g, visited=null) {
   if(!visited) visited = new Set();
 
-  if(visited.has(g))
+  if(visited.has(g) && g.type != IN)
     return true;
 
   visited.add(g);
   for(var i = 0; i < g.inputs.length; i++) {
     if(hasCycles(g.inputs[i], visited))
       return true;
+    visited.delete(g.inputs[i]);
   }
 
   return false;
@@ -236,7 +255,6 @@ function dropped(e) {
     return;
   }
 
-
   // if gate can only have one input, disconnect first
   if((targetInst.type == NOT || targetInst.type == OUT) && targetInst.inputs.length > 0)
     disconnectGates(targetInst.inputs[0], targetInst);
@@ -250,17 +268,18 @@ function dropped(e) {
     return;
   }
 
+  if(outInst.inputs > 0)
+    createTruthTable();
+
   update();
 }
 
 function createTruthTable() {
   var inputsInst = [];
   for(var i = 0; i < gates.length; i++) {
-    if(gates[i].type == IN) inputsInst.push(gates[i]);
+    if(gates[i].type == IN)
+      inputsInst.push(gates[i]);
   }
-
-  // CLEAR TABLE FIRST
-
 /*
   for (j = 1; j <= inputInst.length; j++) {
     var inputCell = document.createElement("td");
@@ -353,7 +372,7 @@ function setupGate(gateNode, headerNode) {
     // set the element's new position:
     gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
     gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
-    update();
+    drawLines();
   }
 
   function closeDragElement() {
@@ -361,7 +380,7 @@ function setupGate(gateNode, headerNode) {
     document.onmouseup = null;
     document.onmousemove = null;
 
-    update();
+    drawLines();
   }
 }
 
