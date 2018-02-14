@@ -34,8 +34,12 @@ class Gate {
 
     if(inputs.length == 0) {
       console.log("Can't evaluate, no inputs");
-      this.state = false;
-      return false;
+      if(type == NOT)
+        this.state = true;
+      else
+        this.state = false;
+
+      return this.state;
     }
 
     if(type == AND) {
@@ -76,6 +80,9 @@ let gates = [];
 // outInst is the output gate instance
 let outInst = null;
 
+// this maps a html gate node to the output image (so we can change on/off)
+let outImage = new Map();
+
 // create a new gate
 function makeGate(type) {
   // create a new div element
@@ -103,7 +110,7 @@ function makeGate(type) {
   if(type != IN) {
     var inputsNode = document.createElement("div");
     inputsNode.className = "column";
-    inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+    inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/nodeoff.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(inputsNode);
   } else {
     var toggleNode = document.createElement("div");
@@ -134,14 +141,18 @@ function makeGate(type) {
   if(type != OUT) {
     var outputNode = document.createElement("div");
     outputNode.className = "column";
-    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/nodeoff.png\" draggable=\"true\" width=\"16\" height=\"16\">";
     gateNode.appendChild(outputNode);
+    outImage.set(gateNode, outputNode.firstChild);
   }
 
   var canvas = document.getElementById("canvas");
   canvas.appendChild(gateNode);
 
   setupGate(gateNode, gateHeaderNode);
+
+  // need this update to update output node, for example for not, it's on by default
+  update();
 }
 
 function update() {
@@ -150,6 +161,7 @@ function update() {
   for(var i = 0; i < gates.length; i++)
     gates[i].getState();
 
+  updateOutImage();
   drawLines();
   createTruthTable();
 }
@@ -163,6 +175,7 @@ function disconnectGates(sourceInst, targetInst) {
 function clearAll() {
   htmlToGate.clear();
   gateToHtml.clear();
+  outImage.clear();
   gates = [];
 
   var cnv = document.getElementById("canvas");
@@ -171,6 +184,18 @@ function clearAll() {
 
   update();
   makeGate(OUT);
+}
+
+function updateOutImage() {
+  for(var i = 0; i < gates.length; i++) {
+    if(gates[i].type == OUT) continue; // this one has none
+
+    var imageNode = outImage.get(gateToHtml.get(gates[i]));
+    if(gates[i].getStatePrecalculated())
+      imageNode.src = "../images/nodeon.png";
+    else
+      imageNode.src = "../images/nodeoff.png";
+  }
 }
 
 function drawLines() {
@@ -339,6 +364,8 @@ function setupGate(gateNode, headerNode) {
 
     gateToHtml.delete(gateInst);
     htmlToGate.delete(gateNode);
+
+    outImage.delete(gateNode);
 
     gateNode.parentNode.removeChild(gateNode);
 
