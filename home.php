@@ -1,17 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <?php
-  // database connection details
-  $servername = "dbhost.cs.man.ac.uk";
-  $username = "a54832bs";
-  $password = "jSgsSnTMF96ceUKm";
-  $db_name="2017_comp10120_m4";
-  $alert = "";
-
+  require_once("php/databaseDetails.php");
   // Create connection
-  $mysql = new mysqli($servername, $username, $password,$db_name);
+  $mysql = new mysqli($servername, $db_username, $db_password,$db_name);
 ?>
 <head>
+  <?php //include_once("php/checkSignIn.php")?>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <title>LogiKK</title>
@@ -84,31 +79,24 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
-                <div class="image">
+                <!--<div class="image">
                     <img src="images/user.png" width="48" height="48" alt="User" />
-                </div>
+                </div>--!>
                 <div class="info-container">
-                  <?php
-                    $user = $_COOKIE['username'];
-                  ?> 
                     <div class="name" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <?php 
-                      $query = "SELECT * FROM user_info WHERE
-                      Username='$user'";
-                      $result = $mysql->query($query);
-                      $row = $result->fetch_assoc();
-                      echo $row["Name"];
-                      $email = $row["Email"];
+                    include_once("php/printName.php");
                     ?>
                     </div>
-                    <div class="email"><?php echo $email; ?></div>
+                    <div class="email"><?php echo $email; ?></div
+
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="php/signOut.php"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>

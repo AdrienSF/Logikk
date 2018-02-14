@@ -2,20 +2,17 @@
 <head>
 <?php
   // database connection details
-  $servername = "dbhost.cs.man.ac.uk";
-  $username = "a54832bs";
-  $password = "jSgsSnTMF96ceUKm";
-  $db_name="2017_comp10120_m4";
-  $alert = "";
+  require_once("databaseDetails.php");
 
   // Create connection
-  $mysql = new mysqli($servername, $username, $password,$db_name);
+  $mysql = new mysqli($servername, $db_username, $db_password,$db_name);
 
 
   // Check connection
   if ($mysql->connect_error) {
       die("Connection failed: " . $mysql->connect_error);
   }
+  //name of table
   $table = "user_info";
 
   if (!empty($_POST))
@@ -36,7 +33,7 @@
       
       $cookie_name = "username";
       $cookie_value = "$uid";
-      setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+      setcookie($cookie_name, $cookie_value, time() + 3600*4, "/");
     }
   }
   else
@@ -54,12 +51,12 @@
     return $data;
   }
 ?>
-<meta http-equiv="refresh" content="0;url=<?php echo $send_to?>"/>
-<!--<script>
-if(!(<?php //echo $alert?> == ""))
+<meta http-equiv="refresh" content="2;url=<?php echo $send_to?>"/>
+<script>
+if(!(<?php echo $alert?> == ""))
 {
-  alert(<?php //echo $alert?>);
+  alert(<?php echo $alert?>);
 }
-</script>--!>
+</script>
 </head>
 
