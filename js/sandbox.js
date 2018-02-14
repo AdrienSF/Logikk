@@ -202,6 +202,21 @@ function allowDrop(e) {
   e.preventDefault();
 }
 
+function hasCycles(g, visited=null) {
+  if(!visited) visited = new Set();
+
+  if(visited.has(g))
+    return true;
+
+  visited.add(g);
+  for(var i = 0; i < g.inputs.length; i++) {
+    if(hasCycles(g.inputs[i], visited))
+      return true;
+  }
+
+  return false;
+}
+
 function dropped(e) {
   e.preventDefault();
   var sourceNode = e.dataTransfer.mozSourceNode.parentNode.parentNode;
@@ -221,12 +236,19 @@ function dropped(e) {
     return;
   }
 
+
   // if gate can only have one input, disconnect first
   if((targetInst.type == NOT || targetInst.type == OUT) && targetInst.inputs.length > 0)
     disconnectGates(targetInst.inputs[0], targetInst);
 
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
+
+  if(hasCycles(targetInst)) {
+    disconnectGates(sourceInst, targetInst);
+    alert("You are trying to create a cycle!");
+    return;
+  }
 
   update();
 }
