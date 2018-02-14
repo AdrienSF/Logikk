@@ -23,7 +23,6 @@ class Gate {
     var outputs = this.outputs;
 
     if(type == IN) {
-      // EDIT THIS, make inputs toggle-able
       return this.state;
     }
 
@@ -222,17 +221,9 @@ function dropped(e) {
     return;
   }
 
-  if(targetInst.type == NOT && targetInst.inputs.length > 0) {
-    // NOT can only have at most one input
-    console.log("NOT can only have one input");
-    return;
-  }
-
-  if(targetInst.type == OUT && targetInst.inputs.length > 0) {
-    // OUT can only have at most one input
-    console.log("OUT can only have one input");
-    return;
-  }
+  // if gate can only have one input, disconnect first
+  if((targetInst.type == NOT || targetInst.type == OUT) && targetInst.inputs.length > 0)
+    disconnectGates(targetInst.inputs[0], targetInst);
 
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
