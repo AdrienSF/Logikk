@@ -17,30 +17,44 @@ class Gate {
       this.state = false;
   }
 
+  getStatePrecalculated() {
+    // use this after running getState if nothing has changed
+    // saves computing power and time
+    return this.state;
+  }
+
   getState() {
     var type = this.type;
     var inputs = this.inputs;
     var outputs = this.outputs;
 
     if(type == IN) {
-      // EDIT THIS, make inputs toggle-able
       return this.state;
     }
 
     if(inputs.length == 0) {
       console.log("Can't evaluate, no inputs");
-      return false;
+      if(type == NOT)
+        this.state = true;
+      else
+        this.state = false;
+
+      return this.state;
     }
 
     if(type == AND) {
+      this.state = false;
       for(var i = 0; i < inputs.length; i++)
         if(!inputs[i].getState()) return false;
+      this.state = true;
       return true;
     }
 
     if(type == OR) {
+      this.state = true;
       for(var i = 0; i < inputs.length; i++)
         if(inputs[i].getState()) return true;
+      this.state = false;
       return false;
     }
 
@@ -48,10 +62,12 @@ class Gate {
       var count = 0;
       for(var i = 0; i < inputs.length; i++)
         if(inputs[i].getState()) count++;
+      this.state = count == 1;
       return count == 1;
     }
 
     if(type == NOT) {
+      this.state = !inputs[0].getState();
       return !inputs[0].getState();
     }
   }
@@ -63,6 +79,9 @@ let gateToHtml = new Map();
 let gates = [];
 // outInst is the output gate instance
 let outInst = null;
+
+// this maps a html gate node to the output image (so we can change on/off)
+let outImage = new Map();
 
 // create a new gate
 function makeGate(type) {
@@ -91,7 +110,7 @@ function makeGate(type) {
   if(type != IN) {
     var inputsNode = document.createElement("div");
     inputsNode.className = "column";
-    inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/node.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+    inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/nodeoff.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(inputsNode);
   } else {
     var toggleNode = document.createElement("div");
@@ -122,17 +141,27 @@ function makeGate(type) {
   if(type != OUT) {
     var outputNode = document.createElement("div");
     outputNode.className = "column";
-    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/node.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/nodeoff.png\" draggable=\"true\" width=\"16\" height=\"16\">";
     gateNode.appendChild(outputNode);
+    outImage.set(gateNode, outputNode.firstChild);
   }
 
   var canvas = document.getElementById("canvas");
   canvas.appendChild(gateNode);
 
   setupGate(gateNode, gateHeaderNode);
+
+  // need this update to update output node, for example for not, it's on by default
+  update();
 }
 
 function update() {
+  // this updates their state instance variable so we can use precalculated state
+  // that way we dont do unecessary calculations
+  for(var i = 0; i < gates.length; i++)
+    gates[i].getState();
+
+  updateOutImage();
   drawLines();
   createTruthTable();
 }
@@ -146,6 +175,7 @@ function disconnectGates(sourceInst, targetInst) {
 function clearAll() {
   htmlToGate.clear();
   gateToHtml.clear();
+  outImage.clear();
   gates = [];
 
   var cnv = document.getElementById("canvas");
@@ -154,6 +184,18 @@ function clearAll() {
 
   update();
   makeGate(OUT);
+}
+
+function updateOutImage() {
+  for(var i = 0; i < gates.length; i++) {
+    if(gates[i].type == OUT) continue; // this one has none
+
+    var imageNode = outImage.get(gateToHtml.get(gates[i]));
+    if(gates[i].getStatePrecalculated())
+      imageNode.src = "../images/nodeon.png";
+    else
+      imageNode.src = "../images/nodeoff.png";
+  }
 }
 
 function drawLines() {
@@ -189,7 +231,7 @@ function drawLines() {
       line.setAttribute('y2', lineEndPos.y - svgpos.y + 8);
       line.setAttribute('stroke-width', '4');
 
-      var state = sourceInst.getState();
+      var state = sourceInst.getStatePrecalculated();
       if(state) line.setAttribute('stroke', 'red');
       else line.setAttribute('stroke', 'black');
 
@@ -201,6 +243,22 @@ function drawLines() {
 function allowDrop(e) {
   // prevent default handling of drop
   e.preventDefault();
+}
+
+function hasCycles(g, visited=null) {
+  if(!visited) visited = new Set();
+
+  if(visited.has(g) && g.type != IN)
+    return true;
+
+  visited.add(g);
+  for(var i = 0; i < g.inputs.length; i++) {
+    if(hasCycles(g.inputs[i], visited))
+      return true;
+    visited.delete(g.inputs[i]);
+  }
+
+  return false;
 }
 
 function dropped(e) {
@@ -222,20 +280,21 @@ function dropped(e) {
     return;
   }
 
-  if(targetInst.type == NOT && targetInst.inputs.length > 0) {
-    // NOT can only have at most one input
-    console.log("NOT can only have one input");
-    return;
-  }
-
-  if(targetInst.type == OUT && targetInst.inputs.length > 0) {
-    // OUT can only have at most one input
-    console.log("OUT can only have one input");
-    return;
-  }
+  // if gate can only have one input, disconnect first
+  if((targetInst.type == NOT || targetInst.type == OUT) && targetInst.inputs.length > 0)
+    disconnectGates(targetInst.inputs[0], targetInst);
 
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);
+
+  if(hasCycles(targetInst)) {
+    disconnectGates(sourceInst, targetInst);
+    alert("You are trying to create a cycle!");
+    return;
+  }
+
+  if(outInst.inputs > 0)
+    createTruthTable();
 
   update();
 }
@@ -243,11 +302,9 @@ function dropped(e) {
 function createTruthTable() {
   var inputsInst = [];
   for(var i = 0; i < gates.length; i++) {
-    if(gates[i].type == IN) inputsInst.push(gates[i]);
+    if(gates[i].type == IN)
+      inputsInst.push(gates[i]);
   }
-
-  // CLEAR TABLE FIRST
-
 /*
   for (j = 1; j <= inputInst.length; j++) {
     var inputCell = document.createElement("td");
@@ -308,7 +365,9 @@ function setupGate(gateNode, headerNode) {
     gateToHtml.delete(gateInst);
     htmlToGate.delete(gateNode);
 
-    gate.parentNode.removeChild(gateNode);
+    outImage.delete(gateNode);
+
+    gateNode.parentNode.removeChild(gateNode);
 
     update();
   }
@@ -323,6 +382,11 @@ function setupGate(gateNode, headerNode) {
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
+
+    // put this as last node -> on top of others
+    var parent = gateNode.parentNode;
+    parent.removeChild(gateNode);
+    parent.appendChild(gateNode);
   }
 
   function elementDrag(e) {
@@ -335,8 +399,7 @@ function setupGate(gateNode, headerNode) {
     // set the element's new position:
     gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
     gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
-
-    update();
+    drawLines();
   }
 
   function closeDragElement() {
@@ -344,7 +407,7 @@ function setupGate(gateNode, headerNode) {
     document.onmouseup = null;
     document.onmousemove = null;
 
-    update();
+    drawLines();
   }
 }
 
