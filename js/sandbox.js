@@ -300,13 +300,20 @@ function dropped(e) {
 }
 
 function createTruthTable() {
+  while (document.getElementById("TThead").firstChild) {
+    document.getElementById("TThead").removeChild(document.getElementById("TThead").firstChild);
+  }
+  while (document.getElementById("TTbody").firstChild) {
+    document.getElementById("TTbody").removeChild(document.getElementById("TTbody").firstChild);
+  }
+
   var inputsInst = [];
   for(var i = 0; i < gates.length; i++) {
     if(gates[i].type == IN)
       inputsInst.push(gates[i]);
   }
-/*
-  for (j = 1; j <= inputInst.length; j++) {
+
+  for (j = 1; j <= inputsInst.length; j++) {
     var inputCell = document.createElement("td");
     var inputText = document.createTextNode("input" + j);
     inputCell.appendChild(inputText);
@@ -319,9 +326,9 @@ function createTruthTable() {
   document.getElementById("TThead").appendChild(outCell);
 
   //display table body
-  for (i = 1; i <= Math.pow(2, inputGates); i++) {
+  for (i = 1; i <= Math.pow(2, inputsInst.length); i++) {
     var stateRow = document.createElement("tr");
-    for (j = 1; j <= inputGates; j++) {
+    for (j = 1; j <= inputsInst.length; j++) {
       var stateCell = document.createElement("td");
       var stateText = document.createTextNode("" + i + "," + j);
       stateCell.appendChild(stateText);
@@ -333,7 +340,7 @@ function createTruthTable() {
     stateRow.appendChild(outStateCell);
 
     document.getElementById("TTbody").appendChild(stateRow);
-  }*/
+  }
 }
 
 // Create an element draggable, removable
