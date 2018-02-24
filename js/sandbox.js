@@ -132,6 +132,7 @@ function makeGate(type) {
       }
 
       update();
+      updateTableStates();
     });
 
     toggleNode.appendChild(toggleButton);
@@ -311,7 +312,17 @@ function dropped(e) {
   update();
 }
 
+//store the output and input text elements so we can change them later
+var outStateText = [];
+var inputStateText = [[],[]];
+//store instances of input gates
+var inputsInst = [];
+
 function createTruthTable() {
+  //reset text arrays
+  outStateText.length = 0;
+  inputStateText.length = 0;
+  inputsInst.length = 0;
   //erase existing truth table
   while (document.getElementById("TThead").firstChild) {
     document.getElementById("TThead").removeChild(document.getElementById("TThead").firstChild);
@@ -320,13 +331,12 @@ function createTruthTable() {
     document.getElementById("TTbody").removeChild(document.getElementById("TTbody").firstChild);
   }
   //count IN gates
-  var inputsInst = [];
   for(var i = 0; i < gates.length; i++) {
     if(gates[i].type == IN)
       inputsInst.push(gates[i]);
   }
   //display inputs in table
-  for (j = 1; j <= inputsInst.length; j++) {
+  for (j = 0; j <= inputsInst.length-1; j++) {
     var inputCell = document.createElement("td");
     var inputText = document.createTextNode("input" + j);
     inputCell.appendChild(inputText);
@@ -339,21 +349,31 @@ function createTruthTable() {
   document.getElementById("TThead").appendChild(outCell);
 
   //display table body
-  for (i = 1; i <= Math.pow(2, inputsInst.length); i++) {
+  for (i = 0; i <= Math.pow(2, inputsInst.length)-1; i++) {
     var stateRow = document.createElement("tr");
-    for (j = 1; j <= inputsInst.length; j++) {
+    inputStateText.push([]);
+    for (j = 0; j <= inputsInst.length-1; j++) {
       var stateCell = document.createElement("td");
-      var stateText = document.createTextNode("" + i + "," + j);
-      stateCell.appendChild(stateText);
+      inputStateText[i].push(document.createTextNode("null"));
+      stateCell.appendChild(inputStateText[i][j]);
       stateRow.appendChild(stateCell);
-    }
+    }//display output column
     var outStateCell = document.createElement("td");
-    var outStateText = document.createTextNode("out" + i);
-    outStateCell.appendChild(outStateText);
+    outStateText.push(document.createTextNode("nullp"));
+    outStateCell.appendChild(outStateText[i]);
     stateRow.appendChild(outStateCell);
 
     document.getElementById("TTbody").appendChild(stateRow);
   }
+}
+
+function updateTableStates() {
+  inputStateText[0][0].nodeValue = inputsInst[0].getState();
+
+}
+
+function loopyBoy() {
+
 }
 
 // Create an element draggable, removable
