@@ -161,9 +161,22 @@ function update() {
   for(var i = 0; i < gates.length; i++)
     gates[i].getState();
 
+  updateInputButton();
   updateOutImage();
   drawLines();
   createTruthTable();
+}
+
+function updateInputButton() {
+  var inputsInst = [];
+  for(var i = 0; i < gates.length; i++) {
+    if(gates[i].type == IN)
+      inputsInst.push(gates[i]);
+    if (inputsInst.length >= 8)
+    document.getElementById("inputButton").disabled = true;
+    else
+    document.getElementById("inputButton").disabled = false;
+  }
 }
 
 function disconnectGates(sourceInst, targetInst) {
@@ -259,8 +272,7 @@ function hasCycles(g, visited=null) {
   }
 
   return false;
-}
-
+}updateInputButton()
 function dropped(e) {
   e.preventDefault();
   var sourceNode = e.dataTransfer.mozSourceNode.parentNode.parentNode;
@@ -300,19 +312,20 @@ function dropped(e) {
 }
 
 function createTruthTable() {
+  //erase existing truth table
   while (document.getElementById("TThead").firstChild) {
     document.getElementById("TThead").removeChild(document.getElementById("TThead").firstChild);
   }
   while (document.getElementById("TTbody").firstChild) {
     document.getElementById("TTbody").removeChild(document.getElementById("TTbody").firstChild);
   }
-
+  //count IN gates
   var inputsInst = [];
   for(var i = 0; i < gates.length; i++) {
     if(gates[i].type == IN)
       inputsInst.push(gates[i]);
   }
-
+  //display inputs in table
   for (j = 1; j <= inputsInst.length; j++) {
     var inputCell = document.createElement("td");
     var inputText = document.createTextNode("input" + j);
@@ -376,6 +389,7 @@ function setupGate(gateNode, headerNode) {
 
     gateNode.parentNode.removeChild(gateNode);
 
+    updateInputButton();
     update();
   }
 
