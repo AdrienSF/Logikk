@@ -355,8 +355,10 @@ function createTruthTable() {
   }
   //display out in table header
   var outCell = document.createElement("td");
-  var outText = document.createTextNode("out");
-  outCell.appendChild(outText);
+  var boldElement = document.createElement("b");
+  var outText = document.createTextNode("OUT");
+  boldElement.appendChild(outText);
+  outCell.appendChild(boldElement);
   document.getElementById("TThead").appendChild(outCell);
 
   //display table body
@@ -371,7 +373,9 @@ function createTruthTable() {
     }//display output column
     var outStateCell = document.createElement("td");
     outStateText.push(document.createTextNode("nullp"));
-    outStateCell.appendChild(outStateText[i]);
+    var boldElement = document.createElement("b");
+    boldElement.appendChild(outStateText[i]);
+    outStateCell.appendChild(boldElement);
     stateRow.appendChild(outStateCell);
 
     document.getElementById("TTbody").appendChild(stateRow);
@@ -404,6 +408,7 @@ function updateTableStates() {
 
   for(var i = 0; i < inputsInst.length; i++)
     inputsInst[i].state = inputStatesOriginal[i];
+  //outInst.getState(); // update all other gates
 }
 
 // Create an element draggable, removable
