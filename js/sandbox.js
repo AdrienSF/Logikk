@@ -42,6 +42,10 @@ class Gate {
       return this.state;
     }
 
+    if(type == OUT) {
+      return inputs[0].getState();
+    }
+
     if(type == AND) {
       this.state = false;
       for(var i = 0; i < inputs.length; i++)
@@ -102,6 +106,7 @@ function makeGate(type) {
   htmlToGate.set(gateNode, gateInst);
   gateToHtml.set(gateInst, gateNode);
 
+  // gateHeader needs to be firstChild for input title labelling later on in this script
   var gateHeaderNode = document.createElement("div");
   gateHeaderNode.innerHTML = type;
   gateHeaderNode.id = "gateheader";
@@ -132,11 +137,13 @@ function makeGate(type) {
       }
 
       update();
-      updateTableStates();
     });
 
     toggleNode.appendChild(toggleButton);
     gateNode.appendChild(toggleNode);
+
+    createTruthTable();
+    createInputLabels();
   }
 
   if(type != OUT) {
@@ -165,7 +172,7 @@ function update() {
   updateInputButton();
   updateOutImage();
   drawLines();
-  createTruthTable();
+  updateTableStates();
 }
 
 function updateInputButton() {
@@ -273,7 +280,8 @@ function hasCycles(g, visited=null) {
   }
 
   return false;
-}updateInputButton()
+}
+
 function dropped(e) {
   e.preventDefault();
   var sourceNode = e.dataTransfer.mozSourceNode.parentNode.parentNode;
@@ -306,8 +314,10 @@ function dropped(e) {
     return;
   }
 
-  if(outInst.inputs > 0)
+  if(outInst.inputs > 0) {
     createTruthTable();
+    createInputLabels();
+  }
 
   update();
 }
@@ -338,7 +348,8 @@ function createTruthTable() {
   //display inputs in table
   for (j = 0; j <= inputsInst.length-1; j++) {
     var inputCell = document.createElement("td");
-    var inputText = document.createTextNode("input" + j);
+    var inputText = document.createTextNode(String.fromCharCode(65 + j));
+
     inputCell.appendChild(inputText);
     document.getElementById("TThead").appendChild(inputCell);
   }
@@ -365,15 +376,34 @@ function createTruthTable() {
 
     document.getElementById("TTbody").appendChild(stateRow);
   }
+
+  updateTableStates();
+}
+
+function createInputLabels() {
+  // Set input header title to corresponding letter
+  for (j = 0; j <= inputsInst.length-1; j++)
+      gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
 }
 
 function updateTableStates() {
-  inputStateText[0][0].nodeValue = inputsInst[0].getState();
+  var inputStatesOriginal = [];
+  for(var i = 0; i < inputsInst.length; i++)
+    inputStatesOriginal.push(inputsInst[i].getState());
 
-}
+  for(var bitmask = 0; bitmask < Math.pow(2, inputsInst.length); bitmask++) {
+    for(var i = 0; i < inputsInst.length; i++) {
+      if((1 << (inputsInst.length - i - 1) & bitmask) != 0)
+        inputsInst[i].state = true;
+      else
+        inputsInst[i].state = false;
+      inputStateText[bitmask][i].nodeValue = inputsInst[i].getState();
+      outStateText[bitmask].nodeValue = outInst.getState();
+    }
+  }
 
-function loopyBoy() {
-
+  for(var i = 0; i < inputsInst.length; i++)
+    inputsInst[i].state = inputStatesOriginal[i];
 }
 
 // Create an element draggable, removable
@@ -410,6 +440,8 @@ function setupGate(gateNode, headerNode) {
     gateNode.parentNode.removeChild(gateNode);
 
     updateInputButton();
+    createTruthTable();
+    createInputLabels();
     update();
   }
 
