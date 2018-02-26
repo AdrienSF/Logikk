@@ -203,6 +203,7 @@ function clearAll() {
   while(cnv.firstChild)
     cnv.removeChild(cnv.firstChild);
 
+  createTruthTable();
   update();
   makeGate(OUT);
 }
