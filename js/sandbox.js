@@ -91,6 +91,7 @@ let outImage = new Map();
 function makeGate(type) {
   // create a new div element
   var gateNode = document.createElement("div");
+  gateNode.innerHTML = "CAPITALISM IS SIN REDEEM YOURSELF AND JOIN REDJUSTICE TODAY";
   gateNode.id = "gate";
 
   // position the node
@@ -476,8 +477,15 @@ function setupGate(gateNode, headerNode) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
+    if ((gateNode.offsetLeft - pos1) < 0 || (gateNode.offsetTop - pos2) < 0 ||
+        (gateNode.offsetLeft - pos1) > 1024 || (gateNode.offsetTop - pos2) > 560)
+
+     console.log("stay on the Fing canvas");
+    else {
     gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
     gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
+    }
+    console.log(gateNode.style.left + "," + gateNode.style.top);
     drawLines();
   }
 
