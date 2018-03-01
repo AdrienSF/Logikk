@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <?php
+  session_start();
   // database connection details
   require_once("databaseDetails.php");
 
@@ -24,22 +25,23 @@
     $res = $mysql->query($query);
     if ($res->num_rows == 0)
     {
-      $alert = "Incorrect Username or password!";
       $send_to = "/logikk/index.php";
+      $_SESSION["accepted"] = false;
+      $_SESSION["err"] = "Incorrect username or password.";
     }
     else
     {
       $send_to = "/logikk/home.php";
-      
-      $cookie_name = "username";
-      $cookie_value = "$uid";
-      setcookie($cookie_name, $cookie_value, time() + 3600*4, "/");
+      $_SESSION["username"] = $uid;
+      $_SESSION["accepted"] = true;
+      $_SESSION["err"] = "";
     }
   }
   else
   {
-    $alert = "Incorrect Username or password!";
     $send_to = "/logikk/index.php";
+    $_SESSION["accepted"] = false;
+    $_SESSION["err"] = "Incorrect username or password.";
   }
   
 
@@ -51,12 +53,6 @@
     return $data;
   }
 ?>
-<meta http-equiv="refresh" content="2;url=<?php echo $send_to?>"/>
-<script>
-if(!(<?php echo $alert?> == ""))
-{
-  alert(<?php echo $alert?>);
-}
-</script>
+<meta http-equiv="refresh" content="0;url=<?php echo $send_to;?>"/>
 </head>
 

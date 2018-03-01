@@ -19,31 +19,35 @@
     <title> Login </title>
   </head>
 
-
-<div class="container">
-  <div class="row">
-    <div class="Absolute-Center is-Responsive">
-      <div id="logo-container"><h3 class="text-center">LogiKK</h3></div>
-      <div class="col-sm-12 col-md-10 col-md-offset-1">
-        <form method="post" action="php/loginVerify.php" id="loginForm">
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input class="form-control" type="text" name='username' placeholder="username"/>
-          </div>
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input class="form-control" type="password" name='password' placeholder="password"/>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> I agree to the <a href="#">Terms of use</a>
-            </label>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-default btn-block">Login</button>
-          </div>
-        </form>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="Absolute-Center is-Responsive">
+        <div id="logo-container"><h3 class="text-center">LogiKK</h3></div>
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+          <form method="post" action="php/loginVerify.php" id="loginForm">
+            <div class="form-group input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input class="form-control" type="text" name='username' placeholder="username"/>
+            </div>
+            <div class="form-group input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input class="form-control" type="password" name='password' placeholder="password"/>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-default btn-block">Login</button>
+            </div>
+            <div>
+              <p><?php 
+                session_start();
+                if ($_SESSION["err"] != "") echo $_SESSION["err"];
+              ?></p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
+
+</html>
