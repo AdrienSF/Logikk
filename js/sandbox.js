@@ -33,7 +33,6 @@ class Gate {
     }
 
     if(inputs.length == 0) {
-      console.log("Can't evaluate, no inputs");
       if(type == NOT)
         this.state = true;
       else
@@ -115,7 +114,7 @@ function makeGate(type) {
   if(type != IN) {
     var inputsNode = document.createElement("div");
     inputsNode.className = "column";
-    inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/nodeoff.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+    inputsNode.innerHTML = "<img id=\"nodein\" src=\"images/nodeoff.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(inputsNode);
   } else {
     var toggleNode = document.createElement("div");
@@ -149,7 +148,7 @@ function makeGate(type) {
   if(type != OUT) {
     var outputNode = document.createElement("div");
     outputNode.className = "column";
-    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/nodeoff.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+    outputNode.innerHTML = "<img id=\"nodeout\" src=\"images/nodeoff.png\" draggable=\"true\" width=\"16\" height=\"16\">";
     gateNode.appendChild(outputNode);
     outImage.set(gateNode, outputNode.firstChild);
   }
@@ -214,9 +213,9 @@ function updateOutImage() {
 
     var imageNode = outImage.get(gateToHtml.get(gates[i]));
     if(gates[i].getStatePrecalculated())
-      imageNode.src = "../images/nodeon.png";
+      imageNode.src = "images/nodeon.png";
     else
-      imageNode.src = "../images/nodeoff.png";
+      imageNode.src = "images/nodeoff.png";
   }
 }
 
@@ -413,6 +412,7 @@ function updateTableStates() {
 }
 
 function fixPos(gateNode) {
+  /*
   var pos1 = 0, pos2 = 0;
   if((gateNode.offsetLeft - pos1) < 0)
     gateNode.style.left = "0px";
@@ -421,7 +421,7 @@ function fixPos(gateNode) {
   if((gateNode.offsetLeft - pos1) > canvasCard.offsetWidth - gateNode.offsetWidth)
     gateNode.style.left = canvasCard.offsetWidth - gateNode.offsetWidth + "px";
   if((gateNode.offsetTop - pos2) > canvasCard.offsetHeight - gateNode.offsetHeight)
-    gateNode.style.top = canvasCard.offsetHeight - gateNode.offsetHeight + "px";
+    gateNode.style.top = canvasCard.offsetHeight - gateNode.offsetHeight + "px"; */
 }
 
 // Create an element draggable, removable
@@ -463,13 +463,13 @@ function setupGate(gateNode, headerNode) {
     update();
   }
 
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var dx = 0, dy = 0, newX = 0, newY = 0;
   function dragMouseDown(e) {
     e.preventDefault();
     e = e || window.event;
     // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
+    newX = e.clientX;
+    newY = e.clientY;
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -483,21 +483,21 @@ function setupGate(gateNode, headerNode) {
   function elementDrag(e) {
     e = e || window.event;
     // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    var canvasCard = document.getElementById("canvasCard");
-    // set the element's new position only if it is on the canvas:
+    dx = newX - e.clientX;
+    dy = newY - e.clientY;
+    newX = e.clientX;
+    newY = e.clientY;
+    /*var canvasCard = document.getElementById("canvasCard");
+     set the element's new position only if it is on the canvas:
     if ((gateNode.offsetLeft - pos1) < 0 || (gateNode.offsetTop - pos2) < 0 ||
         (gateNode.offsetLeft - pos1) > canvasCard.offsetWidth - gateNode.offsetWidth
         || (gateNode.offsetTop - pos2) > canvasCard.offsetHeight - gateNode.offsetHeight)
         console.log("tried to move out of bounds");
-    else {
-    gateNode.style.top = (gateNode.offsetTop - pos2) + "px";
-    gateNode.style.left = (gateNode.offsetLeft - pos1) + "px";
-    }
-    console.log(canvasCard.offsetWidth + "," + canvasCard.offsetHeight);
+        */
+
+    gateNode.style.top = (gateNode.style.top.substring(0, gateNode.style.top.length - 2) - dy) + "px";
+    gateNode.style.left = (gateNode.style.left.substring(0, gateNode.style.left.length - 2) - dx) + "px";
+
     drawLines();
   }
 

@@ -7,19 +7,22 @@ canvas {
 }
 
 tbody {
-    display:block;
-    height:545px;
-    overflow:auto;
+  display:block;
+  height:545px;
+  overflow:auto;
 }
+
 thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
-    text-align: center;
+  display:table;
+  width:100%;
+  table-layout:fixed;
+  text-align: center;
 }
+
 thead {
-    width: calc( 100% - 1em )
+  width: calc( 100% - 1em )
 }
+
 table {
   margin-top: 15px;
   margin-bottom: 15px;

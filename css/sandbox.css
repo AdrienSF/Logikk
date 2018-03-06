@@ -14,8 +14,12 @@
     color: #fff;
 }
 
+body {
+    padding-top: 80px;
+}
+
 .canvascard {
-    height: calc(600px);
+    height: calc(100vh - 130px);
     margin-bottom: 15px;
 }
 
