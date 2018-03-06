@@ -408,7 +408,7 @@ function updateTableStates() {
 
   for(var i = 0; i < inputsInst.length; i++)
     inputsInst[i].state = inputStatesOriginal[i];
-  if(outInst) outInst.getState(); // update all other gates
+  //outInst.getState(); // update all other gates
 }
 
 function fixPos(gateNode) {
