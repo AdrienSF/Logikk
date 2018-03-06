@@ -402,24 +402,26 @@ function updateTableStates() {
     inputStatesOriginal.push(inputsInst[i].getState());
 
   for(var bitmask = 0; bitmask < Math.pow(2, inputsInst.length); bitmask++) {
+    var row = Math.pow(2, inputsInst.length) - bitmask - 1;
+
     for(var i = 0; i < inputsInst.length; i++) {
       if((1 << (inputsInst.length - i - 1) & bitmask) != 0)
         inputsInst[i].state = true;
       else
         inputsInst[i].state = false;
-      inputStateText[bitmask][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
-      outStateText[bitmask].nodeValue = outInst.getState() ? "T" : "F";
+      inputStateText[row][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
+      outStateText[row].nodeValue = outInst.getState() ? "T" : "F";
     }
 
     // color the row we are on in sandbox
-    outStateText[bitmask].parentNode.parentNode.parentNode.style.backgroundColor = "white";
+    outStateText[row].parentNode.parentNode.parentNode.style.backgroundColor = "white";
 
     for(var i = 0; i < inputsInst.length; i++) {
       var isOn = (1 << (inputsInst.length - i - 1) & bitmask) != 0;
       if(inputStatesOriginal[i] != isOn) break;
       else if(i < inputsInst.length - 1) continue;
       else {
-        outStateText[bitmask].parentNode.parentNode.parentNode.style.backgroundColor = "#E9E9E9";
+        outStateText[row].parentNode.parentNode.parentNode.style.backgroundColor = "#E9E9E9";
         break;
       }
     }
