@@ -114,7 +114,7 @@ function makeGate(type) {
   if(type != IN) {
     var inputsNode = document.createElement("div");
     inputsNode.className = "column";
-    inputsNode.innerHTML = "<img id=\"nodein\" src=\"images/nodeoff.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
+    inputsNode.innerHTML = "<img id=\"nodein\" src=\"../images/nodeoff.png\" draggable=\"false\" ondrop=\"dropped(event)\" ondragover=\"allowDrop(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(inputsNode);
   } else {
     var toggleNode = document.createElement("div");
@@ -148,7 +148,7 @@ function makeGate(type) {
   if(type != OUT) {
     var outputNode = document.createElement("div");
     outputNode.className = "column";
-    outputNode.innerHTML = "<img id=\"nodeout\" src=\"images/nodeoff.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/nodeoff.png\" draggable=\"true\" width=\"16\" height=\"16\">";
     gateNode.appendChild(outputNode);
     outImage.set(gateNode, outputNode.firstChild);
   }
@@ -213,9 +213,9 @@ function updateOutImage() {
 
     var imageNode = outImage.get(gateToHtml.get(gates[i]));
     if(gates[i].getStatePrecalculated())
-      imageNode.src = "images/nodeon.png";
+      imageNode.src = "../images/nodeon.png";
     else
-      imageNode.src = "images/nodeoff.png";
+      imageNode.src = "../images/nodeoff.png";
   }
 }
 
