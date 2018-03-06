@@ -170,13 +170,13 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="card">
                         <div class="body">
-                          <button onclick="makeGate('IN')"    type="button" id="inputButton">New Input</button>
                           <button onclick="makeGate('AND')"   type="button">AND</button>
                           <button onclick="makeGate('OR')"    type="button">OR</button>
                           <button onclick="makeGate('XOR')"   type="button">XOR</button>
                           <button onclick="makeGate('NOT')"   type="button">NOT</button>
-                          <button onclick="clearAll()"   type="button">Clear All</button>
-                          <button onclick="createGoalTruthTable(), stopwatch.start()"  type="button" id="startChallengeButton">Start random 2 input challenge</button>
+                          <button onclick="clearAll()"   type="button">Clear All(broken)</button>
+                          <button onclick="startChallenge(), stopwatch.start()"  type="button" id="startChallengeButton">Start random 2 input challenge</button>
+                          <button onClick="checkChallengeComplete();">checkChallengeComplete()</button>
                           <button onClick="stopwatch.stop();">Stop(temporary)</button>
 
                           <div class="stopwatch"></div>
@@ -200,18 +200,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  <div class="card">
-                    <div class="container-fluid">
-                      <table class="table-bordered table-hover" id="goalTruthtable">
-                        <thead> <tr id="goalTThead"> </tr> </thead>
-                        <tbody id="goalTTbody"> </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
 
             </div>
       </div>

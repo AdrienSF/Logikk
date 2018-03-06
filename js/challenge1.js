@@ -142,7 +142,7 @@ function makeGate(type) {
     toggleNode.appendChild(toggleButton);
     gateNode.appendChild(toggleNode);
 
-    createTruthTable();
+    //createTruthTable();
     createInputLabels();
   }
 
@@ -169,10 +169,42 @@ function update() {
   for(var i = 0; i < gates.length; i++)
     gates[i].getState();
 
-  updateInputButton();
+  // updateInputButton();
   updateOutImage();
   drawLines();
   updateTableStates();
+}
+
+function checkChallengeComplete() {
+  var correct = true;
+  //reset all to black
+  for (i = 0; i < Math.pow(2, goalInputs); i++)
+  {
+    for (j = 0; j < goalInputs; j++) {
+      inputStateText[i][j].parentElement.style.color = "black";
+    }
+    var correct = goalOutStateText[i].nodeValue === outStateText[i].nodeValue;
+      goalOutStateText[i].parentElement.style.color = "black";
+      outStateText[i].parentElement.style.color = "black";
+  }
+  //check and color the incorct rows
+  for (i = 0; i < Math.pow(2, goalInputs); i++)
+  {
+    var rowCorrect = goalOutStateText[i].nodeValue === outStateText[i].nodeValue;
+    if (!rowCorrect) {
+      correct = false;
+      goalOutStateText[i].parentElement.style.color = "#ff0000";
+      outStateText[i].parentElement.style.color = "#ff0000";
+      for (j = 0; j < goalInputs; j++) {
+        inputStateText[i][j].parentElement.style.color = "#ff0000";
+      }
+    }
+  }
+
+  if (correct) {
+    stopwatch.stop();
+    alert("congratulations, you have solved one of the 16 challenges of the lowest complexity");
+  }
 }
 
 function updateInputButton() {
@@ -180,10 +212,10 @@ function updateInputButton() {
   for(var i = 0; i < gates.length; i++) {
     if(gates[i].type == IN)
       inputsInst.push(gates[i]);
-    if (inputsInst.length >= 8)
-    document.getElementById("inputButton").disabled = true;
-    else
-    document.getElementById("inputButton").disabled = false;
+    // if (inputsInst.length >= 8)
+    // document.getElementById("inputButton").disabled = true;
+    // else
+    // document.getElementById("inputButton").disabled = false;
   }
 }
 
@@ -203,9 +235,11 @@ function clearAll() {
   while(cnv.firstChild)
     cnv.removeChild(cnv.firstChild);
 
-  createTruthTable();
+  // createTruthTable();
   update();
   makeGate(OUT);
+  for (i = 0; i < goalInputs; i++) makeGate(IN);
+
 }
 
 function updateOutImage() {
@@ -316,19 +350,39 @@ function dropped(e) {
   }
 
   if(outInst.inputs > 0) {
-    createTruthTable();
+    // createTruthTable();
     createInputLabels();
   }
 
   update();
 }
 
+function startChallenge() {
+  fillGoalOutColumn();
+  createTruthTable();
+  document.getElementById("startChallengeButton").disabled = true;
+}
+function updateInputsInst() {
+  for(var i = 0; i < gates.length; i++) {
+    if(gates[i].type == IN)
+      inputsInst.push(gates[i]);
+  }
+}
+
 //store the output and input text elements so we can change them later
 var outStateText = [];
 var inputStateText = [[],[]];
+//store the output and input text elements so we can change them later
+var goalOutStateText = [];
+var goalInputs = 2;
 //store instances of input gates
 var inputsInst = [];
 
+function fillGoalOutColumn() {
+  for(var j = 0; j < Math.pow(2, goalInputs); j++) {
+    goalOutStateText.push(document.createTextNode(Math.random() < 0.5));
+  }
+}
 function createTruthTable() {
   //reset text arrays
   outStateText.length = 0;
@@ -342,10 +396,7 @@ function createTruthTable() {
     document.getElementById("TTbody").removeChild(document.getElementById("TTbody").firstChild);
   }
   //count IN gates
-  for(var i = 0; i < gates.length; i++) {
-    if(gates[i].type == IN)
-      inputsInst.push(gates[i]);
-  }
+  updateInputsInst();
   //display inputs in table
   for (j = 0; j <= inputsInst.length-1; j++) {
     var inputCell = document.createElement("td");
@@ -361,6 +412,13 @@ function createTruthTable() {
   boldElement.appendChild(outText);
   outCell.appendChild(boldElement);
   document.getElementById("TThead").appendChild(outCell);
+  //dsplay goal out in header
+  var goalCell = document.createElement("td");
+  var boldElement = document.createElement("b");
+  var goalText = document.createTextNode("GOAL");
+  boldElement.appendChild(goalText);
+  goalCell.appendChild(boldElement);
+  document.getElementById("TThead").appendChild(goalCell);
 
   //display table body
   for (i = 0; i <= Math.pow(2, inputsInst.length)-1; i++) {
@@ -378,89 +436,28 @@ function createTruthTable() {
     boldElement.appendChild(outStateText[i]);
     outStateCell.appendChild(boldElement);
     stateRow.appendChild(outStateCell);
+    //display goal output column
+
+      var goalOutStateCell = document.createElement("td");
+      var boldElement = document.createElement("b");
+      boldElement.appendChild(goalOutStateText[i]);
+      goalOutStateCell.appendChild(boldElement);
+      stateRow.appendChild(goalOutStateCell);
+
 
     document.getElementById("TTbody").appendChild(stateRow);
   }
 
   updateTableStates();
+
 }
 
-//store the output and input text elements so we can change them later
-var goalOutStateText = [];
-var goalInputStateText = [[],[]];
-var tableSize = 2;
 
-function createGoalTruthTable() {
-  // disable start challenge button
-  document.getElementById("startChallengeButton").disabled = true;
-  //reset text arrays
-  goalOutStateText.length = 0;
-  goalInputStateText.length = 0;
-  //erase existing truth table
-  while (document.getElementById("goalTThead").firstChild) {
-    document.getElementById("goalTThead").removeChild(document.getElementById("goalTThead").firstChild);
-  }
-  while (document.getElementById("goalTTbody").firstChild) {
-    document.getElementById("goalTTbody").removeChild(document.getElementById("goalTTbody").firstChild);
-  }
 
-  //display inputs in table
-  for (j = 0; j <= tableSize-1; j++) {
-    var inputCell = document.createElement("td");
-    var inputText = document.createTextNode(String.fromCharCode(65 + j));
 
-    inputCell.appendChild(inputText);
-    document.getElementById("goalTThead").appendChild(inputCell);
-  }
-  //display out in table header
-  var outCell = document.createElement("td");
-  var boldElement = document.createElement("b");
-  var outText = document.createTextNode("OUT");
-  boldElement.appendChild(outText);
-  outCell.appendChild(boldElement);
-  document.getElementById("goalTThead").appendChild(outCell);
-
-  //display table body
-  for (i = 0; i <= Math.pow(2, tableSize)-1; i++) {
-    var stateRow = document.createElement("tr");
-    goalInputStateText.push([]);
-    for (j = 0; j <= tableSize-1; j++) {
-      var stateCell = document.createElement("td");
-      goalInputStateText[i].push(document.createTextNode("null"));
-      stateCell.appendChild(goalInputStateText[i][j]);
-      stateRow.appendChild(stateCell);
-    }//display output column
-    var outStateCell = document.createElement("td");
-    goalOutStateText.push(document.createTextNode("nullp"));
-    var boldElement = document.createElement("b");
-    boldElement.appendChild(goalOutStateText[i]);
-    outStateCell.appendChild(boldElement);
-    stateRow.appendChild(outStateCell);
-
-    document.getElementById("goalTTbody").appendChild(stateRow);
-  }
-  fillGoalTruthTable();
-}
-
-function fillGoalTruthTable() {
-  for(var bitmask = 0; bitmask < Math.pow(2, tableSize); bitmask++) {
-    for(var i = 0; i < tableSize; i++) {
-      if((1 << (tableSize - i - 1) & bitmask) != 0)
-        goalInputStateText[bitmask][i].nodeValue = true;
-      else
-        goalInputStateText[bitmask][i].nodeValue = false;
-    }
-  }
-  for(var j = 0; j < Math.pow(2, tableSize); j++) {
-    if(Math.random() < 0.5)
-      goalOutStateText[j].nodeValue = true;
-    else
-      goalOutStateText[j].nodeValue = false;
-  }
-}
 
 function createInputLabels() {
-  // Set input header title to corresponding letter
+  // Set input header title to corresponding letter SCREW THIS!!!!
   for (j = 0; j <= inputsInst.length-1; j++)
       gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
 }
@@ -480,6 +477,7 @@ function updateTableStates() {
       outStateText[bitmask].nodeValue = outInst.getState();
     }
   }
+
 
   for(var i = 0; i < inputsInst.length; i++)
     inputsInst[i].state = inputStatesOriginal[i];
@@ -519,8 +517,8 @@ function setupGate(gateNode, headerNode) {
 
     gateNode.parentNode.removeChild(gateNode);
 
-    updateInputButton();
-    createTruthTable();
+    // updateInputButton();
+    //createTruthTable();
     createInputLabels();
     update();
   }
@@ -574,3 +572,5 @@ function setupGate(gateNode, headerNode) {
 
 // to create out gate
 clearAll();
+// to reset start challenge button
+document.getElementById("startChallengeButton").disabled = false;
