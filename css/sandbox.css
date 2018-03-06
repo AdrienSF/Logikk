@@ -21,6 +21,10 @@ body {
 .canvascard {
     height: calc(100vh - 130px);
     margin-bottom: 15px;
+    margin-right: -30px;
+
+    background-image: url("../images/canvasgrid.png");
+    background-repeat: repeat;
 }
 
 .body {

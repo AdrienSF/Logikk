@@ -372,7 +372,7 @@ function createTruthTable() {
       stateRow.appendChild(stateCell);
     }//display output column
     var outStateCell = document.createElement("td");
-    outStateText.push(document.createTextNode("nullp"));
+    outStateText.push(document.createTextNode("F"));
     var boldElement = document.createElement("b");
     boldElement.appendChild(outStateText[i]);
     outStateCell.appendChild(boldElement);
@@ -401,8 +401,8 @@ function updateTableStates() {
         inputsInst[i].state = true;
       else
         inputsInst[i].state = false;
-      inputStateText[bitmask][i].nodeValue = inputsInst[i].getState();
-      outStateText[bitmask].nodeValue = outInst.getState();
+      inputStateText[bitmask][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
+      outStateText[bitmask].nodeValue = outInst.getState() ? "T" : "F";
     }
   }
 

@@ -20,7 +20,7 @@ thead, tbody tr {
 }
 
 thead {
-  width: calc( 100% - 1em )
+  width: calc( 100% )
 }
 
 table {
