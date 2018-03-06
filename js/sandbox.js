@@ -234,10 +234,10 @@ function drawLines() {
 
   for(var i = 0; i < gates.length; i++) {
     for(var j = 0; j < gates[i].outputs.length; j++) {
-      var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
-      var sourceInst = gates[i];
-      var targetInst = gates[i].outputs[j];
+      let sourceInst = gates[i];
+      let targetInst = gates[i].outputs[j];
 
       var sourceNode = gateToHtml.get(gates[i]);
       var targetNode = gateToHtml.get(gates[i].outputs[j]);
@@ -255,6 +255,12 @@ function drawLines() {
       var state = sourceInst.getStatePrecalculated();
       if(state) line.setAttribute('stroke', 'red');
       else line.setAttribute('stroke', 'black');
+
+      // Disconnecting connection stuff
+      line.onclick = function(e) {
+        disconnectGates(sourceInst, targetInst);
+        update();
+      };
 
       svgcanvas.appendChild(line);
     }
