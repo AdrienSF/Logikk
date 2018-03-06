@@ -410,6 +410,19 @@ function updateTableStates() {
       inputStateText[bitmask][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
       outStateText[bitmask].nodeValue = outInst.getState() ? "T" : "F";
     }
+
+    // color the row we are on in sandbox
+    outStateText[bitmask].parentNode.parentNode.parentNode.style.backgroundColor = "white";
+
+    for(var i = 0; i < inputsInst.length; i++) {
+      var isOn = (1 << (inputsInst.length - i - 1) & bitmask) != 0;
+      if(inputStatesOriginal[i] != isOn) break;
+      else if(i < inputsInst.length - 1) continue;
+      else {
+        outStateText[bitmask].parentNode.parentNode.parentNode.style.backgroundColor = "#E9E9E9";
+        break;
+      }
+    }
   }
 
   for(var i = 0; i < inputsInst.length; i++)
