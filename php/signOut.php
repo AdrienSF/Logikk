@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <head>
 <?php
-  if(isset($_COOKIE["username"]))
+  if(isset($_SESSION["username"]))
   {
-    $cookie_user = $_COOKIE["username"];
-    setcookie("username",$cookie_user,time()-1);
+    $_SESSION["username"] = null;
   }
-  echo "<meta http-equiv=\"refresh\" content=\"0;url=index.php\"/>";
+  echo "<meta http-equiv=\"refresh\" content=\"0;url=pages/signIn.php\"/>";
 ?>
 </head>

@@ -25,16 +25,22 @@
     $res = $mysql->query($query);
     if ($res->num_rows == 0)
     {
-      $send_to = "/logikk/index.php";
+      $send_to = "/logikk/pages/signIn.php";
       $_SESSION["accepted"] = false;
       $_SESSION["err"] = "Incorrect username or password.";
     }
-    else
+    elseif ($res->num_rows == 1)
     {
-      $send_to = "/logikk/home.php";
+      $send_to = "/logikk/home.html";
       $_SESSION["username"] = $uid;
       $_SESSION["accepted"] = true;
       $_SESSION["err"] = "";
+    }
+    else
+    {
+      $send_to = "/logikk/signIn.html";
+      $_SESSION["accepted"] = false;
+      $_SESSION["err"] = "Something went wrong!";
     }
   }
   else
@@ -43,9 +49,9 @@
     $_SESSION["accepted"] = false;
     $_SESSION["err"] = "Incorrect username or password.";
   }
-  
 
-  function test_input($data) 
+
+  function test_input($data)
   {
     $data = trim($data);
     $data = stripslashes($data);
@@ -55,4 +61,3 @@
 ?>
 <meta http-equiv="refresh" content="0;url=<?php echo $send_to;?>"/>
 </head>
-
