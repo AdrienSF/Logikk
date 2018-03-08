@@ -5,14 +5,7 @@
   // database connection details
   require_once("databaseDetails.php");
 
-  // Create connection
-  $mysql = new mysqli($servername, $db_username, $db_password,$db_name);
-
-
-  // Check connection
-  if ($mysql->connect_error) {
-      die("Connection failed: " . $mysql->connect_error);
-  }
+  
   //name of table
   $table = "user_info";
 
@@ -25,31 +18,31 @@
     $res = $mysql->query($query);
     if ($res->num_rows == 0)
     {
-      $send_to = "/logikk/pages/signIn.php";
+      $send_to = "../pages/signIn.php";
       $_SESSION["accepted"] = false;
       $_SESSION["err"] = "Incorrect username or password.";
     }
     elseif ($res->num_rows == 1)
     {
-      $send_to = "/logikk/home.html";
+      $send_to = "../home.php";
       $_SESSION["username"] = $uid;
       $_SESSION["accepted"] = true;
       $_SESSION["err"] = "";
     }
     else
     {
-      $send_to = "/logikk/signIn.html";
+      $send_to = "../pages/signIn.php";
       $_SESSION["accepted"] = false;
       $_SESSION["err"] = "Something went wrong!";
     }
   }
   else
   {
-    $send_to = "/logikk/index.php";
+    $send_to = "../pages/signIn.php";
     $_SESSION["accepted"] = false;
     $_SESSION["err"] = "Incorrect username or password.";
   }
-
+  $mysql->close();
 
   function test_input($data)
   {
