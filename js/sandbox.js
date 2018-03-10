@@ -236,9 +236,9 @@ function drawLines() {
 
   var svgcanvas = document.getElementById("svgcanvas");
 
-  // clear canvas children
-  while (svgcanvas.firstChild)
-    svgcanvas.removeChild(svgcanvas.firstChild);
+  // clear canvas children, except defs for arrowhead
+  while (svgcanvas.lastChild && svgcanvas.childNodes.length > 2)
+    svgcanvas.removeChild(svgcanvas.lastChild);
 
   for(var i = 0; i < gates.length; i++) {
     for(var j = 0; j < gates[i].outputs.length; j++) {
@@ -260,9 +260,14 @@ function drawLines() {
       line.setAttribute('y2', lineEndPos.y - svgpos.y + 8);
       line.setAttribute('stroke-width', '4');
 
-      var state = sourceInst.getStatePrecalculated();
-      if(state) line.setAttribute('stroke', 'red');
-      else line.setAttribute('stroke', 'black');
+      var state = sourceInst.getState();
+      if(state) {
+        line.setAttribute('stroke', 'red');
+        line.setAttribute('marker-end', 'url(#arrowred)');
+      } else {
+        line.setAttribute('stroke', 'black');
+        line.setAttribute('marker-end', 'url(#arrowblack)');
+      }
 
       // Disconnecting connection stuff
       line.onclick = function(e) {
