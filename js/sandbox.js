@@ -38,6 +38,8 @@ class Gate {
       else
         this.state = false;
 
+      hasUpdatedOutSuccessfully = false;
+      this.state = false;
       return this.state;
     }
 
@@ -76,6 +78,8 @@ class Gate {
   }
 }
 
+var hasUpdatedOutSuccessfully = false;
+
 // HTML node <-> Gate instance map
 let htmlToGate = new Map();
 let gateToHtml = new Map();
@@ -85,6 +89,10 @@ let outInst = null;
 
 // this maps a html gate node to the output image (so we can change on/off)
 let outImage = new Map();
+
+// When dragging out a connection, this represents that line
+// negative values mean it doesn't exist
+var dragLineX1 = -10, dragLineX2 = -10, dragLineY1 = -10, dragLineY2 = -10;
 
 // create a new gate
 function makeGate(type) {
@@ -265,6 +273,17 @@ function drawLines() {
       svgcanvas.appendChild(line);
     }
   }
+
+  // dragLine
+  let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute('x1', dragLineX1);
+  line.setAttribute('y1', dragLineY1);
+  line.setAttribute('x2', dragLineX2);
+  line.setAttribute('y2', dragLineY2);
+  line.setAttribute('stroke-width', '4');
+
+  line.setAttribute('stroke', 'black');
+  svgcanvas.appendChild(line);
 }
 
 function allowDrop(e) {
@@ -401,6 +420,17 @@ function updateTableStates() {
   for(var i = 0; i < inputsInst.length; i++)
     inputStatesOriginal.push(inputsInst[i].getState());
 
+  // update out color
+  if(outInst && gateToHtml.get(outInst)) {
+    hasUpdatedOutSuccessfully = true;
+    // try to update, this will set to false if there's a problem
+    outInst.getState();
+    if(!hasUpdatedOutSuccessfully)
+      gateToHtml.get(outInst).firstChild.style.backgroundColor = "#AA1111";
+    else
+      gateToHtml.get(outInst).firstChild.style.backgroundColor = "#2196F3";
+  }
+
   for(var bitmask = 0; bitmask < Math.pow(2, inputsInst.length); bitmask++) {
     var row = Math.pow(2, inputsInst.length) - bitmask - 1;
 
@@ -508,13 +538,26 @@ function setupGate(gateNode, headerNode) {
     dy = newY - e.clientY;
     newX = e.clientX;
     newY = e.clientY;
-    /*var canvasCard = document.getElementById("canvasCard");
-     set the element's new position only if it is on the canvas:
-    if ((gateNode.offsetLeft - pos1) < 0 || (gateNode.offsetTop - pos2) < 0 ||
-        (gateNode.offsetLeft - pos1) > canvasCard.offsetWidth - gateNode.offsetWidth
-        || (gateNode.offsetTop - pos2) > canvasCard.offsetHeight - gateNode.offsetHeight)
-        console.log("tried to move out of bounds");
-        */
+
+    if(gateNode.offsetLeft - dx < 0) {
+      dx = 0;
+      gateNode.style.left = "0px";
+    }
+
+    if(gateNode.offsetLeft - dx > canvasCard.offsetWidth - gateNode.offsetWidth) {
+      dx = 0;
+      gateNode.style.left = canvasCard.offsetWidth - gateNode.offsetWidth;
+    }
+
+    if((gateNode.offsetTop - dy) < 0) {
+      dy = 0;
+      gateNode.style.top = "0px";
+    }
+
+    if(gateNode.offsetTop - dy > canvasCard.offsetHeight - gateNode.offsetHeight) {
+      dy = 0;
+      gateNode.style.top = canvasCard.offsetHeight - gateNode.offsetHeight;
+    }
 
     gateNode.style.top = (gateNode.style.top.substring(0, gateNode.style.top.length - 2) - dy) + "px";
     gateNode.style.left = (gateNode.style.left.substring(0, gateNode.style.left.length - 2) - dx) + "px";
