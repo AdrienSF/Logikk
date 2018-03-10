@@ -25,7 +25,7 @@
       <div class="Absolute-Center is-Responsive">
         <div id="logo-container"><h3 class="text-center">LogiKK</h3></div>
         <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <form method="post" action="php/loginVerify.php" id="loginForm">
+          <form method="post" action="../php/loginVerify.php" id="loginForm">
             <div class="form-group input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
               <input class="form-control" type="text" name='username' placeholder="username"/>
@@ -40,7 +40,7 @@
             <div>
               <p><?php 
                 session_start();
-                if ($_SESSION["err"] != "") echo $_SESSION["err"];
+                if (isset($_SESSION["err"]) and $_SESSION["err"] != "") echo $_SESSION["err"];
               ?></p>
             </div>
           </form>

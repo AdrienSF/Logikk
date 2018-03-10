@@ -16,12 +16,15 @@
   .myDark{
     background: #dcdcdc
   }
-
+.form-group span {
+      margin: auto;
+      padding-right: 5px;
+    }
   h1 {
     text-align: center !important;
   }
 
-  .container-fluid {
+  .infocontainer {
     min-height: 100vh;
     padding-top: 8vh;
   }
@@ -40,7 +43,7 @@
 <body style="background: #e9e9e9">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#"><span style="color: green">Logikk</span></a>
+    <a class="navbar-brand" href="#"><span style="color: green"><b>Logikk</b></span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -60,10 +63,14 @@
       <ul class="navbar-nav ml-auto">
         <?php if (!isset($_SESSION["username"])) { ?>
         <li class="nav-item">
-          <a class="nav-link" href="pages/login.html"><i class="fas fa-sign-in-alt"></i> Log In</a>
+          <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>       
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/signIn.php"><i class="fas fa-user-plus"></i> Sign Up</a>
+          <button class="btn btn-primary-outline" style="margin-left: 0.5vw" type="button" data-toggle="modal" data-target="#signUpModal">
+          <i class="fas fa-user-plus"></i> Sign Up
+          </button>
         </li>
         <?php } else { 
         echo "<li class=\"nav-item\">";
@@ -106,7 +113,7 @@
   <!-- Carousel End -->
 
 
-  <div class="container-fluid" id="head1">
+  <div class="infocontainer" id="head1">
     <div class="container">
       <div class="row justify-content-md-around">
         <div class="col-xs-12 col-lg-8">
@@ -124,7 +131,7 @@
     </div>
   </div>
 
-  <div class="container-fluid myDark" id="head2">
+  <div class="infocontainer myDark" id="head2">
     <div class="container">
       <div class="row justify-content-md-around">
         <div class="col-xs-12 col-lg-4">
@@ -141,7 +148,7 @@
   </div>
 
 
-  <div class="container-fluid" id="head3">
+  <div class="infocontainer" id="head3">
     <div class="container">
       <div class="row justify-content-md-around">
         <div class="col-xs-12 col-lg-8">
@@ -157,7 +164,7 @@
     </div>
   </div>
 
-  <div class="container-fluid myDark" id="head4">
+  <div class="infocontainer myDark" id="head4">
     <div class="container">
       <div class="row justify-content-md-around">
         <div class="col-xs-12 col-lg-4">
@@ -174,11 +181,120 @@
   </div>
 
 
+
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="plugins/bootstrap/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<!-- SignUp Modal -->
+<div class="modal fade" id="signUpModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="align:center;">
+        <h3 class="modal-title">Sign Up</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" action="../home.php" method="post">
+      <div class="col-*-12" id="wrapperContents">
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-user"></i></span>
+          <input class="form-control" type="text" name='name' placeholder="Name" required/>
+        </div>
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
+          <input class="form-control" type="text" name='username' placeholder="Username" required/>
+        </div>
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
+          <input class="form-control" type="email" name='email' placeholder="Email" required/>
+        </div>
+        <fieldset>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+            <input class="form-control" type="password" name='password' id="password" placeholder="Password" required/>
+          </div>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+            <input class="form-control" type="password" name='confirmedPassword' id="confirm_password" placeholder="Retype Password" oninput="check(this);" required/>
+          </div>
+        </fieldset>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required> I agree to the <a href="#">Terms of use</a>
+          </label>
+        </div>
+      </div>
+    
+      </div>
+      <div class="modal-footer">
+      <div class="container-fluid">
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark btn-block">Create account</button>
+        </div>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- SignIn Modal -->
+<div class="modal fade" id="signInModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="align:center;">
+        <h3 class="modal-title">Sign In</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" action="../home.php" method="post">
+      <div class="col-*-12" id="wrapperContents">
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-user"></i></span>
+          <input class="form-control" type="text" name='name' placeholder="Name" required/>
+        </div>
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
+          <input class="form-control" type="text" name='username' placeholder="Username" required/>
+        </div>
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
+          <input class="form-control" type="email" name='email' placeholder="Email" required/>
+        </div>
+        <fieldset>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+            <input class="form-control" type="password" name='password' id="password" placeholder="Password" required/>
+          </div>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+            <input class="form-control" type="password" name='confirmedPassword' id="confirm_password" placeholder="Retype Password" oninput="check(this);" required/>
+          </div>
+        </fieldset>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required> I agree to the <a href="#">Terms of use</a>
+          </label>
+        </div>
+      </div>
+    
+      </div>
+      <div class="modal-footer">
+      <div class="container-fluid">
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark btn-block">Create account</button>
+        </div>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
   <script type="text/javascript">
     $('a[href*="#"]')
     // Remove links that don't actually link to anything
@@ -230,6 +346,17 @@
       });
     });
 
+</script>
+
+<script type="text/javascript">
+  function check(input) {
+        if (input.value != document.getElementById('password').value) {
+            input.setCustomValidity('Password Must be Matching.');
+        } else {
+            // input is valid -- reset the error message
+            input.setCustomValidity('');
+        }
+    }
 </script>
 </body>
 
