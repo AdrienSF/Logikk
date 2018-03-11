@@ -65,16 +65,16 @@
         <li class="nav-item">
           <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal">
           <i class="fas fa-sign-in-alt"></i> Sign In
-          </button>       
+          </button>
         </li>
         <li class="nav-item">
           <button class="btn btn-primary-outline" style="margin-left: 0.5vw" type="button" data-toggle="modal" data-target="#signUpModal">
           <i class="fas fa-user-plus"></i> Sign Up
           </button>
         </li>
-        <?php } else { 
+        <?php } else {
         echo "<li class=\"nav-item\">";
-        echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome "; 
+        echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome ";
         echo $_SESSION["username"] . "</li></a>";
         }
         ?>
@@ -114,18 +114,22 @@
 
 
   <div class="infocontainer" id="head1">
-    <div class="container">
+    <div class="container" >
       <div class="row justify-content-md-around">
         <div class="col-xs-12 col-lg-8">
           <h1>Logikk</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in diam ut justo fermentum malesuada nec non nibh. Nam feugiat est id purus ultrices, eu lacinia ante luctus. Aliquam ultrices erat nec neque imperdiet, id venenatis magna hendrerit. Pellentesque sed odio mauris. Aenean bibendum nisi quis euismod rutrum. Morbi luctus elit nibh, ac malesuada libero lobortis sit amet. Etiam sed ultrices arcu. Cras neque eros, elementum interdum condimentum sed, aliquet id nisl. Donec condimentum dignissim imperdiet. Fusce vestibulum libero a ipsum suscipit, eget molestie sem laoreet. Nunc varius porttitor lorem sagittis luctus. Pellentesque quis bibendum diam. Cras cursus massa in urna tincidunt, at volutpat tortor viverra. In et pretium justo, non pharetra sem. Praesent a aliquet eros, id consequat lectus. Mauris lorem diam, imperdiet mollis aliquam in, dictum sed magna.
+            Did it take you more time to understand this logic gate meme than it should've? There is one of three things that usually happens when someone encounters a logic gate meme such as this beautiful one: The person scrolls past calling it ridiculous and uninteresting, they stop and try to comprehend what the meme is about and forward it to one of their geeky friends in hopes of learning what it is about, or they understand it and have this unimaginable feeling of pride of knowing so much about Logic Gates. In the third situation more often than never people have this burning feeling of just popping an app open to design some logic gates, but sadly there aren't any available on the mainstream platform that satiates their hunger properly. We, at <b> Logikk </b>, decided to change it. With Logikk, misspelt incorrectly for reasons we would rather you learn by exploring our website a bit more, we aim to create a Logic gate simulator environment which is friendly for people of all ages. We aim to help students learn more about logic gates by giving them a platform where they can construct and evaluating logic gates to gain intuition on how they relate to truth tables. Each individual can either start as guests or login to keep track of their performance as it turns out Logikk is more than just a Logic Gate evaluation application. To be clear, it comes with two modes:
 
-            Vestibulum consequat pellentesque odio vel elementum. Donec semper dui eu nulla consectetur tincidunt. Sed viverra erat sit amet ullamcorper aliquet. Fusce et massa laoreet, lobortis nibh non, tincidunt quam. Mauris dictum fringilla nisi, quis posuere risus fermentum vel. Aenean eget commodo elit. Proin mattis maximus lacus sed tempus. Quisque venenatis sodales arcu eget pellentesque. Quisque sollicitudin tellus eget egestas rutrum.
+            <ol> <b>
+              <li> Sandbox Mode </li>
+              <li> Challenge Mode </li>
+            </b> </ol>
+
           </p>
         </div>
         <div class="col-xs-12 col-lg-4">
-          <p>INSERT IMAGE HERE</p>
+          <p><img src="images/android_gate.jpg" width=130% height=280></p>
         </div>
       </div>
     </div>
@@ -227,7 +231,7 @@
           </label>
         </div>
       </div>
-    
+
       </div>
       <div class="modal-footer">
       <div class="container-fluid">
@@ -282,7 +286,7 @@
           </label>
         </div>
       </div>
-    
+
       </div>
       <div class="modal-footer">
       <div class="container-fluid">
