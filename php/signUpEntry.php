@@ -1,47 +1,54 @@
 <!DOCTYPE html>
+<html>
 <head>
-<?php
-  include_once("databaseDetails.php");
+  <meta http-equiv="refresh" content="1;url=../home.php"/>
+  <?php
+    session_start();
 
-  $name = test_input($_POST["name"]);
-  $user = test_input($_POST["username"]);
-  $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
-  $email = test_input($_POST["email"]);
+    require_once("databaseDetails.php");
+    if (isset($_POST['username'])) {
+      exit();
+    }
 
-  $queryUniqueUser = "SELECT * FROM user_info WHERE Username='" . $user . "'";
-  $resUniqueUser = $mysql->query($queryUniqueUser);
-  $queryUniqueEmail = "SELECT * FROM user_info WHERE Email='" . $email . "'";
-  $resUniqueEmail = $mysql->query($queryUniqueEmail);
+    $name = test_input($_POST["name"]);
+    $user = test_input($_POST["username"]);
+    // $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    $pass = $_POST["password"];
+    $email = test_input($_POST["email"]);
 
-  if ($resUniqueUser->num_rows != 0) {
-    $_SESSION['textSignUp'] = "Sorry, Username is taken.";
+    $queryUserUnique = "SELECT * FROM user_info WHERE Username='$user'";
+    $queryEmailUnique = "SELECT * FROM user_info WHERE Email='$email'";
+
+    $_SESSION['textSignUp'] = "Welcome $name, you've made the Logikkal choice trusting us with your logic circuit!";
+    if ($mysql->query($queryUserUnique)->num_rows != 0) {
+      $_SESSION['textSignUp'] = "Username already exists, please try again!";
+      exit();
+    }
+
+    if ($mysql->query($queryEmailUnique)->num_rows != 0) {
+      $_SESSION['textSignUp'] = "Email already exists, please try again!";
+      exit();
+    }
+
+    $queryInsert = "INSERT INTO user_info VALUES ('$user', '$email', '$pass', '$name')";
+
+    if ($mysql->query($queryInsert) === FALSE) {
+      $_SESSION['textSignUp'] = "Something went wrong, Please try again!";
+      exit();
+    }
+
     $mysql->close();
-    exit();
-  }
 
-  if ($resUniqueUser->num_rows != 0) {
-    $_SESSION['textSignUp'] = "Sorry, Email is taken.";
-    $mysql->close();
-    exit();
-  }
+    function test_input($data)
+    {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
+  ?>
 
-  $query = "INSERT INTO user_info VALUES (".$user.", ".$email.", ".$pass.", ".$name.")";
-
-  if ($mysql->query($query) === TRUE) {
-    $_SESSION['textSignUp'] = "Welcome to the beautiful world of Logikk " . $name . ". Please sign in to continue using user priviliges";
-  } else {
-    $_SESSION['textSignUp'] = "Sorry, Something went wrong!";
-  }
-
-  $mysql->close();
-
-  function test_input($data)
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-?>
-<meta http-equiv="refresh" content="0;url=../home.php"/>
 </head>
+<body>
+</body>
+</html>

@@ -48,6 +48,7 @@
     $data = htmlspecialchars($data);
     return $data;
   }
+
 ?>
 <meta http-equiv="refresh" content="0;url=../home.php"/>
 </head>
