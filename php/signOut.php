@@ -2,10 +2,13 @@
 <head>
   <?php
     session_start();
-    if(isset($_SESSION["username"]))
-    {
-      $_SESSION["username"] = null;
-    }
-    echo "<meta http-equiv=\"refresh\" content=\"0;url=home.html\"/>";
+    session_unset();
+    session_destroy();
   ?>
+  <meta http-equiv="refresh" content="2;url=../home.php"/>
 </head>
+<body>
+  <div class="loader">
+    Please wait...
+  </div>
+</body>

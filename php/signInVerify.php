@@ -5,7 +5,7 @@
   // database connection details
   require_once("databaseDetails.php");
 
-  
+
   //name of table
   $table = "user_info";
 
@@ -18,20 +18,17 @@
     $res = $mysql->query($query);
     if ($res->num_rows == 0)
     {
-      $send_to = "../pages/signIn.php";
       $_SESSION["accepted"] = false;
       $_SESSION["err"] = "Incorrect username or password.";
     }
     elseif ($res->num_rows == 1)
     {
-      $send_to = "../home.php";
       $_SESSION["username"] = $uid;
       $_SESSION["accepted"] = true;
       $_SESSION["err"] = "";
     }
     else
     {
-      $send_to = "../pages/signIn.php";
       $_SESSION["accepted"] = false;
       $_SESSION["err"] = "Something went wrong!";
     }
@@ -52,5 +49,5 @@
     return $data;
   }
 ?>
-<meta http-equiv="refresh" content="0;url=<?php echo $send_to;?>"/>
+<meta http-equiv="refresh" content="0;url=../home.php"/>
 </head>
