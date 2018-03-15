@@ -7,7 +7,6 @@
   $user = test_input($_POST["username"]);
   $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
   $email = test_input($_POST["email"]);
-  $send_to = "signUp.html";
 
   $queryUniqueUser = "SELECT * FROM user_info WHERE Username='" . $user . "'";
   $resUniqueUser = $mysql->query($queryUniqueUser);
@@ -26,7 +25,7 @@
     exit();
   }
 
-  $query = "INSERT INTO user_info VALUES (".$user.", ".$email.", ".$pass.", ".$name")";
+  $query = "INSERT INTO user_info VALUES (".$user.", ".$email.", ".$pass.", ".$name.")";
 
   if ($mysql->query($query) === TRUE) {
     $_SESSION['textSignUp'] = "Welcome to the beautiful world of Logikk " . $name . ". Please sign in to continue using user priviliges";
