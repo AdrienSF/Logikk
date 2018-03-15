@@ -385,13 +385,14 @@
         }
     }
 </script>
-<?php if(isset($_SESSION['textSignUp']))
-{
-  echo "\<script\>
-  alert(".$_SESSION['textSignUp'].");
-  \</script\>";
-}
-?>
+<script type="text/javascript">
+  <?php
+  if (isset($_SESSION['textSignUp'])) {
+    echo 'alert("'.$_SESSION['textSignUp'].'");';
+  }
+  unset($_SESSION['textSignUp']);
+  ?>
+</script>
 
 </body>
 

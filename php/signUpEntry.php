@@ -6,7 +6,7 @@
     session_start();
 
     require_once("databaseDetails.php");
-    if (isset($_POST['username'])) {
+    if (isset($_POST['username']) || $error) {
       exit();
     }
 
@@ -22,11 +22,13 @@
     $_SESSION['textSignUp'] = "Welcome $name, you've made the Logikkal choice trusting us with your logic circuit!";
     if ($mysql->query($queryUserUnique)->num_rows != 0) {
       $_SESSION['textSignUp'] = "Username already exists, please try again!";
+      $mysql->close();
       exit();
     }
 
     if ($mysql->query($queryEmailUnique)->num_rows != 0) {
       $_SESSION['textSignUp'] = "Email already exists, please try again!";
+      $mysql->close();
       exit();
     }
 
@@ -34,6 +36,7 @@
 
     if ($mysql->query($queryInsert) === FALSE) {
       $_SESSION['textSignUp'] = "Something went wrong, Please try again!";
+      $mysql->close();
       exit();
     }
 
