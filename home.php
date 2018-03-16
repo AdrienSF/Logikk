@@ -10,6 +10,8 @@
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+  <link href="../css/binary-ol-20-rows.min.css" rel="stylesheet" type="text/html" />
+
 
 
   <style media="screen">
@@ -51,13 +53,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="home.php">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pages/sandbox.html">Sandbox</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#head3">Tutorials</a>
+          <a class="nav-link" href="pages/tutorial.html">Tutorials</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
@@ -114,12 +116,20 @@
 
 
   <div class="infocontainer" id="head1">
-    <div class="container" >
+    <div class="container-fluid" >
       <div class="row justify-content-md-around">
-        <div class="col-xs-12 col-lg-8">
+        <div class="col-xs-12 col-lg-6">
           <h1>Logikk</h1>
           <p>
-            Did it take you more time to understand this logic gate meme than it should've? There is one of three things that usually happens when someone encounters a logic gate meme such as this beautiful one: The person scrolls past calling it ridiculous and uninteresting, they stop and try to comprehend what the meme is about and forward it to one of their geeky friends in hopes of learning what it is about, or they understand it and have this unimaginable feeling of pride of knowing so much about Logic Gates. In the third situation more often than never people have this burning feeling of just popping an app open to design some logic gates, but sadly there aren't any available on the mainstream platform that satiates their hunger properly. We, at <b> Logikk </b>, decided to change it. With Logikk, misspelt incorrectly for reasons we would rather you learn by exploring our website a bit more, we aim to create a Logic gate simulator environment which is friendly for people of all ages. We aim to help students learn more about logic gates by giving them a platform where they can construct and evaluating logic gates to gain intuition on how they relate to truth tables. Each individual can either start as guests or login to keep track of their performance as it turns out Logikk is more than just a Logic Gate evaluation application. To be clear, it comes with two modes:
+            <h4> Did it take you more time to understand this logic gate meme than it should've? </h4>
+
+            <h5> There are 11 kinds of people: </h5>
+              <b> 01. </b> Those who scroll past calling it ridiculous and uninteresting <br>
+              <b> 10. </b> The ones who forward it to one of their geeky friends in hopes of learning what it is about <br>
+              <b> 11. </b> Geeks with immense amount of pride because they get Logic Gate (and binary) jokes. </p>
+
+              <p>
+                <b> Logikk </b> is for the third kind to build logic gate circuits and satiate their hunger. We aim to create a Logic gate simulator environment which is friendly for people of all ages. We aim to help students learn more about logic gates by giving them a platform where they can construct and evaluating logic gates to gain intuition on how they relate to truth tables. Each individual can either start as guests or login to keep track of their performance as it turns out Logikk is more than just a Logic Gate evaluation application. To be clear, it comes with two modes:
 
             <ol> <b>
               <li> Sandbox Mode </li>
@@ -128,8 +138,8 @@
 
           </p>
         </div>
-        <div class="col-xs-12 col-lg-4">
-          <p><img src="images/android_gate.jpg" width=130% height=280></p>
+        <div class="col-lg-4">
+          <p><img class="img-fluid" src="images/android_gate.jpg" width="600" height="100"></p>
         </div>
       </div>
     </div>
