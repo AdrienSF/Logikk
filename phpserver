@@ -1,0 +1,3 @@
+#!/bin/bash
+OUTPUT="$(ifconfig eno1 | grep 'inet ' | cut -d: -f3 | awk '{print $2}')"
+php -S ${OUTPUT}:8000 -t . &

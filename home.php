@@ -10,9 +10,6 @@
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-  <link href="../css/binary-ol-20-rows.min.css" rel="stylesheet" type="text/html" />
-
-
 
   <style media="screen">
   .myDark{
@@ -45,7 +42,11 @@
 <body style="background: #e9e9e9">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#"><span style="color: green"><b>Logikk</b></span></a>
+    <a class="navbar-brand" href="#">
+      <!-- Logikk -->
+      <img src="images/image-gallery/logikk.png" width="130" height="30">
+      </span>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -59,9 +60,13 @@
           <a class="nav-link" href="pages/sandbox.html">Sandbox</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/tutorial.html">Tutorials</a>
+          <a class="nav-link" href="challenges.html">Challenges </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/tutorial.html">Tutorial</a>
         </li>
       </ul>
+
       <ul class="navbar-nav ml-auto">
         <?php if (!isset($_SESSION["username"])) { ?>
         <li class="nav-item">
@@ -91,11 +96,11 @@
       <div class="carousel-inner">
 
         <div class="carousel-item active">
-          <a href="#head1"><img class="w-100" src="images/image-gallery/1.jpg" alt="First slide"></a>
+          <a href="#head1"><img class="w-100" src="images/image-gallery/poster.png" alt="First slide"></a>
         </div>
 
         <div class="carousel-item">
-          <a href="#head2"><img class="w-100" src="images/image-gallery/2.jpg" alt="Second slide"></a>
+          <a href="#head2"><img class="w-100" src="images/image-gallery/sandbox.png" alt="Second slide"></a>
         </div>
 
         <div class="carousel-item">
@@ -125,7 +130,7 @@
 
             <h5> There are 11 kinds of people: </h5>
               <b> 01. </b> Those who scroll past calling it ridiculous and uninteresting <br>
-              <b> 10. </b> The ones who forward it to one of their geeky friends in hopes of learning what it is about <br>
+              <b> 10. </b> The ones who forward it to their friends in hopes of learning what it is about <br>
               <b> 11. </b> Geeks with immense amount of pride because they get Logic Gate (and binary) jokes. </p>
 
               <p>
@@ -139,7 +144,7 @@
           </p>
         </div>
         <div class="col-lg-4">
-          <p><img class="img-fluid" src="images/android_gate.jpg" width="600" height="100"></p>
+          <p><img class="img-fluid" src="images/image-gallery/android_gate.jpg" width="600" height="100"></p>
         </div>
       </div>
     </div>
