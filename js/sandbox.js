@@ -417,7 +417,7 @@ function createTruthTable() {
 function createInputLabels() {
   // Set input header title to corresponding letter
   for (j = 0; j <= inputsInst.length-1; j++)
-      gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
+    gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
 }
 
 function updateTableStates() {
@@ -429,11 +429,13 @@ function updateTableStates() {
   if(outInst && gateToHtml.get(outInst)) {
     hasUpdatedOutSuccessfully = true;
     // try to update, this will set to false if there's a problem
+
     outInst.getState();
-    if(!hasUpdatedOutSuccessfully)
+    if(!hasUpdatedOutSuccessfully) {
       gateToHtml.get(outInst).firstChild.style.backgroundColor = "#AA1111";
-    else
+    } else {
       gateToHtml.get(outInst).firstChild.style.backgroundColor = "#2196F3";
+    }
   }
 
   for(var bitmask = 0; bitmask < Math.pow(2, inputsInst.length); bitmask++) {
@@ -445,7 +447,10 @@ function updateTableStates() {
       else
         inputsInst[i].state = false;
       inputStateText[row][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
-      outStateText[row].nodeValue = outInst.getState() ? "T" : "F";
+      if(hasUpdatedOutSuccessfully)
+        outStateText[row].nodeValue = outInst.getState() ? "T" : "F";
+      else
+        outStateText[row].nodeValue = "n/a";
     }
 
     // color the row we are on in sandbox
