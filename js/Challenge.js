@@ -458,7 +458,7 @@ function createTruthTable() {
 function createInputLabels() {
   // Set input header title to corresponding letter
   for (j = 0; j <= inputsInst.length-1; j++)
-    gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
+      gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
 }
 
 var goalTable;//XOR gate truth table for 2 inputs
@@ -473,11 +473,10 @@ function updateTableStates() {
     hasUpdatedOutSuccessfully = true;
     // try to update, this will set to false if there's a problem
     outInst.getState();
-    if(!hasUpdatedOutSuccessfully) {
+    if(!hasUpdatedOutSuccessfully)
       gateToHtml.get(outInst).firstChild.style.backgroundColor = "#AA1111";
-    }else{
+    else
       gateToHtml.get(outInst).firstChild.style.backgroundColor = "#2196F3";
-    }
   }
 
   for(var bitmask = 0; bitmask < Math.pow(2, inputsInst.length); bitmask++) {
@@ -489,16 +488,8 @@ function updateTableStates() {
       else
         inputsInst[i].state = false;
       inputStateText[row][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
-      inputStateText[row][i].parentNode.style.color = inputsInst[i].getState() ? "green" : "red";
-
-      if(hasUpdatedOutSuccessfully) {
-
-        outStateText[row].nodeValue = outInst.getState() ? "T" : "F";
-        outStateText[row].parentNode.style.color = outInst.getState() ? "green" : "red";
-        } else {
-          outStateText[row].nodeValue = "n/a";
-          outStateText[row].parentNode.style.color = "black";
-        }
+      outStateText[row].nodeValue = outInst.getState() ? "T" : "F";
+      goalOutStateText[row].nodeValue = goalTable[row] ? "T" : "F";
     }
 
     // color the row we are on in sandbox
@@ -522,7 +513,7 @@ function updateTableStates() {
   checkChallengeComplete();
 }
 
-function checkChallengeComplete() {
+function checkChallengeComplete(isSubmitted) {
   var correct = true;
   //reset all to black
   for (i = 0; i < Math.pow(2, inputsInst.length); i++)
@@ -547,8 +538,9 @@ function checkChallengeComplete() {
     }
   }
   // console.log("1:" + correct);
-  // console.log("2:" + (inputsInst.length === goalInputs));
-  if (correct && (inputsInst.length === goalInputs)) {
+  // console.log("inputsInst.length:" + inputsInst.length);
+  // console.log("goalInputs:" + goalInputs)
+  if (correct && ((""+inputsInst.length) === (""+goalInputs)) && isSubmitted) {
     alert(winMessage);
   }
 }
