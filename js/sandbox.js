@@ -446,11 +446,17 @@ function updateTableStates() {
         inputsInst[i].state = true;
       else
         inputsInst[i].state = false;
+
       inputStateText[row][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
-      if(hasUpdatedOutSuccessfully)
+      inputStateText[row][i].parentNode.style.color = inputsInst[i].getState() ? "green" : "red";
+
+      if(hasUpdatedOutSuccessfully) {
         outStateText[row].nodeValue = outInst.getState() ? "T" : "F";
-      else
+        outStateText[row].parentNode.style.color = outInst.getState() ? "green" : "red";
+      } else {
         outStateText[row].nodeValue = "n/a";
+        outStateText[row].parentNode.style.color = "black";
+      }
     }
 
     // color the row we are on in sandbox
