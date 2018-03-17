@@ -10,6 +10,7 @@ function getParameterByName(name, url) {
 }
 
 
+
 goalInputs = getParameterByName("in");
 maxANDgates = getParameterByName("and");
 maxORgates = getParameterByName("or");
@@ -23,9 +24,9 @@ var challengeDescription = document.createTextNode("Construct a circuit that pro
 /*
 what we really want:
 
-var challengeToLoad = getParameterByName("challenge");
+var challengeID = getParameterByName("i") + "," + getParameterByName("j");
 
-connect to table challengeToLoad in database (sudocode because I don't know how to do this)
+connect to the table with the Given challengeID in database 
 
 goalInputs = some data fetched from database;
 maxANDgates = some data fetched from database;

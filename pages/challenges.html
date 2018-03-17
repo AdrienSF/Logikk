@@ -20,6 +20,9 @@
   #dark{
     background: #dcdcdc
   }
+  h3 {
+    margin-top: 15px;
+  }
   </style>
 </head>
 
@@ -55,70 +58,18 @@
   <!-- challenges -->
   <section>
     <div class="container-fluid">
+
       <div class="block-header">
         <h2>CHALLENGES</h2>
       </div>
-      <div class="row clearfix">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <a href="#"><div class="card" style="background-color: #428BCA;">
-            <p></p>
-            <h3 class="text-center">3 input true Challenge</h3>
-            <p class="text-center">
-              Construct a circuit that produces true for every output. <br>
-            </p>
-          </div></a>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="card" style="background-color: #428BCA;">
-            <p></p>
-            <h3 class="text-center">3 input 2 true Challenge</h3>
-            <p class="text-center">
-              Construct a circuit that outputs true when exactly 2 inputs are true. <br>
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="card" style="background-color: #5CB85C;">
-            <p></p>
-            <h3 class="text-center">2 input XOR Challenge</h3>
-            <p class="text-center">
-              Construct a circuit that produces the same output as a XOR gate. <br>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row clearfix">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="card" style="background-color: #5CB85C;">
-            <p></p>
-            <h3 class="text-center">2 input implication Challenge</h3>
-            <p class="text-center">
-              Construct a circuit that produces an output matching A => B. <br>
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="card" style="background-color: #F9F9F9;">
-            <p></p>
-            <h3 class="text-center"></h3>
-            <p class="text-center">
-              <br><br>
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-          <div class="card" style="background-color: #F9F9F9;">
-            <p></p>
-            <h3 class="text-center"></h3>
-            <p class="text-center">
-              <br><br>
-            </p>
-          </div>
-        </div>
-      </div>
+
+      <div id="challengeCards"></div>
+
+    </div>
+  </section>
 
 
-
+  <script src="../js/challenges.js"></script>
       <!-- challenges -->
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
