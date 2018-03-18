@@ -124,24 +124,26 @@
     <div class="container-fluid" >
       <div class="row justify-content-md-around">
         <div class="col-xs-12 col-lg-6">
-          <h1>Logikk</h1>
+          <h1><img src="images/image-gallery/logikklogo.png" width="130" height="30"></h1>
           <p>
-            <h4> Did it take you more time to understand this logic gate meme than it should've? </h4>
+            <h3> Did it take you more time to understand this logic gate meme than it should've? </h3>
+            <br><br>
 
-            <h5> There are 11 kinds of people: </h5>
+            <h4> There are 11 kinds of people: </h4>
               <b> 01. </b> Those who scroll past calling it ridiculous and uninteresting <br>
               <b> 10. </b> The ones who forward it to their friends in hopes of learning what it is about <br>
               <b> 11. </b> Geeks with immense amount of pride because they get Logic Gate (and binary) jokes. </p>
+              <br><br>
 
-              <p>
-                <b> Logikk </b> is for the third kind to build logic gate circuits and satiate their hunger. We aim to create a Logic gate simulator environment which is friendly for people of all ages. We aim to help students learn more about logic gates by giving them a platform where they can construct and evaluating logic gates to gain intuition on how they relate to truth tables. Each individual can either start as guests or login to keep track of their performance as it turns out Logikk is more than just a Logic Gate evaluation application. To be clear, it comes with two modes:
+              <h5>
+                <b> Logikk </b> is for the third kind to build logic gate circuits and satiate their hunger. We aim to create a Logic gate simulator environment which is friendly for people of all ages. It comes with two modes:
 
             <ol> <b>
               <li> Sandbox Mode </li>
               <li> Challenge Mode </li>
             </b> </ol>
 
-          </p>
+          </h5>
         </div>
         <div class="col-lg-4">
           <p><img class="img-fluid" src="images/image-gallery/android_gate.jpg" width="600" height="100"></p>
