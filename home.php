@@ -12,9 +12,7 @@
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
   <style media="screen">
-  .myDark{
-    background: #dcdcdc
-  }
+  .myDark{ background: #dcdcdc }
 .form-group span {
       margin: auto;
       padding-right: 5px;
@@ -28,13 +26,9 @@
     padding-top: 8vh;
   }
 
-  .transitionRow {
-    height: 8vh;
-  }
+  .transitionRow { height: 8vh; }
 
-  #toTop {
-    height: 8vh;
-  }
+  #toTop { height: 8vh }
 
   </style>
 </head>

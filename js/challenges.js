@@ -7,7 +7,9 @@ for (var i = 1; i <= 10; i++)
 
   for (var j = 1; j <= 3; j++)
   {
-    var challengeID = "" + i + "," + j;
+    var part1 = "0" + i;
+    if (i > 9) part1 = i;
+    var challengeID = "G" + part1 + j;
 
     var column = document.createElement("div");
     column.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4";
@@ -40,7 +42,7 @@ for (var i = 1; i <= 10; i++)
 
 function getBackgroundColor(challengeID)
 {
-  var inputs = 2;//get number of inputs from a table called challengeID in database if it exists
+  var inputs = 3;//get number of inputs from a table called challengeID in database if it exists
   var colorCode = "F9F9F9";
   if (inputs === 2) colorCode = "5CB85C";//should really be switch/case
   if (inputs === 3) colorCode = "5BC0DE";

@@ -10,6 +10,11 @@ function getParameterByName(name, url) {
 }
 
 
+var part1 = "0" + getParameterByName("i");
+if (getParameterByName("i") > 9) part1 = getParameterByName("i");
+var challengeID = "G" + part1 + getParameterByName("j");
+
+// connect to the table with the Given challengeID in database
 
 goalInputs = getParameterByName("in");
 maxANDgates = getParameterByName("and");
@@ -17,16 +22,12 @@ maxORgates = getParameterByName("or");
 maxXORgates = getParameterByName("xor");
 maxNOTgates = getParameterByName("not");
 goalTable = [false, true, true, false];//2 input XOR truth table out column
-winMessage = "congratulations, you have solved one of the 16 challenges of the lowest complexity";
+winMessage = "Congratulations, you have solved one of the 16 challenges of the lowest complexity";
 var challengeHeader = document.createTextNode("2 input XOR challenge");
 var challengeDescription = document.createTextNode("Construct a circuit that produces the same output as a XOR gate, shown on the leftmost column of the truth table.");
 
 /*
 what we really want:
-
-var challengeID = getParameterByName("i") + "," + getParameterByName("j");
-
-connect to the table with the Given challengeID in database 
 
 goalInputs = some data fetched from database;
 maxANDgates = some data fetched from database;
