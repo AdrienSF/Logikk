@@ -87,14 +87,7 @@ class Gate {
     }
 
     if(inputs.length == 0) {
-      if(type == NOT)
-        this.state = true;
-      else
-        this.state = false;
-
-      hasUpdatedOutSuccessfully = false;
-      this.state = false;
-      return this.state;
+      return "err";
     }
 
     if(type == OUT) {
@@ -230,6 +223,7 @@ function update() {
   updateOutImage();
   drawLines();
   updateTableStates();
+  updateBoolExpr();
 }
 
 function updateInputButton() {
@@ -462,12 +456,22 @@ function createTruthTable() {
   }
 
   updateTableStates();
+  updateBoolExpr();
 }
 
 function createInputLabels() {
   // Set input header title to corresponding letter
   for (j = 0; j <= inputsInst.length-1; j++)
     gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
+}
+
+function updateBoolExpr() {
+  // run updateTableStates first so hasUpdatedOutSuccessfully is up to date
+  if(hasUpdatedOutSuccessfully) {
+    document.getElementById("boolExp").innerHTML = outInst.constructBoolExpr();
+  } else {
+    document.getElementById("boolExp").innerHTML = "out not connected";
+  }
 }
 
 function updateTableStates() {

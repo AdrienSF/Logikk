@@ -76,6 +76,49 @@ class Gate {
       return !inputs[0].getState();
     }
   }
+
+  constructBoolExpr() {
+    var type = this.type;
+    var inputs = this.inputs;
+    var outputs = this.outputs;
+
+    if(type == IN) {
+      return gateToHtml.get(this).firstChild.innerHTML;
+    }
+
+    if(inputs.length == 0) {
+      return "err";
+    }
+
+    if(type == OUT) {
+      return inputs[0].constructBoolExpr();
+    }
+
+    if(type == AND) {
+      var expr = "(" + inputs[0].constructBoolExpr() + ")";
+      for(var i = 1; i < inputs.length; i++)
+        expr += "∧(" + inputs[i].constructBoolExpr() + ")";
+      return expr;
+    }
+
+    if(type == OR) {
+      var expr = "(" + inputs[0].constructBoolExpr() + ")";
+      for(var i = 1; i < inputs.length; i++)
+        expr += "∨(" + inputs[i].constructBoolExpr() + ")";
+      return expr;
+    }
+
+    if(type == XOR) {
+      var expr = "(" + inputs[0].constructBoolExpr() + ")";
+      for(var i = 1; i < inputs.length; i++)
+        expr += "^(" + inputs[i].constructBoolExpr() + ")";
+      return expr;
+    }
+
+    if(type == NOT) {
+      return "¬(" + inputs[0].constructBoolExpr() + ")";
+    }
+  }
 }
 
 var hasUpdatedOutSuccessfully = false;
@@ -180,6 +223,7 @@ function update() {
   updateOutImage();
   drawLines();
   updateTableStates();
+  updateBoolExpr();
 }
 
 var goalInputs;
@@ -453,12 +497,22 @@ function createTruthTable() {
   }
 
   updateTableStates();
+  updateBoolExpr();
 }
 
 function createInputLabels() {
   // Set input header title to corresponding letter
   for (j = 0; j <= inputsInst.length-1; j++)
       gateToHtml.get(inputsInst[j]).firstChild.innerHTML = String.fromCharCode(65 + j);
+}
+
+function updateBoolExpr() {
+  // run updateTableStates first so hasUpdatedOutSuccessfully is up to date
+  if(hasUpdatedOutSuccessfully) {
+    document.getElementById("boolExp").innerHTML = outInst.constructBoolExpr();
+  } else {
+    document.getElementById("boolExp").innerHTML = "out not connected";
+  }
 }
 
 var goalTable;//XOR gate truth table for 2 inputs
@@ -662,7 +716,7 @@ window.onresize = function(event) {
   for(var i = 0; i < gates.length; i++)
     fixPos(gateToHtml.get(gates[i]));
   drawLines();
-};
+}
 
 // to create out gate
 clearAll();
