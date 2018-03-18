@@ -448,11 +448,11 @@ function updateTableStates() {
         inputsInst[i].state = false;
 
       inputStateText[row][i].nodeValue = inputsInst[i].getState() ? "T" : "F";
-      inputStateText[row][i].parentNode.style.color = inputsInst[i].getState() ? "green" : "red";
+      inputStateText[row][i].parentNode.style.color = inputsInst[i].getState() ? "red" : "black";
 
       if(hasUpdatedOutSuccessfully) {
         outStateText[row].nodeValue = outInst.getState() ? "T" : "F";
-        outStateText[row].parentNode.style.color = outInst.getState() ? "green" : "red";
+        outStateText[row].parentNode.style.color = outInst.getState() ? "red" : "black";
       } else {
         outStateText[row].nodeValue = "n/a";
         outStateText[row].parentNode.style.color = "black";
