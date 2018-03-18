@@ -45,7 +45,6 @@
     <a class="navbar-brand" href="#">
       <!-- Logikk -->
       <img src="images/image-gallery/logikk.png" width="130" height="30">
-      </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -60,7 +59,7 @@
           <a class="nav-link" href="pages/sandbox.html">Sandbox</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="challenges.html">Challenges </a>
+          <a class="nav-link" href="pages/challenges.html">Challenges </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pages/tutorial.html">Tutorial</a>
@@ -130,9 +129,9 @@
             <br><br>
 
             <h4> There are 11 kinds of people: </h4>
-              <b> 01. </b> Those who scroll past calling it ridiculous and uninteresting <br>
-              <b> 10. </b> The ones who forward it to their friends in hopes of learning what it is about <br>
-              <b> 11. </b> Geeks with immense amount of pride because they get Logic Gate (and binary) jokes. </p>
+              <b> 01. </b> Who ignore it calling it uninteresting <br>
+              <b> 10. </b> Who forward it to others to get the joke <br>
+              <b> 11. </b> Geeks with immense amount of pride for getting Logic Gate (and binary) jokes. </p>
               <br><br>
 
               <h5>
