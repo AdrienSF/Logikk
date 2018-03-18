@@ -76,6 +76,56 @@ class Gate {
       return !inputs[0].getState();
     }
   }
+
+  constructBoolExpr() {
+    var type = this.type;
+    var inputs = this.inputs;
+    var outputs = this.outputs;
+
+    if(type == IN) {
+      return gateToHtml.get(this).firstChild.innerHTML;
+    }
+
+    if(inputs.length == 0) {
+      if(type == NOT)
+        this.state = true;
+      else
+        this.state = false;
+
+      hasUpdatedOutSuccessfully = false;
+      this.state = false;
+      return this.state;
+    }
+
+    if(type == OUT) {
+      return inputs[0].constructBoolExpr();
+    }
+
+    if(type == AND) {
+      var expr = "(" + inputs[0].constructBoolExpr() + ")";
+      for(var i = 1; i < inputs.length; i++)
+        expr += "∧(" + inputs[i].constructBoolExpr() + ")";
+      return expr;
+    }
+
+    if(type == OR) {
+      var expr = "(" + inputs[0].constructBoolExpr() + ")";
+      for(var i = 1; i < inputs.length; i++)
+        expr += "∨(" + inputs[i].constructBoolExpr() + ")";
+      return expr;
+    }
+
+    if(type == XOR) {
+      var expr = "(" + inputs[0].constructBoolExpr() + ")";
+      for(var i = 1; i < inputs.length; i++)
+        expr += "^(" + inputs[i].constructBoolExpr() + ")";
+      return expr;
+    }
+
+    if(type == NOT) {
+      return "¬(" + inputs[0].constructBoolExpr() + ")";
+    }
+  }
 }
 
 var hasUpdatedOutSuccessfully = false;
