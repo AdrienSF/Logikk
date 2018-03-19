@@ -5,6 +5,9 @@ let OR     = "OR";
 let XOR    = "XOR";
 let NOT    = "NOT";
 
+let COLOR_BROKEN = "#9900ff";
+let COLOR_CORRECT = "#2196F3";
+
 class Gate {
   // type may be IN, AND, OR, XOR, NOT
   constructor(type) {
@@ -15,6 +18,20 @@ class Gate {
 
     if(this.type == IN)
       this.state = false;
+
+    if(this.type == IN) {
+      this.inputLimit = 0;
+    } else if(this.type == OUT) {
+      this.inputLimit = 1;
+    } else if(this.type == AND) {
+      this.inputLimit = 2;
+    } else if(this.type == OR) {
+      this.inputLimit = 2;
+    } else if(this.type == XOR) {
+      this.inputLimit = 2;
+    } else if(this.type == NOT) {
+      this.inputLimit = 1;
+    }
   }
 
   getStatePrecalculated() {
@@ -32,14 +49,14 @@ class Gate {
       return this.state;
     }
 
-    if(inputs.length == 0) {
+    if(inputs.length != this.inputLimit) {
+      hasUpdatedOutSuccessfully = false;
+
       if(type == NOT)
         this.state = true;
       else
         this.state = false;
 
-      hasUpdatedOutSuccessfully = false;
-      this.state = false;
       return this.state;
     }
 
@@ -224,6 +241,7 @@ function update() {
   drawLines();
   updateTableStates();
   updateBoolExpr();
+  updateGateColours();
 }
 
 function updateInputButton() {
@@ -376,7 +394,7 @@ function dropped(e) {
   }
 
   // if gate can only have one input, disconnect first
-  if((targetInst.type == NOT || targetInst.type == OUT) && targetInst.inputs.length > 0)
+  if(targetInst.inputs.length >= targetInst.inputLimit)
     disconnectGates(targetInst.inputs[0], targetInst);
 
   sourceInst.outputs.push(targetInst);
@@ -457,6 +475,7 @@ function createTruthTable() {
 
   updateTableStates();
   updateBoolExpr();
+  updateGateColours();
 }
 
 function createInputLabels() {
@@ -466,11 +485,36 @@ function createInputLabels() {
 }
 
 function updateBoolExpr() {
-  // run updateTableStates first so hasUpdatedOutSuccessfully is up to date
+  if(outInst && gateToHtml.get(outInst)) {
+    hasUpdatedOutSuccessfully = true;
+    outInst.getState();
+  } else return;
+
   if(hasUpdatedOutSuccessfully) {
     document.getElementById("boolExp").innerHTML = outInst.constructBoolExpr();
   } else {
     document.getElementById("boolExp").innerHTML = "out not connected";
+  }
+}
+
+function updateGateColours() {
+  if(!outInst || !gateToHtml.get(outInst)) return;
+
+  for(var i = 0; i < gates.length; i++) {
+    if(gates[i].inputs.length != gates[i].inputLimit) {
+      gateToHtml.get(gates[i]).firstChild.style.backgroundColor = COLOR_BROKEN;
+    } else {
+      gateToHtml.get(gates[i]).firstChild.style.backgroundColor = COLOR_CORRECT;
+    }
+  }
+
+
+  // out is special because we are checking whether it properly connects recursively
+  outInst.getState();
+  if(!hasUpdatedOutSuccessfully) {
+    gateToHtml.get(outInst).firstChild.style.backgroundColor = COLOR_BROKEN;
+  } else {
+    gateToHtml.get(outInst).firstChild.style.backgroundColor = COLOR_CORRECT;
   }
 }
 
@@ -479,18 +523,9 @@ function updateTableStates() {
   for(var i = 0; i < inputsInst.length; i++)
     inputStatesOriginal.push(inputsInst[i].getState());
 
-  // update out color
-  if(outInst && gateToHtml.get(outInst)) {
-    hasUpdatedOutSuccessfully = true;
-    // try to update, this will set to false if there's a problem
-
+  hasUpdatedOutSuccessfully = true;
+  if(outInst && gateToHtml.get(outInst))
     outInst.getState();
-    if(!hasUpdatedOutSuccessfully) {
-      gateToHtml.get(outInst).firstChild.style.backgroundColor = "#AA1111";
-    } else {
-      gateToHtml.get(outInst).firstChild.style.backgroundColor = "#2196F3";
-    }
-  }
 
   for(var bitmask = 0; bitmask < Math.pow(2, inputsInst.length); bitmask++) {
     var row = Math.pow(2, inputsInst.length) - bitmask - 1;
