@@ -264,7 +264,9 @@ function disconnectGates(sourceInst, targetInst) {
   sourceInst.outputs.splice(sourceInst.outputs.indexOf(targetInst), 1);
 }
 
-function clearAll() {
+function clearAll(override) {
+  if(!override && !confirm("Are you sure you want to Clear All?")) return;
+
   htmlToGate.clear();
   gateToHtml.clear();
   outImage.clear();
@@ -691,4 +693,4 @@ window.onresize = function(event) {
 };
 
 // to create out gate
-clearAll();
+clearAll(true);

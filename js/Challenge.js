@@ -138,4 +138,4 @@ function checkChallengeComplete(isSubmitted) {
 }
 
 // to create out gate
-clearAll();
+clearAll(true);

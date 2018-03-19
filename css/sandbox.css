@@ -1,3 +1,7 @@
+.btn-dark {
+  margin-top: -20px;
+}
+
 #gate {
     position: absolute;
     z-index: 10;
