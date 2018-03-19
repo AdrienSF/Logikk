@@ -112,7 +112,6 @@ function createTruthTable() {
 function updateGoalTableStates() {
   for(var row = 0; row < Math.pow(2, inputsInst.length); row++)
     goalOutStateText[row].nodeValue = goalTable[row] ? "T" : "F";
-
   checkChallengeComplete();
 }
 
@@ -123,12 +122,23 @@ function checkChallengeComplete(isSubmitted) {
     goalOutStateText[i].parentElement.parentElement.parentElement.style.backgroundColor = "white";
 
   //check and color the incorrect rows
-  for (i = 0; i < Math.pow(2, inputsInst.length); i++)
+  for (row = 0; row < Math.pow(2, inputsInst.length); row++)
   {
-    var rowCorrect = goalOutStateText[i].nodeValue === outStateText[i].nodeValue;
+    var rowCorrect = goalOutStateText[row].nodeValue === outStateText[row].nodeValue;
     if (!rowCorrect) {
       correct = false;
-      goalOutStateText[i].parentElement.parentElement.parentElement.style.backgroundColor = "pink";
+      goalOutStateText[row].parentElement.parentElement.parentElement.style.backgroundColor = "pink";
+    }
+
+    for(var i = 0; i < inputsInst.length; i++) {
+      var isOn = (1 << (inputsInst.length - i - 1) & row) != 0;
+      if(inputsInst[i].getState() != isOn) break;
+      else if(i < inputsInst.length - 1) continue;
+      else {
+        if(rowCorrect) outStateText[row].parentNode.parentNode.parentNode.style.backgroundColor = "#E9E9E9";
+        else outStateText[row].parentNode.parentNode.parentNode.style.backgroundColor = "palevioletred";
+        break;
+      }
     }
   }
 

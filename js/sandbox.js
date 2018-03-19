@@ -574,19 +574,6 @@ function updateTableStates() {
     updateGoalTableStates();
 }
 
-function fixPos(gateNode) {
-  /*
-  var pos1 = 0, pos2 = 0;
-  if((gateNode.offsetLeft - pos1) < 0)
-    gateNode.style.left = "0px";
-  if((gateNode.offsetTop - pos2) < 0)
-    gateNode.style.top = "0px";
-  if((gateNode.offsetLeft - pos1) > canvasCard.offsetWidth - gateNode.offsetWidth)
-    gateNode.style.left = canvasCard.offsetWidth - gateNode.offsetWidth + "px";
-  if((gateNode.offsetTop - pos2) > canvasCard.offsetHeight - gateNode.offsetHeight)
-    gateNode.style.top = canvasCard.offsetHeight - gateNode.offsetHeight + "px"; */
-}
-
 // Create an element draggable, removable
 function setupGate(gateNode, headerNode) {
   headerNode.onmousedown = dragMouseDown;
@@ -685,12 +672,6 @@ function setupGate(gateNode, headerNode) {
     drawLines();
   }
 }
-
-window.onresize = function(event) {
-  for(var i = 0; i < gates.length; i++)
-    fixPos(gateToHtml.get(gates[i]));
-  drawLines();
-};
 
 // to create out gate
 clearAll(true);
