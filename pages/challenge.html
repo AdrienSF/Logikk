@@ -70,8 +70,16 @@
           <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
             <h2>CHALLENGE</h2>
           </div>
-          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <h2 id="boolExp" class="text-center">some expression<h2>
+          </div>
+          <div class="col-lg-3">
+            <button class="btn btn-dark" onclick="makeGate('IN')"    type="button" id="inputButton">New Input</button>
+            <button class="btn btn-dark" onclick="makeGate('AND')"   type="button" id="andButton">AND</button>
+            <button class="btn btn-dark" onclick="makeGate('OR')"    type="button" id="orButton">OR</button>
+            <button class="btn btn-dark" onclick="makeGate('XOR')"   type="button" id="xorButton">XOR</button>
+            <button class="btn btn-dark" onclick="makeGate('NOT')"   type="button" id="notButton">NOT</button>
+            <button class="btn btn-dark" onclick="clearAll()"        type="button">Clear All</button>
           </div>
         </div>
       </div>
@@ -119,16 +127,6 @@
 
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
           <div class="card" id="ttCard">
-            <div class="body">
-              <button onclick="makeGate('IN')"    type="button" id="inputButton">New Input</button>
-              <button onclick="makeGate('AND')"   type="button" id="andButton">AND</button>
-              <button onclick="makeGate('OR')"    type="button" id="orButton">OR</button>
-              <button onclick="makeGate('XOR')"   type="button" id="xorButton">XOR</button>
-              <button onclick="makeGate('NOT')"   type="button" id="notButton">NOT</button>
-              <button onclick="clearAll()"        type="button" >Clear All</button>
-              <button onclick="checkChallengeComplete(true)"        type="button" >Submit</button>
-            </div>
-
             <div class="container-fluid">
               <table class="table-bordered table-hover" id="truthtable">
                 <thead> <tr id="TThead"> </tr> </thead>
@@ -141,7 +139,7 @@
     </div>
   </section>
 
-
+  <script src="../js/sandbox.js"></script>
   <script src="../js/challengeParam.js"></script> <!-- specify parameters of the challenge here -->
   <script src="../js/Challenge.js"></script>
   <!-- Challenge End -->

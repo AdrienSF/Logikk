@@ -242,6 +242,8 @@ function update() {
   updateTableStates();
   updateBoolExpr();
   updateGateColours();
+  if(typeof updateButtonDisabling == 'function')
+    updateButtonDisabling();
 }
 
 function updateInputButton() {
@@ -565,6 +567,9 @@ function updateTableStates() {
   for(var i = 0; i < inputsInst.length; i++)
     inputsInst[i].state = inputStatesOriginal[i];
   if(outInst) outInst.getState(); // update all other gates
+
+  if(typeof updateGoalTableStates == 'function')
+    updateGoalTableStates();
 }
 
 function fixPos(gateNode) {
