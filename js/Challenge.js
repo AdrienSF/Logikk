@@ -132,7 +132,7 @@ function checkChallengeComplete(isSubmitted) {
 
     for(var i = 0; i < inputsInst.length; i++) {
       var isOn = (1 << (inputsInst.length - i - 1) & row) != 0;
-      if(inputsInst[i].getState() != isOn) break;
+      if(inputsInst[i].getState() === isOn) break;
       else if(i < inputsInst.length - 1) continue;
       else {
         if(rowCorrect) outStateText[row].parentNode.parentNode.parentNode.style.backgroundColor = "#E9E9E9";
