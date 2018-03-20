@@ -1,12 +1,12 @@
 // HTML node <-> Gate instance map
-let htmlToGate = new Map();
-let gateToHtml = new Map();
-let gates = [];
+var htmlToGate = new Map();
+var gateToHtml = new Map();
+var gates = [];
 // outInst is the output gate instance
-let outInst = null;
+var outInst = null;
 
 // this maps a html gate node to the output image (so we can change on/off)
-let outImage = new Map();
+var outImage = new Map();
 
 // create a new gate
 function makeGate(type) {
@@ -70,7 +70,7 @@ function makeGate(type) {
   if(type != OUT) {
     var outputNode = document.createElement("div");
     outputNode.className = "column";
-    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/nodeoff.png\" draggable=\"true\" width=\"16\" height=\"16\">";
+    outputNode.innerHTML = "<img id=\"nodeout\" src=\"../images/nodeoff.png\" draggable=\"true\" ondragstart=\"dragStart(event)\" width=\"16\" height=\"16\">";
     gateNode.appendChild(outputNode);
     outImage.set(gateNode, outputNode.firstChild);
   }
@@ -84,9 +84,15 @@ function makeGate(type) {
   update();
 }
 
+var elementBeingDragged;
+function dragStart(e) {
+  elementBeingDragged = e.target.parentNode.parentNode;
+}
+
 function dropped(e) {
   e.preventDefault();
-  var sourceNode = e.dataTransfer.mozSourceNode.parentNode.parentNode;
+
+  var sourceNode = elementBeingDragged;
   var targetNode = e.target.parentNode.parentNode;
 
   if(sourceNode === targetNode) {
