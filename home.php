@@ -9,7 +9,8 @@
 
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+  <link href="../css/font.css" rel="stylesheet">
 
   <style media="screen">
   .myDark{ background: #dcdcdc }
