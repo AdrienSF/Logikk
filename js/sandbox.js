@@ -178,10 +178,6 @@ let outInst = null;
 // this maps a html gate node to the output image (so we can change on/off)
 let outImage = new Map();
 
-// When dragging out a connection, this represents that line
-// negative values mean it doesn't exist
-var dragLineX1 = -10, dragLineX2 = -10, dragLineY1 = -10, dragLineY2 = -10;
-
 // create a new gate
 function makeGate(type) {
   // create a new div element
@@ -372,17 +368,6 @@ function drawLines() {
       svgcanvas.appendChild(line);
     }
   }
-
-  // dragLine
-  let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  line.setAttribute('x1', dragLineX1);
-  line.setAttribute('y1', dragLineY1);
-  line.setAttribute('x2', dragLineX2);
-  line.setAttribute('y2', dragLineY2);
-  line.setAttribute('stroke-width', '4');
-
-  line.setAttribute('stroke', 'black');
-  svgcanvas.appendChild(line);
 }
 
 function allowDrop(e) {
@@ -496,7 +481,7 @@ function createTruthTable() {
       stateRow.appendChild(stateCell);
     }//display output column
     var outStateCell = document.createElement("td");
-    outStateText.push(document.createTextNode("F"));
+    outStateText.push(document.createTextNode("n/a"));
     var boldElement = document.createElement("b");
     boldElement.appendChild(outStateText[i]);
     outStateCell.appendChild(boldElement);
