@@ -110,8 +110,10 @@ function createTruthTable() {
 }
 
 function updateGoalTableStates() {
-  for(var row = 0; row < Math.pow(2, inputsInst.length); row++)
+  for(var row = 0; row < Math.pow(2, inputsInst.length); row++) {
     goalOutStateText[row].nodeValue = goalTable[row] ? "T" : "F";
+    goalOutStateText[row].parentNode.style.color = goalTable[row] ? "red" : "black";
+  }
   checkChallengeComplete();
 }
 
