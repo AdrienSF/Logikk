@@ -112,28 +112,56 @@ class Gate {
     }
 
     if(type == AND) {
-      var expr = "(" + inputs[0].constructBoolExpr() + ")";
-      for(var i = 1; i < inputs.length; i++)
-        expr += "∧(" + inputs[i].constructBoolExpr() + ")";
+      var expr = "";
+
+      // first one
+      if(inputs[0].type == IN) expr += inputs[0].constructBoolExpr();
+      else expr += "(" + inputs[0].constructBoolExpr() + ")";
+
+      // others
+      for(var i = 1; i < inputs.length; i++) {
+        if(inputs[i].type == IN) expr += "∧" + inputs[i].constructBoolExpr();
+        else expr += "∧(" + inputs[i].constructBoolExpr() + ")";
+      }
+
       return expr;
     }
 
     if(type == OR) {
-      var expr = "(" + inputs[0].constructBoolExpr() + ")";
-      for(var i = 1; i < inputs.length; i++)
-        expr += "∨(" + inputs[i].constructBoolExpr() + ")";
+      var expr = "";
+
+      // first one
+      if(inputs[0].type == IN) expr += inputs[0].constructBoolExpr();
+      else expr += "(" + inputs[0].constructBoolExpr() + ")";
+
+      // others
+      for(var i = 1; i < inputs.length; i++) {
+        if(inputs[i].type == IN) expr += "∨" + inputs[i].constructBoolExpr();
+        else expr += "∨(" + inputs[i].constructBoolExpr() + ")";
+      }
+
       return expr;
     }
 
     if(type == XOR) {
-      var expr = "(" + inputs[0].constructBoolExpr() + ")";
-      for(var i = 1; i < inputs.length; i++)
-        expr += "^(" + inputs[i].constructBoolExpr() + ")";
+      var expr = "";
+
+      // first one
+      if(inputs[0].type == IN) expr += inputs[0].constructBoolExpr();
+      else expr += "(" + inputs[0].constructBoolExpr() + ")";
+
+      // others
+      for(var i = 1; i < inputs.length; i++) {
+        if(inputs[i].type == IN) expr += "^" + inputs[i].constructBoolExpr();
+        else expr += "^(" + inputs[i].constructBoolExpr() + ")";
+      }
+
       return expr;
     }
 
     if(type == NOT) {
-      return "¬(" + inputs[0].constructBoolExpr() + ")";
+      if(inputs[0].type == IN) return "¬" + inputs[0].constructBoolExpr();
+      else return "¬(" + inputs[0].constructBoolExpr() + ")";
     }
   }
 }
