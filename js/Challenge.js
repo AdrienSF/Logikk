@@ -142,6 +142,8 @@ function checkChallengeComplete(isSubmitted) {
     }
   }
 
+  document.getElementById("submitButton").disabled = !correct || ((""+inputsInst.length) != goalInputs);
+
   if (correct && ((""+inputsInst.length) === (""+goalInputs)) && isSubmitted) {
     alert(winMessage);
   }
