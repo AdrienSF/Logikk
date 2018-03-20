@@ -154,8 +154,8 @@ class Gate {
 
       // others
       for(var i = 1; i < inputs.length; i++) {
-        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "^" + inputs[i].constructBoolExpr();
-        else expr += "^(" + inputs[i].constructBoolExpr() + ")";
+        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "⊕" + inputs[i].constructBoolExpr();
+        else expr += "⊕(" + inputs[i].constructBoolExpr() + ")";
       }
 
       return expr;
