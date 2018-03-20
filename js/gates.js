@@ -117,12 +117,12 @@ class Gate {
       var expr = "";
 
       // first one
-      if(inputs[0].type == IN) expr += inputs[0].constructBoolExpr();
+      if(inputs[0].type == IN || inputs[0].type == NOT) expr += inputs[0].constructBoolExpr();
       else expr += "(" + inputs[0].constructBoolExpr() + ")";
 
       // others
       for(var i = 1; i < inputs.length; i++) {
-        if(inputs[i].type == IN) expr += "∧" + inputs[i].constructBoolExpr();
+        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "∧" + inputs[i].constructBoolExpr();
         else expr += "∧(" + inputs[i].constructBoolExpr() + ")";
       }
 
@@ -133,12 +133,12 @@ class Gate {
       var expr = "";
 
       // first one
-      if(inputs[0].type == IN) expr += inputs[0].constructBoolExpr();
+      if(inputs[0].type == IN || inputs[0].type == NOT) expr += inputs[0].constructBoolExpr();
       else expr += "(" + inputs[0].constructBoolExpr() + ")";
 
       // others
       for(var i = 1; i < inputs.length; i++) {
-        if(inputs[i].type == IN) expr += "∨" + inputs[i].constructBoolExpr();
+        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "∨" + inputs[i].constructBoolExpr();
         else expr += "∨(" + inputs[i].constructBoolExpr() + ")";
       }
 
@@ -149,12 +149,12 @@ class Gate {
       var expr = "";
 
       // first one
-      if(inputs[0].type == IN) expr += inputs[0].constructBoolExpr();
+      if(inputs[0].type == IN || inputs[0].type == NOT) expr += inputs[0].constructBoolExpr();
       else expr += "(" + inputs[0].constructBoolExpr() + ")";
 
       // others
       for(var i = 1; i < inputs.length; i++) {
-        if(inputs[i].type == IN) expr += "^" + inputs[i].constructBoolExpr();
+        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "^" + inputs[i].constructBoolExpr();
         else expr += "^(" + inputs[i].constructBoolExpr() + ")";
       }
 
