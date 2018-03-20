@@ -162,7 +162,7 @@ class Gate {
     }
 
     if(type == NOT) {
-      if(inputs[0].type == IN) return "¬" + inputs[0].constructBoolExpr();
+      if(inputs[0].type == IN || inputs[0].type == NOT) return "¬" + inputs[0].constructBoolExpr();
       else return "¬(" + inputs[0].constructBoolExpr() + ")";
     }
   }
