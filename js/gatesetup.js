@@ -1,12 +1,12 @@
 // HTML node <-> Gate instance map
-var htmlToGate = new Map();
-var gateToHtml = new Map();
-var gates = [];
+let htmlToGate = new Map();
+let gateToHtml = new Map();
+let gates = [];
 // outInst is the output gate instance
-var outInst = null;
+let outInst = null;
 
 // this maps a html gate node to the output image (so we can change on/off)
-var outImage = new Map();
+let outImage = new Map();
 
 // create a new gate
 function makeGate(type) {

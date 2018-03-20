@@ -1,12 +1,12 @@
-var IN     = "IN";
-var OUT    = "OUT";
-var AND    = "AND";
-var OR     = "OR";
-var XOR    = "XOR";
-var NOT    = "NOT";
+let IN     = "IN";
+let OUT    = "OUT";
+let AND    = "AND";
+let OR     = "OR";
+let XOR    = "XOR";
+let NOT    = "NOT";
 
-var COLOR_BROKEN = "#9900ff";
-var COLOR_CORRECT = "#2196F3";
+let COLOR_BROKEN = "#9900ff";
+let COLOR_CORRECT = "#2196F3";
 
 var hasUpdatedOutSuccessfully = false;
 
