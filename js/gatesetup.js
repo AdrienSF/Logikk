@@ -130,6 +130,26 @@ function dropped(e) {
   update();
 }
 
+window.onresize = function() {
+  for(var i = 0; i < gates.length; i++) {
+    var gateNode = gateToHtml.get(gates[i]);
+
+    if(gateNode.offsetLeft < 0)
+      gateNode.style.left = "0px";
+
+    if(gateNode.offsetLeft > canvasCard.offsetWidth - gateNode.offsetWidth)
+      gateNode.style.left = (canvasCard.offsetWidth - gateNode.offsetWidth) + "px";
+
+    if(gateNode.offsetTop < 0)
+      gateNode.style.top = "0px";
+
+    if(gateNode.offsetTop > canvasCard.offsetHeight - gateNode.offsetHeight)
+      gateNode.style.top = (canvasCard.offsetHeight - gateNode.offsetHeight) + "px";
+  }
+
+  drawLines();
+}
+
 
 // Create an element draggable, removable
 function setupGate(gateNode, headerNode) {
