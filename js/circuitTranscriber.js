@@ -3,7 +3,7 @@ function saveCircuit() {
 
   for(var i = 0; i < gates.length; i++) {
     obj[i] = {"type":gates[i].type};
-    obj[i].x = parseInt(gateToHtml.get(gates[i]).style.left, 10) / canvasCard.offsetWidth; // later on take ratio by canvas size
+    obj[i].x = parseInt(gateToHtml.get(gates[i]).style.left, 10) / canvasCard.offsetWidth;
     obj[i].y = parseInt(gateToHtml.get(gates[i]).style.top, 10) / canvasCard.offsetHeight;
     obj[i].inputs = [];
 
