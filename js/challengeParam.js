@@ -40,7 +40,9 @@ var challengeDescription = document.createTextNode(some data fetched from databa
 
 */
 
-
+document.getElementById("challengeHeader").appendChild(challengeHeader);
+document.getElementById("challengeDescription").appendChild(challengeDescription);
+document.getElementById("goalInputs").innerHTML = goalInputs;
 
 var andLine = document.createElement("li");
 andLine.innerHTML = maxANDgates + " AND gates";
