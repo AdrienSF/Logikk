@@ -166,8 +166,8 @@ function checkChallengeComplete(isSubmitted) {
   }
 
   document.getElementById("submitButton").disabled = !correct || ((""+inputsInst.length) != goalInputs);
-// ((""+inputsInst.length) === (""+goalInputs)) &&
-  if (isSubmitted) {
+
+  if (correct && ((""+inputsInst.length) === (""+goalInputs)) && isSubmitted) {
     $("#myModal").modal();
   }
 }
