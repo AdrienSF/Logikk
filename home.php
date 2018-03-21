@@ -275,21 +275,6 @@
         }
       }
     });
-
-    $(document).ready( function() {
-      $("#sectionButton").hide(); //hide your div initially
-      var topOfOthDiv = $("#carouselExampleControls").offset().top;
-      $(window).scroll(function() {
-        if($(window).scrollTop() > topOfOthDiv+250)
-        {
-          //scrolled past the other div?
-          $("#sectionButton").show(); //reached the desired point -- show div
-        } else {
-          $("#sectionButton").hide();
-        }
-      });
-    });
-
 </script>
 
 <script type="text/javascript">
@@ -301,14 +286,6 @@
             input.setCustomValidity('');
         }
     }
-</script>
-<script type="text/javascript">
-  <?php
-  if (isset($_SESSION['textSignUp'])) {
-    echo 'alert("'.$_SESSION['textSignUp'].'");';
-  }
-  unset($_SESSION['textSignUp']);
-  ?>
 </script>
 
 </body>
