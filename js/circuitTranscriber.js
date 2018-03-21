@@ -43,3 +43,16 @@ function loadCircuit(data) {
 
   update();
 }
+
+setInterval(updateCookie, 1000);
+function updateCookie() {
+  if(hasLoaded)
+    document.cookie = saveCircuit();
+}
+
+var hasLoaded = false;
+window.onload = function() {
+  if(document.cookie.indexOf(";") != -1)
+    loadCircuit(document.cookie.substring(0, document.cookie.indexOf(";")));
+  hasLoaded = true;
+}
