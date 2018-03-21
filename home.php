@@ -121,15 +121,15 @@
       <div class="carousel-inner">
 
         <div class="carousel-item active">
-          <a href="#head1"><img class="w-100" src="images/image-gallery/test1000.png" alt="First slide"></a>
+          <a href="#head1"><img class="w-100" src="images/test1.png" alt="First slide"></a>
         </div>
 
         <div class="carousel-item">
-          <a href="#head2"><img class="w-100" src="images/image-gallery/testest1000.png" alt="Second slide"></a>
+          <a href="#head2"><img class="w-100" src="images/test2.png" alt="Second slide"></a>
         </div>
 
         <div class="carousel-item">
-          <a href="#head3"><img class="w-100" src="images/image-gallery/crapcat.jpg" alt="Third slide"></a>
+          <a href="#head3"><img class="w-100" src="images/test3.png" alt="Third slide"></a>
         </div>
 
       </div>
@@ -143,90 +143,6 @@
       </a>
     </div>
   <!-- Carousel End -->
-<!--
-
-  <div class="infocontainer" id="head1">
-    <div class="container-fluid" >
-      <div class="row justify-content-md-around">
-        <div class="col-xs-12 col-lg-6">
-          <h1><img src="images/image-gallery/logikklogo.png" width="130" height="30"></h1>
-          <p>
-            <h3> Did it take you more time to understand this logic gate meme than it should've? </h3>
-            <br><br>
-
-            <h4> There are 11 kinds of people: </h4>
-              <b> 01. </b> Who ignore it calling it uninteresting <br>
-              <b> 10. </b> Who forward it to others to get the joke <br>
-              <b> 11. </b> Geeks with immense amount of pride for getting Logic Gate (and binary) jokes. </p>
-              <br><br>
-
-              <h5>
-                <b> Logikk </b> is for the third kind to build logic gate circuits and satiate their hunger. We aim to create a Logic gate simulator environment which is friendly for people of all ages. It comes with two modes:
-
-            <ol> <b>
-              <li> Sandbox Mode </li>
-              <li> Challenge Mode </li>
-            </b> </ol>
-
-          </h5>
-        </div>
-        <div class="col-lg-4">
-          <p><img class="img-fluid" src="images/image-gallery/android_gate.jpg" width="600" height="100"></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="infocontainer myDark" id="head2">
-    <div class="container">
-      <div class="row justify-content-md-around">
-        <div class="col-xs-12 col-lg-4">
-          <p>INSERT IMAGE HERE</p>
-        </div>
-        <div class="col-xs-12 col-lg-8">
-          <h1>Sandbox</h1>
-          <p>
-            Sed vel magna ut ipsum posuere placerat. Integer nec accumsan velit. Sed tempus metus quis est dictum ultricies. Vestibulum tincidunt porta risus, ullamcorper consectetur felis feugiat dictum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur felis mauris, tristique sed pellentesque sit amet, suscipit in lectus. Pellentesque a purus at quam accumsan bibendum. Maecenas a turpis ut leo pulvinar efficitur. Praesent a mi at sapien aliquet dictum. In augue ligula, lobortis ut consectetur et, mattis at magna. Integer ac orci sed quam tempor commodo. Cras in venenatis felis. Praesent pellentesque metus sed odio fringilla mattis. Curabitur urna nulla, hendrerit et nulla a, vestibulum consequat arcu. Curabitur et odio quis est sagittis viverra.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="infocontainer" id="head3">
-    <div class="container">
-      <div class="row justify-content-md-around">
-        <div class="col-xs-12 col-lg-8">
-          <h1>Challenges</h1>
-          <p>
-            Proin cursus orci sagittis pharetra venenatis. Cras imperdiet posuere massa. Pellentesque accumsan lobortis commodo. In in dui aliquam, interdum lacus at, pharetra orci. Nulla vulputate iaculis dapibus. Maecenas vehicula, nisi at congue hendrerit, risus metus congue sem, vitae pulvinar eros magna sed lorem. Vestibulum velit dui, finibus sit amet rhoncus sit amet, accumsan et justo. Nulla justo ante, tempus a nisi quis, dignissim ornare felis. Sed commodo vitae odio in porttitor. Sed accumsan scelerisque urna sit amet egestas. In a mi orci.
-          </p>
-        </div>
-        <div class="col-xs-12 col-lg-4">
-          <p>INSERT IMAGE HERE</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="infocontainer myDark" id="head4">
-    <div class="container">
-      <div class="row justify-content-md-around">
-        <div class="col-xs-12 col-lg-4">
-          <p>INSERT IMAGE HERE</p>
-        </div>
-        <div class="col-xs-12 col-lg-8">
-          <h1>Tutorials</h1>
-          <p>
-            Aenean dapibus enim sed nisl venenatis, eget molestie lorem convallis. Nunc non orci ornare, maximus libero ut, iaculis felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam sit amet rutrum mi. Nam dignissim dictum magna, vitae dapibus odio laoreet vel. Sed pharetra convallis elit sit amet sagittis. Nam vitae urna volutpat, laoreet ex at, fringilla nisl.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
 
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
