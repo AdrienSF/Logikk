@@ -41,10 +41,17 @@ var challengeDescription = document.createTextNode(some data fetched from databa
 */
 
 
-document.getElementById("challengeHeader").appendChild(challengeHeader);
-document.getElementById("challengeDescription").appendChild(challengeDescription);
-document.getElementById("goalInputs").innerHTML = goalInputs;
-document.getElementById("maxANDgates").innerHTML = maxANDgates;
-document.getElementById("maxORgates").innerHTML = maxORgates;
-document.getElementById("maxXORgates").innerHTML = maxXORgates;
-document.getElementById("maxNOTgates").innerHTML = maxNOTgates;
+
+var andLine = document.createElement("li");
+andLine.innerHTML = maxANDgates + " AND gates";
+var orLine = document.createElement("li");
+orLine.innerHTML = maxORgates + " OR gates";
+var xorLine = document.createElement("li");
+xorLine.innerHTML = maxXORgates + " XOR gates";
+var notLine = document.createElement("li");
+notLine.innerHTML = maxNOTgates + " NOT gates";
+
+if (maxANDgates && maxANDgates > 0) document.getElementById("restrictions").appendChild(andLine);
+if (maxORgates && maxORgates > 0) document.getElementById("restrictions").appendChild(orLine);
+if (maxXORgates && maxXORgates > 0) document.getElementById("restrictions").appendChild(xorLine);
+if (maxNOTgates && maxNOTgates > 0) document.getElementById("restrictions").appendChild(notLine);

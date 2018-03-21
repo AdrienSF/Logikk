@@ -40,6 +40,8 @@ function clearAll(override) {
   outImage.clear();
   gates = [];
 
+  document.cookie = "";
+
   var cnv = document.getElementById("canvas");
   while(cnv.firstChild)
     cnv.removeChild(cnv.firstChild);
