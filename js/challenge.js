@@ -89,7 +89,7 @@ function createTruthTable() {
       stateRow.appendChild(stateCell);
     }//display output column
     var outStateCell = document.createElement("td");
-    outStateText.push(document.createTextNode("F"));
+    outStateText.push(document.createTextNode("n/a"));
     var boldElement = document.createElement("b");
     boldElement.appendChild(outStateText[i]);
     outStateCell.appendChild(boldElement);
