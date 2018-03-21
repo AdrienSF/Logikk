@@ -35,6 +35,27 @@ function updateButtonDisabling() {
     document.getElementById("xorButton").disabled = (xorInst.length >= maxXORgates);
     document.getElementById("notButton").disabled = (notInst.length >= maxNOTgates);
 
+    //display amount of gates left upon hover
+    if(goalInputs - inputsInst.length > 0)
+    document.getElementById("inputButton").title = goalInputs - inputsInst.length + " left";
+    else document.getElementById("inputButton").title = "none left";
+
+    if (maxANDgates - andInst.length > 0)
+    document.getElementById("andButton").title = maxANDgates - andInst.length + " left";
+    else document.getElementById("andButton").title = "none left";
+
+    if (maxORgates - orInst.length > 0)
+    document.getElementById("orButton").title = maxORgates - orInst.length + " left";
+    else document.getElementById("orButton").title = "none left";
+
+    if (maxXORgates - xorInst.length)
+    document.getElementById("xorButton").title = maxXORgates - xorInst.length + " left";
+    else document.getElementById("xorButton").title = "none left";
+
+    if (maxNOTgates - notInst.length > 0)
+    document.getElementById("notButton").title = maxNOTgates - notInst.length + " left";
+    else document.getElementById("notButton").title = "none left";
+
   }
 }
 
