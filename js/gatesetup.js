@@ -82,6 +82,8 @@ function makeGate(type) {
 
   // need this update to update output node, for example for not, it's on by default
   update();
+
+  return gateInst;
 }
 
 var elementBeingDragged;
@@ -104,31 +106,35 @@ function dropped(e) {
   var sourceInst = htmlToGate.get(sourceNode);
   var targetInst = htmlToGate.get(targetNode);
 
-  if(sourceInst.outputs.includes(targetInst)) {
-    console.log("This connection already exists");
-    return;
-  }
+  connectGates(sourceInst, targetInst);
+}
 
-  if(targetInst.inputs.length >= targetInst.inputLimit) {
-    alert("This gate has already reached its input limit.");
-    return;
-  }
+function connectGates(sourceInst, targetInst) {
+    if(sourceInst.outputs.includes(targetInst)) {
+      console.log("This connection already exists");
+      return;
+    }
 
-  sourceInst.outputs.push(targetInst);
-  targetInst.inputs.push(sourceInst);
+    if(targetInst.inputs.length >= targetInst.inputLimit) {
+      alert("This gate has already reached its input limit.");
+      return;
+    }
 
-  if(hasCycles(targetInst)) {
-    disconnectGates(sourceInst, targetInst);
-    alert("You are trying to create a cycle!");
-    return;
-  }
+    sourceInst.outputs.push(targetInst);
+    targetInst.inputs.push(sourceInst);
 
-  if(outInst.inputs > 0) {
-    createTruthTable();
-    createInputLabels();
-  }
+    if(hasCycles(targetInst)) {
+      disconnectGates(sourceInst, targetInst);
+      alert("You are trying to create a cycle!");
+      return;
+    }
 
-  update();
+    if(outInst.inputs > 0) {
+      createTruthTable();
+      createInputLabels();
+    }
+
+    update();
 }
 
 window.onresize = function() {
