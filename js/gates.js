@@ -21,18 +21,30 @@ class Gate {
     if(this.type == IN)
       this.state = false;
 
+    // precedence top to bottom
+    // IN
+    // NOT
+    // AND
+    // OR, XOR
+
     if(this.type == IN) {
       this.inputLimit = 0;
+      this.precedence = 100;
     } else if(this.type == OUT) {
       this.inputLimit = 1;
+      this.precedence = -1;
     } else if(this.type == AND) {
       this.inputLimit = 2;
+      this.precedence = 10;
     } else if(this.type == OR) {
       this.inputLimit = 2;
+      this.precedence = 5;
     } else if(this.type == XOR) {
       this.inputLimit = 2;
+      this.precedence = 5;
     } else if(this.type == NOT) {
       this.inputLimit = 1;
+      this.precedence = 20;
     }
   }
 
@@ -113,57 +125,30 @@ class Gate {
       return inputs[0].constructBoolExpr();
     }
 
-    if(type == AND) {
-      var expr = "";
-
-      // first one
-      if(inputs[0].type == IN || inputs[0].type == NOT) expr += inputs[0].constructBoolExpr();
-      else expr += "(" + inputs[0].constructBoolExpr() + ")";
-
-      // others
-      for(var i = 1; i < inputs.length; i++) {
-        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "∧" + inputs[i].constructBoolExpr();
-        else expr += "∧(" + inputs[i].constructBoolExpr() + ")";
-      }
-
-      return expr;
-    }
-
-    if(type == OR) {
-      var expr = "";
-
-      // first one
-      if(inputs[0].type == IN || inputs[0].type == NOT) expr += inputs[0].constructBoolExpr();
-      else expr += "(" + inputs[0].constructBoolExpr() + ")";
-
-      // others
-      for(var i = 1; i < inputs.length; i++) {
-        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "∨" + inputs[i].constructBoolExpr();
-        else expr += "∨(" + inputs[i].constructBoolExpr() + ")";
-      }
-
-      return expr;
-    }
-
-    if(type == XOR) {
-      var expr = "";
-
-      // first one
-      if(inputs[0].type == IN || inputs[0].type == NOT) expr += inputs[0].constructBoolExpr();
-      else expr += "(" + inputs[0].constructBoolExpr() + ")";
-
-      // others
-      for(var i = 1; i < inputs.length; i++) {
-        if(inputs[i].type == IN || inputs[i].type == NOT) expr += "⊕" + inputs[i].constructBoolExpr();
-        else expr += "⊕(" + inputs[i].constructBoolExpr() + ")";
-      }
-
-      return expr;
-    }
-
     if(type == NOT) {
-      if(inputs[0].type == IN || inputs[0].type == NOT) return "¬" + inputs[0].constructBoolExpr();
-      else return "¬(" + inputs[0].constructBoolExpr() + ")";
+      if(inputs[0].precedence > this.precedence)
+        return "¬" + inputs[0].constructBoolExpr();
+      else
+        return "¬(" + inputs[0].constructBoolExpr() + ")";
     }
+
+    var connector = "";
+    if(type == AND) connector = "∧";
+    if(type == OR)  connector = "∨";
+    if(type == XOR) connector = "⊕";
+
+    var expr = "";
+
+    for(var i = 0; i < inputs.length; i++) {
+      if(inputs[i].precedence > this.precedence)
+        expr += inputs[i].constructBoolExpr();
+      else
+        expr += "(" + inputs[i].constructBoolExpr() + ")";
+
+      if(i != inputs.length - 1)
+        expr += connector;
+    }
+
+    return expr;
   }
 }
