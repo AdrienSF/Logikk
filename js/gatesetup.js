@@ -29,7 +29,7 @@ function makeGate(type) {
 
   // gateHeader needs to be firstChild for input title labelling later on in this script
   var gateHeaderNode = document.createElement("div");
-  gateHeaderNode.innerHTML = type;
+  gateHeaderNode.innerHTML = gateInst.type;
   gateHeaderNode.id = "gateheader";
   gateNode.appendChild(gateHeaderNode);
 
@@ -109,9 +109,10 @@ function dropped(e) {
     return;
   }
 
-  // if gate can only have one input, disconnect first
-  if(targetInst.inputs.length >= targetInst.inputLimit)
-    disconnectGates(targetInst.inputs[0], targetInst);
+  if(targetInst.inputs.length >= targetInst.inputLimit) {
+    alert("This gate has already reached its input limit.");
+    return;
+  }
 
   sourceInst.outputs.push(targetInst);
   targetInst.inputs.push(sourceInst);

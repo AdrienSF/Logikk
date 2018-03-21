@@ -1,4 +1,3 @@
-
 function updateOutImage() {
   for(var i = 0; i < gates.length; i++) {
     if(gates[i].type == OUT) continue; // this one has none
