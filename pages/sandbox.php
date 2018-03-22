@@ -86,18 +86,20 @@
     <div class="container-fluid">
       <div class="block-header">
         <div class="row clearfix">
-          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-            <h2>SANDBOX</h2>
-          </div>
-          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            <h2 id="boolExp" class="text-center">some expression<h2>
-          </div>
-          <div class="col-lg-3">
+          <div class="col-lg-offset-8 col-lg-12" align="right">
             <button class="btn btn-dark" onclick="makeGate('IN')"    type="button" id="inputButton">New Input</button>
             <button class="btn btn-dark" onclick="makeGate('AND')"   type="button">AND</button>
             <button class="btn btn-dark" onclick="makeGate('OR')"    type="button">OR</button>
             <button class="btn btn-dark" onclick="makeGate('XOR')"   type="button">XOR</button>
             <button class="btn btn-dark" onclick="makeGate('NOT')"   type="button">NOT</button>
+          </div>
+          <div class="col-lg-1 col-sm col">
+            <h2>SANDBOX</h2>
+          </div>
+          <div class="col-lg-8 col-sm col" align="float-none">
+            <h2 id="boolExp" class="text-center">some expression<h2>
+          </div>
+          <div class="col-lg-3 col-sm col" align="right">
             <button class="btn btn-dark" onclick="clearAll()"        type="button">Clear All</button>
             <button class="btn btn-dark"  data-toggle="modal" data-target="#myModal"                           type="button">Save/Load</button>
           </div>
