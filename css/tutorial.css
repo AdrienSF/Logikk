@@ -35,17 +35,17 @@ body {
 }
 
 /* layout */
-#main-wrap {
+.main-wrap {
     /* overflow to handle inner floating block */
     overflow: hidden;
 }
 
-#sidebar {
+.sidebar {
     float: left;
-    width: 20%;
+    width: 50%;
 }
 
-#content-wrap {
+.content-wrap {
     float: right;
-    width: 80%;
+    width: 50%;
 }
