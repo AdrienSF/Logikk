@@ -27,7 +27,7 @@
 </head>
 
 <body style="background: #e9e9e9">
-  <?php include('../php/challenge_info.php') ?>
+  <?php include('../php/challengeInfo.php') ?>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
