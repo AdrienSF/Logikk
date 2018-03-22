@@ -66,10 +66,8 @@ class Gate {
     if(inputs.length != this.inputLimit) {
       hasUpdatedOutSuccessfully = false;
 
-      if(type == NOT)
-        this.state = true;
-      else
-        this.state = false;
+      if(type == NOT) this.state = true;
+      else this.state = false;
 
       return this.state;
     }
@@ -87,11 +85,14 @@ class Gate {
     }
 
     if(type == OR) {
-      this.state = true;
+      var flag = true;
+
+      // going thru all because of hasUpdatedOutSuccessfully
       for(var i = 0; i < inputs.length; i++)
-        if(inputs[i].getState()) return true;
-      this.state = false;
-      return false;
+        if(!inputs[i].getState()) flag = false;
+
+      this.state = flag;
+      return flag;
     }
 
     if(type == XOR) {

@@ -68,15 +68,14 @@ function hasCycles(g, visited=null) {
 }
 
 function updateBoolExpr() {
+  document.getElementById("boolExp").innerHTML = "out not connected";
+
   if(outInst && gateToHtml.get(outInst)) {
     hasUpdatedOutSuccessfully = true;
     outInst.getState();
-  } else return;
 
-  if(hasUpdatedOutSuccessfully) {
-    document.getElementById("boolExp").innerHTML = outInst.constructBoolExpr();
-  } else {
-    document.getElementById("boolExp").innerHTML = "out not connected";
+    if(hasUpdatedOutSuccessfully)
+      document.getElementById("boolExp").innerHTML = outInst.constructBoolExpr();
   }
 }
 

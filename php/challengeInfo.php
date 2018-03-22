@@ -3,7 +3,6 @@
   if($error) exit;
 
   $query = "SELECT * FROM challenges WHERE id=\"" . $_GET['id'] . "\"";
-  echo $query;
   $result = $mysql->query($query);
   $row = $result->fetch_assoc();
 
