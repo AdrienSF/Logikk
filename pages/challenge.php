@@ -101,8 +101,8 @@
               <button class="btn btn-dark" onclick="makeGate('OR')"    type="button" id="orButton">OR</button>
               <button class="btn btn-dark" onclick="makeGate('XOR')"   type="button" id="xorButton">XOR</button>
               <button class="btn btn-dark" onclick="makeGate('NOT')"   type="button" id="notButton">NOT</button>
-              <button class="btn btn-dark" onclick="clearAll()"        type="button">Clear All</button>
-              <button class="btn btn-dark" onclick="checkChallengeComplete(true)" type="button" id="submitButton">Submit</button>
+              <button class="btn btn-dark" onclick="clearAll()"        type="button" title="remove all gates">Clear All</button>
+              <button class="btn btn-dark" onclick="checkChallengeComplete(true)" type="button" id="submitButton" title="challenge is incomplete">Submit</button>
             </div>
           </div>
         </div>

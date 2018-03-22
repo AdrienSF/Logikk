@@ -172,6 +172,8 @@ function checkChallengeComplete(isSubmitted) {
   }
 
   document.getElementById("submitButton").disabled = !correct || ((""+inputsInst.length) != goalInputs);
+  if (document.getElementById("submitButton").disabled == true) document.getElementById("submitButton").title = "challenge is incomplete";
+  else document.getElementById("submitButton").title = "evaluate challenge correctness";
 
   if (correct && ((""+inputsInst.length) === (""+goalInputs)) && isSubmitted) {
     $("#myModal").modal();

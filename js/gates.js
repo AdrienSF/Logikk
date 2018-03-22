@@ -85,11 +85,11 @@ class Gate {
     }
 
     if(type == OR) {
-      var flag = true;
+      var flag = false;
 
       // going thru all because of hasUpdatedOutSuccessfully
       for(var i = 0; i < inputs.length; i++)
-        if(!inputs[i].getState()) flag = false;
+        if(inputs[i].getState()) flag = true;
 
       this.state = flag;
       return flag;
