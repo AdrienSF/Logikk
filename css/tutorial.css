@@ -1,0 +1,51 @@
+/*
+.card {
+  overflow: auto;
+}
+
+.cc {
+    float: left;
+    width: 50%;
+    display: -webkit-flex; Safari
+    -webkit-align-items: center;  Safari 7.0+
+    display: flex;
+}*/
+
+
+
+  /* Clear floats after the columns
+  .row:after {
+      content: "";
+      display: table;
+      clear: both;
+  } */
+
+  /* sizes */
+
+body {
+    padding-top: 80px;
+}
+/* sizes */
+#main-wrap > div { min-height: 200px; }
+
+
+#header,
+#footer {
+    min-height: 40px;
+}
+
+/* layout */
+#main-wrap {
+    /* overflow to handle inner floating block */
+    overflow: hidden;
+}
+
+#sidebar {
+    float: left;
+    width: 30%;
+}
+
+#content-wrap {
+    float: right;
+    width: 70%;
+}
