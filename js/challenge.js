@@ -182,3 +182,4 @@ function checkChallengeComplete(isSubmitted) {
 
 // to create out gate
 clearAll(true);
+document.getElementById("submitButton").disabled = true;
