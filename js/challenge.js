@@ -120,6 +120,11 @@ function createTruthTable() {
     document.getElementById("TTbody").appendChild(stateRow);
   }
 
+  if(inputsInst.length < goalInputs)
+    document.getElementById("TTbody").appendChild(document.createTextNode("add more inputs"));
+   else if(inputsInst.length > goalInputs)
+     document.getElementById("TTbody").appendChild(document.createTextNode("too many inputs"));
+
   updateTableStates();
   updateBoolExpr();
 }
