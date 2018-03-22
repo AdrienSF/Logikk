@@ -70,6 +70,18 @@ function createTruthTable() {
     if(gates[i].type == IN)
       inputsInst.push(gates[i]);
   }
+
+  if(inputsInst.length != goalInputs) {
+    var inputMessage = document.createElement("div");
+    var amount = goalInputs - inputsInst.length;
+    inputMessage.className = "text-center";
+    inputMessage.appendChild(document.createTextNode("add " + amount + " more inputs"))
+    document.getElementById("TTbody").appendChild(inputMessage);
+
+    return;
+  }
+
+
   //display inputs in table
   for (j = 0; j <= inputsInst.length-1; j++) {
     var inputCell = document.createElement("td");
@@ -119,11 +131,6 @@ function createTruthTable() {
 
     document.getElementById("TTbody").appendChild(stateRow);
   }
-
-  if(inputsInst.length < goalInputs)
-    document.getElementById("TTbody").appendChild(document.createTextNode("add more inputs"));
-   else if(inputsInst.length > goalInputs)
-     document.getElementById("TTbody").appendChild(document.createTextNode("too many inputs"));
 
   updateTableStates();
   updateBoolExpr();
