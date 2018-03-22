@@ -44,6 +44,14 @@ function loadCircuit(data) {
   update();
 }
 
+function saveCircuitBtn() {
+
+}
+
+function loadCircuitBtn() {
+  
+}
+
 setInterval(updateCookie, 1000);
 function updateCookie() {
   if(hasLoaded)
