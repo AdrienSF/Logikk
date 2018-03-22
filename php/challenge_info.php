@@ -1,6 +1,6 @@
 <?php
-require_once("databaseDetails.php");
-if($error) exit;
+  require_once("databaseDetails.php");
+  if($error) exit;
 
   // $userForPrint = $_SESSION['username'];
   $query = "SELECT * FROM challenges WHERE Challenge_id=challengeID";

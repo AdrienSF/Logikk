@@ -22,8 +22,7 @@
 </head>
 
 <body style="background: #e9e9e9">
-<?php include('../php/challenge_info.php') ?>
-<?php include('../php/challenge_card_info.php') ?>
+  <?php include('../php/challenge_card_info.php') ?>
 
 
   <!-- Navbar -->
@@ -71,7 +70,7 @@
         <h2 id="boolExp"><h2>
       </div>
 
-      <div id="challengeCards"></div>
+      <div class="row clearfix" id="challengeCards"></div>
     </div>
   </section>
 

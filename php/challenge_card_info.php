@@ -3,7 +3,7 @@ require_once("databaseDetails.php");
 if($error) exit;
 
   // $userForPrint = $_SESSION['username'];
-  $query = "SELECT * FROM challenges WHERE Challenge_id=challengeID";
+  $query = "SELECT * FROM challenges";
   $result = $mysql->query($query);
   $row = $result->fetch_assoc();
   $id = $row['challenge_id'];
@@ -20,6 +20,8 @@ if($error) exit;
 ?>
 
 <script>
+  // function to call is appendChild(id, name, desc)
+
   nameOfTheChallenge = "<?php echo $name ?>";
   goalInputs = "<?php echo $in_num ?>";
   maxANDgates = "<?php echo $and_num ?>";

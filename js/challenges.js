@@ -1,43 +1,33 @@
+var row = document.getElementById("challengeCards");
 
-for (var i = 1; i <= 10; i++)
-{
-  var nameOfTheChallenge;
-  var row = document.createElement("div");
-  row.className = "row clearfix";
+function appendChallenge(id, name, description) {
+  var column = document.createElement("div");
+  column.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4";
 
-  for (var j = 1; j <= 3; j++)
-  {
-    var part1 = "0" + i;
-    if (i > 9) part1 = i;
-    var challengeID = "G" + part1 + j;
+  var link = document.createElement("a");
+  link.href = "challenge.php?i=" + id;
+  link.style = "color: #F9F9F9";
 
-    var column = document.createElement("div");
-    column.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4";
-    var link = document.createElement("a");
-    link.href = "challenge.php?i=" + i + "&j=" + j;
-    link.style = "color: #F9F9F9"
-    var card = document.createElement("div");
-    card.className = "card";
-    card.style = getBackgroundColor(challengeID);/*determined from num of inputs*/
-    var h3 = document.createElement("h3");
-    h3.className = "text-center";
-    var headerText = document.createTextNode(getChallengeTitle(challengeID));
-    var p = document.createElement("p");
-    p.className = "text-center";
-    var descriptionText = document.createTextNode(getChallengeDescription(challengeID));
+  var card = document.createElement("div");
+  card.className = "card";
+  card.style = getBackgroundColor(id);
 
-    h3.appendChild(headerText);
-    p.appendChild(descriptionText);
-    card.appendChild(h3);
-    card.appendChild(p);
-    link.appendChild(card);
-    column.appendChild(link);
-    row.appendChild(column);
+  var h3 = document.createElement("h3");
+  h3.className = "text-center";
 
-  }
+  var headerText = document.createTextNode(name);
+  var p = document.createElement("p");
+  p.className = "text-center";
+  
+  var descriptionText = document.createTextNode(description);
 
-  document.getElementById("challengeCards").appendChild(row);
-
+  h3.appendChild(headerText);
+  p.appendChild(descriptionText);
+  card.appendChild(h3);
+  card.appendChild(p);
+  link.appendChild(card);
+  column.appendChild(link);
+  row.appendChild(column);
 }
 
 function getBackgroundColor(challengeID)
@@ -50,16 +40,4 @@ function getBackgroundColor(challengeID)
   if (inputs === 5) colorCode = "D9534F";
 
   return "background-color: #" + colorCode;
-}
-
-function getChallengeTitle(challengeID)
-{
-  if (true/*challenge exists*/) return nameOfTheChallenge;//get challenge title from db
-  else return "Empty slot";
-}
-
-function getChallengeDescription(challengeID)
-{
-  if (true/*challenge exists*/) return nameOfTheChallenge; "ayeayeayayayayyyyaeayeyeaeyayyy";//get challenge description from db
-  else return "A challenge for this slot has not yet been made.";
 }
