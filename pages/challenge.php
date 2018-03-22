@@ -115,7 +115,7 @@
                 <p id="winMessage"></p>
               </div>
               <div class="modal-footer">
-                  <a href="challenges.html"><button type="button" class="btn btn-default">Go to challenge list</button></a>
+                  <a href="challengeLibrary.php"><button type="button" class="btn btn-default">Go to challenge list</button></a>
                   <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div> -->
                   <button type="button" class="btn btn-default" data-dismiss="modal">Stay on page</button>
               </div>

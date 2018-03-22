@@ -2,7 +2,7 @@
   require_once("databaseDetails.php");
   if($error) exit;
 
-  $query = "SELECT * FROM challenges WHERE challenge_id=\"" . $_GET['id'] . "\"";
+  $query = "SELECT * FROM challenges WHERE id=\"" . $_GET['id'] . "\"";
   echo $query;
   $result = $mysql->query($query);
   $row = $result->fetch_assoc();
@@ -16,7 +16,7 @@
 
 <script>
   var challengeName = "<?php echo $row['name']; ?>";
-  var challengeDescription = "<?php echo $row['text']; ?>";
+  var challengeDescription = "<?php echo $row['description']; ?>";
 
   var goalInputs  = <?php echo $row['in']; ?>;
   var maxANDgates = <?php echo $row['and']; ?>;

@@ -1,0 +1,3 @@
+#!/bin/bash
+OUTPUT="$(ifconfig em1 | grep 'inet ' | cut -d: -f3 | awk '{print $2}')"
+php -S ${OUTPUT}:8052 -t . 

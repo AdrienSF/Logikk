@@ -9,9 +9,9 @@
   while($row = $result->fetch_array()) {
     $i++;
 
-    $rows[$i]['id'] = $row['challenge_id'];
+    $rows[$i]['id'] = $row['id'];
     $rows[$i]['name'] = $row['name'];
-    $rows[$i]['text'] = $row['challenge_text'];
+    $rows[$i]['text'] = $row['description'];
     // $rows[$i]['in'] = $row['in_num'];
     // $rows[$i]['and'] = $row['and_num'];
     // $rows[$i]['or'] = $row['or_num'];
