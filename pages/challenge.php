@@ -90,60 +90,42 @@
       <div class="block-header">
         <div class="row clearfix">
           <div class="col-lg-offset-8 col-lg-12" align="right">
-            <button class="btn btn-dark" onclick="makeGate('IN')"    type="button" id="inputButton">New Input</button>
-            <button class="btn btn-dark" onclick="makeGate('AND')"   type="button">AND</button>
-            <button class="btn btn-dark" onclick="makeGate('OR')"    type="button">OR</button>
-            <button class="btn btn-dark" onclick="makeGate('XOR')"   type="button">XOR</button>
-            <button class="btn btn-dark" onclick="makeGate('NOT')"   type="button">NOT</button>
+            <button class="btn btn-dark" onclick="makeGate('IN')"    type="button" id="inputButton" title="give me more">New Input</button>
+            <button class="btn btn-dark" onclick="makeGate('AND')"   type="button" id="andButton">AND</button>
+            <button class="btn btn-dark" onclick="makeGate('OR')"    type="button" id="orButton">OR</button>
+            <button class="btn btn-dark" onclick="makeGate('XOR')"   type="button" id="xorButton">XOR</button>
+            <button class="btn btn-dark" onclick="makeGate('NOT')"   type="button" id="notButton">NOT</button>
           </div>
           <div class="col-lg-1 col-sm col">
-            <h2>SANDBOX</h2>
+            <h2>CHALLENGE</h2>
           </div>
           <div class="col-lg-8 col-sm col" align="float-none">
             <h3 id="boolExp" class="text-center">some expression</h3>
           </div>
           <div class="col-lg-3 col-sm col" align="right">
-            <button class="btn btn-dark" onclick="clearAll()"        type="button">Clear All</button>
+            <button class="btn btn-dark" onclick="clearAll()"        type="button" title="remove all gates">Clear All</button>
             <button class="btn btn-dark" onclick="checkChallengeComplete(true)" type="button" id="submitButton" title="challenge is incomplete">Submit</button>
-          </div>
-        </div>
-<!--
-        <div class="row clearfix">
-          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-            <h2>CHALLENGE</h2>
-          </div>
-          <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <h2 id="boolExp" class="text-center">some expression<h2>
-            </div>
-            <div class="col-lg-4">
-              <button class="btn btn-dark" onclick="makeGate('IN')"    type="button" id="inputButton" title="give me more">New Input</button>
-              <button class="btn btn-dark" onclick="makeGate('AND')"   type="button" id="andButton">AND</button>
-              <button class="btn btn-dark" onclick="makeGate('OR')"    type="button" id="orButton">OR</button>
-              <button class="btn btn-dark" onclick="makeGate('XOR')"   type="button" id="xorButton">XOR</button>
-              <button class="btn btn-dark" onclick="makeGate('NOT')"   type="button" id="notButton">NOT</button>
-              <button class="btn btn-dark" onclick="clearAll()"        type="button" title="remove all gates">Clear All</button>
-              <button class="btn btn-dark" onclick="checkChallengeComplete(true)" type="button" id="submitButton" title="challenge is incomplete">Submit</button>
-            </div>
-          </div> -->
-        </div>
-
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-body">
-                <p id="winMessage"></p>
-              </div>
-              <div class="modal-footer">
-                  <a href="challengeLibrary.php"><button type="button" class="btn btn-default">Go to challenge list</button></a>
-                  <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div> -->
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Stay on page</button>
-              </div>
-            </div>
 
           </div>
         </div>
+      </div>
+
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-body">
+              <p id="winMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="challengeLibrary.php"><button type="button" class="btn btn-default">Go to Challenge List</button></a>
+                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div> -->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Stay on Page</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="row clearfix">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
