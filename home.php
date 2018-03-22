@@ -31,6 +31,18 @@
 
   #toTop { height: 8vh }
 
+  .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+  }
+
+  .body {
+    background-image: ../images/stuff_for_carousel_slide_2/GRID.xcf.;
+  }
+
   </style>
 </head>
 
@@ -86,7 +98,7 @@
   <a href="#home"></a>
 
   <!-- Carousel -->
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide vertical-center" data-ride="carousel">
       <div class="carousel-inner">
 
         <div class="carousel-item active">
@@ -274,10 +286,6 @@
         }
     }
 </script>
-<<<<<<< HEAD
-
-=======
->>>>>>> challenges load from database initiated
 </body>
 
 </html>
