@@ -23,7 +23,9 @@
   </style>
 </head>
 <body>
-  <div class="loader">
+  <div class="container-fluid">
+    <div class="loader">
+    </div>
     Please Wait...
   </div>
 </body>
