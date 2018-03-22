@@ -199,7 +199,7 @@
       </div>
       <div class="modal-body">
         <div class="container">
-          <form class="form-group" action="php/checkSignIn.php" method="post">
+          <form class="form-group" action="php/signInVerify.php" method="post">
             <div class="col-*-8" id="wrapperContents">
               <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
