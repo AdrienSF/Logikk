@@ -15,8 +15,20 @@ function makeGate(type) {
   gateNode.id = "gate";
 
   // position the node
-  gateNode.style.top = (gateNode.offsetTop + 250) + "px";
-  gateNode.style.left = (gateNode.offsetLeft + 50) + "px";
+  if(type == OUT) {
+    gateNode.style.left = (canvasCard.offsetLeft + canvasCard.offsetWidth*0.8) + "px";
+    gateNode.style.top = (canvasCard.offsetTop + canvasCard.offsetHeight/2) + "px";
+  } else {
+    var x = canvasCard.offsetLeft + canvasCard.offsetWidth*0.1;
+    var y = canvasCard.offsetTop + canvasCard.offsetHeight/2;
+
+    x += (Math.random()-0.5) * canvasCard.offsetWidth/5;
+    y += (Math.random()-0.5) * canvasCard.offsetHeight/2;
+
+    gateNode.style.left = x + "px";
+    gateNode.style.top = y + "px";
+
+  }
 
   // create a new gate instance
   var gateInst = new Gate(type);
@@ -75,7 +87,6 @@ function makeGate(type) {
     outImage.set(gateNode, outputNode.firstChild);
   }
 
-  var canvas = document.getElementById("canvas");
   canvas.appendChild(gateNode);
 
   setupGate(gateNode, gateHeaderNode);
