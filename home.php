@@ -198,49 +198,32 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-group" action="../home.php" method="post">
-      <div class="col-*-12" id="wrapperContents">
-        <div class="form-group input-group">
-          <span class="input-group-addon"><i class="fas fa-user"></i></span>
-          <input class="form-control" type="text" name='name' placeholder="Name" required/>
-        </div>
-        <div class="form-group input-group">
-          <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
-          <input class="form-control" type="text" name='username' placeholder="Username" required/>
-        </div>
-        <div class="form-group input-group">
-          <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
-          <input class="form-control" type="email" name='email' placeholder="Email" required/>
-        </div>
-        <fieldset>
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-            <input class="form-control" type="password" name='password' id="password" placeholder="Password" required/>
+        <div class="container">
+          <form class="form-group" action="php/checkSignIn.php" method="post">
+            <div class="col-*-8" id="wrapperContents">
+              <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
+                <input class="form-control" type="text" name='username' placeholder="Username" required/>
+              </div>
+              <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+                <input class="form-control" type="password" name='password'placeholder="Password" required/>
+              </div>
+            </div>
           </div>
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-            <input class="form-control" type="password" name='confirmedPassword' id="confirm_password" placeholder="Retype Password" oninput="check(this);" required/>
+          <div class="modal-footer">
+            <div class="container-fluid">
+              <div class="form-group">
+                <button type="submit" class="btn btn-dark btn-block">Sign In</button>
+              </div>
+            </div>
           </div>
-        </fieldset>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" required> I agree to the <a href="#">Terms of use</a>
-          </label>
-        </div>
-      </div>
-
-      </div>
-      <div class="modal-footer">
-      <div class="container-fluid">
-        <div class="form-group">
-          <button type="submit" class="btn btn-dark btn-block">Create account</button>
-        </div>
-      </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
   <script type="text/javascript">
     $('a[href*="#"]')
     // Remove links that don't actually link to anything
