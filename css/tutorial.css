@@ -42,10 +42,10 @@ body {
 
 #sidebar {
     float: left;
-    width: 30%;
+    width: 20%;
 }
 
 #content-wrap {
     float: right;
-    width: 70%;
+    width: 80%;
 }

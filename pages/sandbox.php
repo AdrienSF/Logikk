@@ -97,7 +97,7 @@
             <h2>SANDBOX</h2>
           </div>
           <div class="col-lg-8 col-sm col" align="float-none">
-            <h2 id="boolExp" class="text-center">some expression<h2>
+            <h3 id="boolExp" class="text-center">some expression</h3>
           </div>
           <div class="col-lg-3 col-sm col" align="right">
             <button class="btn btn-dark" onclick="clearAll()"        type="button">Clear All</button>

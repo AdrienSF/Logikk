@@ -1,22 +1,29 @@
 .block-header {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 .block-header h2 {
-    margin: 0 !important;
-    color: #666 !important;
-    font-weight: normal;
-    font-size: 16px;
+  margin: 0 !important;
+  color: #666 !important;
+  font-weight: lighter;
+  font-size: 19px;
 }
 .block-header h2 small {
-    display: block;
-    font-size: 12px;
-    margin-top: 8px;
-    color: #888;
+  display: block;
+  font-size: 12px;
+  margin-top: 8px;
+  color: #888;
 }
 .block-header h2 small a {
-    font-weight: bold;
-    color: #777;
+  font-weight: bold;
+  color: #777;
 }
+.block-header h3 {
+  margin: 0 !important;
+  color: #666 !important;
+  font-weight: normal;
+  font-size: 17px;
+}
+
 /* Card ======================================== */
 .card {
     background: #fff;
