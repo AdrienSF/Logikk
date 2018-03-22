@@ -5,7 +5,7 @@ function appendChallenge(id, name, description) {
   column.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4";
 
   var link = document.createElement("a");
-  link.href = "challenge.php?i=" + id;
+  link.href = "challenge.php?id=" + id;
   link.style = "color: #F9F9F9";
 
   var card = document.createElement("div");
@@ -18,7 +18,7 @@ function appendChallenge(id, name, description) {
   var headerText = document.createTextNode(name);
   var p = document.createElement("p");
   p.className = "text-center";
-  
+
   var descriptionText = document.createTextNode(description);
 
   h3.appendChild(headerText);

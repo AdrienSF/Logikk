@@ -1,6 +1,6 @@
 <?php
-require_once("databaseDetails.php");
-if($error) exit;
+  require_once("databaseDetails.php");
+  if($error) exit;
 
   $query = "SELECT * FROM challenges";
   $result = $mysql->query($query);

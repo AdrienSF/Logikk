@@ -27,7 +27,6 @@
 </head>
 
 <body style="background: #e9e9e9">
-  <?php include('../php/challengeInfo.php') ?>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -44,10 +43,10 @@
           <a class="nav-link" href="../home.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="sandbox.html">Sandbox </a>
+          <a class="nav-link" href="sandbox.php">Sandbox</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="challenges.php">Challenges <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="challengeLibrary.php">Challenges <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="tutorial.html">Tutorial</a>
@@ -166,7 +165,7 @@
   <script src="../js/sandbox.js"></script>
   <script src="../js/circuitTranscriber.js"></script>
 
-  <script src="../js/challengeParam.js"></script> <!-- specify parameters of the challenge here -->
+  <?php include('../php/challengeInfo.php') ?>
   <script src="../js/challenge.js"></script>
   <!-- Challenge End -->
 

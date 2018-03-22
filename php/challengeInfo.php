@@ -2,28 +2,45 @@
   require_once("databaseDetails.php");
   if($error) exit;
 
-  // $userForPrint = $_SESSION['username'];
-  $query = "SELECT * FROM challenges WHERE Challenge_id=challengeID";
+  $query = "SELECT * FROM challenges WHERE challenge_id=\"" . $_GET['id'] . "\"";
+  echo $query;
   $result = $mysql->query($query);
   $row = $result->fetch_assoc();
-  $id = $row['challenge_id'];
-  $name = $row['name'];
-  $text = $row['challenge_text'];
-  $in_num = $row['in'];
-  $and_num = $row['and'];
-  $or_num = $row['or'];
-  $xor_num = $row['xor'];
-  $not_num = $row['not'];
-  echo 'Challenge ID: '.$id.'<br>';
-  echo 'Name: '.$name.'<br>';
-  echo 'Description Text: '.$text.'<br>';
+
+  if($row) {
+    // works
+  } else {
+    // broken
+  }
 ?>
 
 <script>
-  nameOfTheChallenge = "<?php echo $name ?>";
-  goalInputs = "<?php echo $in_num ?>";
-  maxANDgates = "<?php echo $and_num ?>";
-  maxORgates = "<?php echo $or_num ?>";
-  maxXORgates = "<?php echo $xor_num ?>";
-  maxNOTgates = "<?php echo $not_num ?>";
+  var challengeName = "<?php echo $row['name']; ?>";
+  var challengeDescription = "<?php echo $row['text']; ?>";
+
+  var goalInputs  = <?php echo $row['in']; ?>;
+  var maxANDgates = <?php echo $row['and']; ?>;
+  var maxORgates  = <?php echo $row['or']; ?>;
+  var maxXORgates = <?php echo $row['xor']; ?>;
+  var maxNOTgates = <?php echo $row['not']; ?>;
+  var goalTable = "<?php echo $row['truth_table']; ?>";
+
+  document.getElementById("challengeHeader").appendChild(document.createTextNode(challengeName));
+  document.getElementById("challengeDescription").appendChild(document.createTextNode(challengeDescription));
+  document.getElementById("goalInputs").innerHTML = goalInputs;
+  document.getElementById("winMessage").innerHTML = winMessage;
+
+  var andLine = document.createElement("li");
+  andLine.innerHTML = maxANDgates + " AND gates";
+  var orLine = document.createElement("li");
+  orLine.innerHTML = maxORgates + " OR gates";
+  var xorLine = document.createElement("li");
+  xorLine.innerHTML = maxXORgates + " XOR gates";
+  var notLine = document.createElement("li");
+  notLine.innerHTML = maxNOTgates + " NOT gates";
+
+  if (maxANDgates && maxANDgates > 0) document.getElementById("restrictions").appendChild(andLine);
+  if (maxORgates && maxORgates > 0) document.getElementById("restrictions").appendChild(orLine);
+  if (maxXORgates && maxXORgates > 0) document.getElementById("restrictions").appendChild(xorLine);
+  if (maxNOTgates && maxNOTgates > 0) document.getElementById("restrictions").appendChild(notLine);
 </script>

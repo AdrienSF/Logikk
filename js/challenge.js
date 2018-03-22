@@ -1,12 +1,6 @@
-var goalInputs;
-var maxANDgates;
-var maxORgates;
-var maxXORgates;
-var maxNOTgates;
+// parameters defined in challengeInfo.php
 
 var goalOutStateText = [];
-var goalTable;//XOR gate truth table for 2 inputs
-var winMessage;
 
 function updateButtonDisabling() {
   //reset counting arrays
@@ -132,7 +126,7 @@ function createTruthTable() {
 
 function updateGoalTableStates() {
   for(var row = 0; row < Math.pow(2, inputsInst.length); row++) {
-    goalOutStateText[row].nodeValue = goalTable[row] ? "T" : "F";
+    goalOutStateText[row].nodeValue = goalTable[row];
     goalOutStateText[row].parentNode.style.color = goalTable[row] ? "red" : "black";
   }
   checkChallengeComplete();

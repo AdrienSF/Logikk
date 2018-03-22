@@ -65,10 +65,10 @@
           <a class="nav-link" href="home.php">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/sandbox.html">Sandbox</a>
+          <a class="nav-link" href="pages/sandbox.php">Sandbox</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/challenges.html">Challenges </a>
+          <a class="nav-link" href="pages/challengeLibrary.php">Challenges </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pages/tutorial.html">Tutorial</a>
