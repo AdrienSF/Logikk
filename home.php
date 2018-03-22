@@ -142,7 +142,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-group" action="../home.php" method="post">
+
+        <form class="form-group" id="signUpForm" action="php/signUpEntry.php" method="post">
       <div class="col-*-12" id="wrapperContents">
         <div class="form-group input-group">
           <span class="input-group-addon"><i class="fas fa-user"></i></span>
@@ -288,6 +289,7 @@
         }
     }
 </script>
+
 </body>
 
 </html>
