@@ -16,6 +16,7 @@
 <script>
   var challengeName = "<?php echo $row['name']; ?>";
   var challengeDescription = "<?php echo $row['description']; ?>";
+  var winMessage = "<?php echo $row['win_text']; ?>";
 
   var goalInputs  = <?php echo $row['in']; ?>;
   var maxANDgates = <?php echo $row['and']; ?>;
