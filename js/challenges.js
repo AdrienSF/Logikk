@@ -1,7 +1,7 @@
 
 for (var i = 1; i <= 10; i++)
 {
-
+  var nameOfTheChallenge;
   var row = document.createElement("div");
   row.className = "row clearfix";
 
@@ -14,7 +14,7 @@ for (var i = 1; i <= 10; i++)
     var column = document.createElement("div");
     column.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4";
     var link = document.createElement("a");
-    link.href = "challenge.html?i=" + i + "&j=" + j;
+    link.href = "challenge.php?i=" + i + "&j=" + j;
     link.style = "color: #F9F9F9"
     var card = document.createElement("div");
     card.className = "card";
@@ -54,12 +54,12 @@ function getBackgroundColor(challengeID)
 
 function getChallengeTitle(challengeID)
 {
-  if (true/*challenge exists*/) return challengeID;//get challenge title from db
+  if (true/*challenge exists*/) return nameOfTheChallenge;//get challenge title from db
   else return "Empty slot";
 }
 
 function getChallengeDescription(challengeID)
 {
-  if (true/*challenge exists*/) return "ayeayeayayayayyyyaeayeyeaeyayyy";//get challenge description from db
+  if (true/*challenge exists*/) return nameOfTheChallenge; "ayeayeayayayayyyyaeayeyeaeyayyy";//get challenge description from db
   else return "A challenge for this slot has not yet been made.";
 }

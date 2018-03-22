@@ -27,6 +27,8 @@
 </head>
 
 <body style="background: #e9e9e9">
+  <?php include('../php/challenge_info.php') ?>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">
@@ -45,7 +47,7 @@
           <a class="nav-link" href="sandbox.html">Sandbox </a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="challenges.html">Challenges <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="challenges.php">Challenges <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="tutorial.html">Tutorial</a>

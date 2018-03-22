@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php
-    session_start();
-  ?>
+  <?php session_start(); ?>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
   <title>LogiKK</title>
 
   <!-- Bootstrap CSS CDN -->
@@ -16,34 +13,11 @@
   <link href="../css/font.css" rel="stylesheet">
 
   <style media="screen">
-  .myDark{
-    background: #dcdcdc
-  }
-
-  .modal {
-    text-align: center;
-  }
-
-  @media screen and (min-width: 768px) {
-    .modal:before {
-      display: inline-block;
-      vertical-align: middle;
-      content: " ";
-      height: 100%;
-    }
-  }
-
-  .modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  .form-group span {
+  .myDark{ background: #dcdcdc }
+.form-group span {
       margin: auto;
       padding-right: 5px;
-  }
-
+    }
   h1 {
     text-align: center !important;
   }
@@ -54,6 +28,8 @@
   }
 
   .transitionRow { height: 8vh; }
+
+  #toTop { height: 8vh }
 
   </style>
 </head>
@@ -86,7 +62,7 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
-        <?php if (!isset($_SESSION["username"])) : ?>
+        <?php if (!isset($_SESSION["username"])) { ?>
         <li class="nav-item">
           <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal">
           <i class="fas fa-sign-in-alt"></i> Sign In
@@ -97,19 +73,12 @@
           <i class="fas fa-user-plus"></i> Sign Up
           </button>
         </li>
-      <?php else : ?>
-        <div class="dropdown">
-         <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">Welcome
-          <?php
-              echo " " . $_SESSION['username'] . "<span class=\"caret\"></span></button>
-              <ul class=\"dropdown-menu\">
-              <li><a href=\"#\">Challenges</a></li>
-              <li><a href=\"#\">Sandbox</a></li>
-              <li><a href=\"php/signOut.php\">Sign Out</a></li>
-              </ul>
-              </div>";
-            endif;
-          ?>
+        <?php } else {
+        echo "<li class=\"nav-item\">";
+        echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome ";
+        echo $_SESSION["username"] . "</li></a>";
+        }
+        ?>
       </ul>
     </div>
   </nav>
@@ -159,7 +128,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-group" action="php/signUpEntry.php" method="post">
+        <form class="form-group" action="../home.php" method="post">
       <div class="col-*-12" id="wrapperContents">
         <div class="form-group input-group">
           <span class="input-group-addon"><i class="fas fa-user"></i></span>
@@ -207,33 +176,51 @@
 <div class="modal fade" id="signInModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="align:center;">
         <h3 class="modal-title">Sign In</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="container">
-          <form class="form-group" action="php/signInVerify.php" method="post">
-            <div class="col-*-8" id="wrapperContents">
-              <div class="form-group input-group">
-                <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
-                <input class="form-control" type="text" name='username' placeholder="Username" required/>
-              </div>
-              <div class="form-group input-group">
-                <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-                <input class="form-control" type="password" name='password'placeholder="Password" required/>
-              </div>
-            </div>
+        <form class="form-group" action="../home.php" method="post">
+      <div class="col-*-12" id="wrapperContents">
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-user"></i></span>
+          <input class="form-control" type="text" name='name' placeholder="Name" required/>
+        </div>
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
+          <input class="form-control" type="text" name='username' placeholder="Username" required/>
+        </div>
+        <div class="form-group input-group">
+          <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
+          <input class="form-control" type="email" name='email' placeholder="Email" required/>
+        </div>
+        <fieldset>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+            <input class="form-control" type="password" name='password' id="password" placeholder="Password" required/>
           </div>
-          <div class="modal-footer">
-            <div class="container-fluid">
-              <div class="form-group">
-                <button type="submit" class="btn btn-dark btn-block">Sign In</button>
-              </div>
-            </div>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+            <input class="form-control" type="password" name='confirmedPassword' id="confirm_password" placeholder="Retype Password" oninput="check(this);" required/>
           </div>
+        </fieldset>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" required> I agree to the <a href="#">Terms of use</a>
+          </label>
+        </div>
+      </div>
+
+      </div>
+      <div class="modal-footer">
+      <div class="container-fluid">
+        <div class="form-group">
+          <button type="submit" class="btn btn-dark btn-block">Create account</button>
+        </div>
+      </div>
         </form>
       </div>
     </div>
@@ -287,7 +274,10 @@
         }
     }
 </script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> challenges load from database initiated
 </body>
 
 </html>

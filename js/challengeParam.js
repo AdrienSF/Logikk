@@ -15,11 +15,6 @@ var challengeID = "G" + part1 + getParameterByName("j");
 
 // connect to the table with the Given challengeID in database
 
-goalInputs = getParameterByName("in");
-maxANDgates = getParameterByName("and");
-maxORgates = getParameterByName("or");
-maxXORgates = getParameterByName("xor");
-maxNOTgates = getParameterByName("not");
 goalTable = [false, true, true, false];//2 input XOR truth table out column
 winMessage = "Congratulations, you have solved one of the 16 challenges of the lowest complexity";
 var challengeHeader = document.createTextNode("2 input XOR challenge");
@@ -43,7 +38,10 @@ var challengeDescription = document.createTextNode(some data fetched from databa
 document.getElementById("challengeHeader").appendChild(challengeHeader);
 document.getElementById("challengeDescription").appendChild(challengeDescription);
 document.getElementById("goalInputs").innerHTML = goalInputs;
+<<<<<<< HEAD
 document.getElementById("winMessage").innerHTML = winMessage;
+=======
+>>>>>>> challenges load from database initiated
 
 var andLine = document.createElement("li");
 andLine.innerHTML = maxANDgates + " AND gates";
