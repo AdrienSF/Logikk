@@ -6,9 +6,6 @@
     session_start();
 
     require_once("databaseDetails.php");
-    if (isset($_POST['username']) || $error) {
-      exit();
-    }
 
     $name = test_input($_POST["name"]);
     $user = test_input($_POST["username"]);
@@ -16,28 +13,13 @@
     $pass = $_POST["password"];
     $email = test_input($_POST["email"]);
 
-    $queryUserUnique = "SELECT * FROM user_info WHERE Username='$user'";
-    $queryEmailUnique = "SELECT * FROM user_info WHERE Email='$email'";
+    $queryInsert = "INSERT INTO user_info VALUES ('$user','$email','$password','$name')";
 
-    $_SESSION['textSignUp'] = "Welcome $name, you've made the Logikkal choice trusting us with your logic circuit!";
-    if ($mysql->query($queryUserUnique)->num_rows != 0) {
-      $_SESSION['textSignUp'] = "Username already exists, please try again!";
+    if ($mysql->query($queryInsert) === TRUE ) {
+      $_SESSION['textSignUp'] = "Welcome $name, you've made the Logikkal choice trusting us with your logic circuit!";
+    } else {
+      $_SESSION['textSignUp'] = "Email or Username is not Unique!";
       $mysql->close();
-      exit();
-    }
-
-    if ($mysql->query($queryEmailUnique)->num_rows != 0) {
-      $_SESSION['textSignUp'] = "Email already exists, please try again!";
-      $mysql->close();
-      exit();
-    }
-
-    $queryInsert = "INSERT INTO user_info VALUES ('$user', '$email', '$pass', '$name')";
-
-    if ($mysql->query($queryInsert) === FALSE) {
-      $_SESSION['textSignUp'] = "Something went wrong, Please try again!";
-      $mysql->close();
-      exit();
     }
 
     $mysql->close();
