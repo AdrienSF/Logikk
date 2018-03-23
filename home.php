@@ -104,15 +104,15 @@
       <div class="carousel-inner">
 
         <div class="carousel-item active">
-          <a href="#head1"><img class="w-100" src="images/test1.png" alt="First slide"></a>
+          <a href="#head1"><img class="w-100" src="images/FINAL1.png" alt="First slide"></a>
         </div>
 
         <div class="carousel-item">
-          <a href="#head2"><img class="w-100" src="images/test2.png" alt="Second slide"></a>
+          <a href="#head2"><img class="w-100" src="images/FINAL2.png" alt="Second slide"></a>
         </div>
 
         <div class="carousel-item">
-          <a href="#head3"><img class="w-100" src="images/test3.png" alt="Third slide"></a>
+          <a href="#head3"><img class="w-100" src="images/FINAL3.png" alt="Third slide"></a>
         </div>
 
       </div>
