@@ -40,7 +40,11 @@ function clearAll(override) {
   outImage.clear();
   gates = [];
 
-  document.cookie = "";
+  if(!override && typeof updateButtonDisabling != 'function') {
+    // this means we are doing it with the clear all button
+    // also challenge.js isnt loaded
+    document.cookie = "";
+  }
 
   var cnv = document.getElementById("canvas");
   while(cnv.firstChild)
