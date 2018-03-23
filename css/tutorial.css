@@ -49,3 +49,7 @@ body {
     float: right;
     width: 50%;
 }
+
+.card {
+  height: 90%;
+}
