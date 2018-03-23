@@ -68,10 +68,15 @@
           <h4 class="modal-title">Save and Load Circuits</h4>
         </div>
         <div class="modal-body">
-          <p>Circuit name: <input type="text" name="fname"><br></p>
+          <p>This circuit's code:</p>
+          <textarea type="text" readonly="true" width="100%" rows="3" id="saveCircuitText"></textarea>
+
+          <br><br>
+
+          <p>Load Circuit:</p>
+          <textarea type="text" width="100%" rows="3" id="loadCircuitText"></textarea><br>
           <!-- these functions are in circuitTranscriber -->
-          <button class="btn btn-dark" onclick="saveCircuitBtn()"   type="button">Save</button>
-          <button class="btn btn-dark" onclick="loadCircuitBtn()"   type="button">Load</button>
+          <button class="btn btn-dark" onclick="loadBtnClicked()"   type="button">Load</button>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -101,7 +106,7 @@
           </div>
           <div class="col-lg-3 col-sm col" align="right">
             <button class="btn btn-dark" onclick="clearAll()"        type="button">Clear All</button>
-            <button class="btn btn-dark"  data-toggle="modal" data-target="#myModal"                           type="button">Save/Load</button>
+            <button class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="saveLoadBtnClicked()" type="button">Save/Load</button>
           </div>
         </div>
       </div>

@@ -44,12 +44,14 @@ function loadCircuit(data) {
   update();
 }
 
-function saveCircuitBtn() {
-
+function saveLoadBtnClicked() {
+  document.getElementById("saveCircuitText").value = saveCircuit();
+  document.getElementById("loadCircuitText").value = "";
 }
 
-function loadCircuitBtn() {
-  
+function loadBtnClicked() {
+  var data = document.getElementById("loadCircuitText").value;
+  loadCircuit(data);
 }
 
 setInterval(updateCookie, 1000);
