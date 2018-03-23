@@ -167,6 +167,7 @@
   <script src="../js/truthtable.js"></script>
   <script src="../js/sandbox.js"></script>
 
+  <script src="../js/challengeTranscriber.js"></script>
   <?php include('../php/challengeInfo.php') ?>
   <script src="../js/challenge.js"></script>
   <!-- Challenge End -->

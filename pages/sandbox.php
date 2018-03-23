@@ -76,7 +76,27 @@
           <p>Load Circuit:</p>
           <textarea type="text" width="100%" rows="3" id="loadCircuitText"></textarea><br>
           <!-- these functions are in circuitTranscriber -->
-          <button class="btn btn-dark" onclick="loadBtnClicked()"   type="button">Load</button>
+          <button class="btn btn-dark" onclick="loadBtnClicked()" data-dismiss="modal" type="button">Load</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="createChallengeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Create a challenge from this circuit</h4>
+        </div>
+        <div class="modal-body">
+          <p>This circuit's challenge code:</p>
+          <textarea type="text" readonly="true" width="100%" rows="3" id="challengeCode"></textarea>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -107,6 +127,7 @@
           <div class="col-lg-3 col-sm col" align="right">
             <button class="btn btn-dark" onclick="clearAll()"        type="button">Clear All</button>
             <button class="btn btn-dark" data-toggle="modal" data-target="#myModal" onclick="saveLoadBtnClicked()" type="button">Save/Load</button>
+            <button class="btn btn-dark" data-toggle="modal" data-target="#createChallengeModal" onclick="makeChallengeBtnClicked()" type="button">Create challenge</button>
           </div>
         </div>
       </div>
@@ -151,7 +172,9 @@
   <script src="../js/gatesetup.js"></script>
   <script src="../js/graphics.js"></script>
   <script src="../js/truthtable.js"></script>
+
   <script src="../js/circuitTranscriber.js"></script>
+  <script src="../js/challengeTranscriber.js"></script>
   <script src="../js/sandbox.js"></script>
   <!-- Sandbox End -->
 

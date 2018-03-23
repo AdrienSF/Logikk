@@ -61,13 +61,42 @@
   </nav>
   <!-- Navbar End -->
 
+  <div id="loadChallengeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Load a custom challenge</h4>
+        </div>
+        <div class="modal-body">
+
+          <p>Paste challenge code:</p>
+          <textarea type="text" width="100%" rows="3" id="challengeCode"></textarea><br>
+          <button class="btn btn-dark" onclick="loadChallengeBtnClicked()" data-dismiss="modal" type="button">Load</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
   <!-- challenges -->
   <section>
     <div class="container-fluid">
 
       <div class="block-header">
-        <h2>CHALLENGES</h2>
-        <h2 id="boolExp"><h2>
+        <div class="row clearfix">
+          <div class="col-lg-1 col-sm col">
+            <h2>SANDBOX</h2>
+          </div>
+          <div class="col-lg-11 col-sm col" align="right">
+            <button class="btn btn-dark" data-toggle="modal" data-target="#loadChallengeModal" onclick="" type="button">Load custom challenge</button>
+          </div>
+        </div>
       </div>
 
       <div class="row clearfix" id="challengeCards"></div>
@@ -76,6 +105,7 @@
 
 
   <script src="../js/challenges.js"></script>
+  <script src="../js/challengeTranscriber.js"></script>
   <?php include('../php/challengeCardInfo.php') ?>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

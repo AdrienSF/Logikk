@@ -23,31 +23,31 @@ function updateButtonDisabling() {
       notInst.push(gates[i]);
 
     //disable button if max gates are spawned
-    document.getElementById("inputButton").disabled = (inputsInst.length >= goalInputs);
-    document.getElementById("andButton").disabled = (andInst.length >= maxANDgates);
-    document.getElementById("orButton").disabled = (orInst.length >= maxORgates);
-    document.getElementById("xorButton").disabled = (xorInst.length >= maxXORgates);
-    document.getElementById("notButton").disabled = (notInst.length >= maxNOTgates);
+    document.getElementById("inputButton").disabled = (inputsInst.length >= challengeData.in);
+    document.getElementById("andButton").disabled = (andInst.length >= challengeData.and);
+    document.getElementById("orButton").disabled = (orInst.length >= challengeData.or);
+    document.getElementById("xorButton").disabled = (xorInst.length >= challengeData.xor);
+    document.getElementById("notButton").disabled = (notInst.length >= challengeData.not);
 
     //display amount of gates left upon hover
-    if(goalInputs - inputsInst.length > 0)
-    document.getElementById("inputButton").title = goalInputs - inputsInst.length + " left";
+    if(challengeData.in - inputsInst.length > 0)
+    document.getElementById("inputButton").title = challengeData.in - inputsInst.length + " left";
     else document.getElementById("inputButton").title = "none left";
 
-    if (maxANDgates - andInst.length > 0)
-    document.getElementById("andButton").title = maxANDgates - andInst.length + " left";
+    if (challengeData.and - andInst.length > 0)
+    document.getElementById("andButton").title = challengeData.and - andInst.length + " left";
     else document.getElementById("andButton").title = "none left";
 
-    if (maxORgates - orInst.length > 0)
-    document.getElementById("orButton").title = maxORgates - orInst.length + " left";
+    if (challengeData.or - orInst.length > 0)
+    document.getElementById("orButton").title = challengeData.or - orInst.length + " left";
     else document.getElementById("orButton").title = "none left";
 
-    if (maxXORgates - xorInst.length)
-    document.getElementById("xorButton").title = maxXORgates - xorInst.length + " left";
+    if (challengeData.xor - xorInst.length)
+    document.getElementById("xorButton").title = challengeData.xor - xorInst.length + " left";
     else document.getElementById("xorButton").title = "none left";
 
-    if (maxNOTgates - notInst.length > 0)
-    document.getElementById("notButton").title = maxNOTgates - notInst.length + " left";
+    if (challengeData.not - notInst.length > 0)
+    document.getElementById("notButton").title = challengeData.not - notInst.length + " left";
     else document.getElementById("notButton").title = "none left";
 
   }
@@ -71,9 +71,9 @@ function createTruthTable() {
       inputsInst.push(gates[i]);
   }
 
-  if(inputsInst.length != goalInputs) {
+  if(inputsInst.length != challengeData.in) {
     var inputMessage = document.createElement("div");
-    var amount = goalInputs - inputsInst.length;
+    var amount = challengeData.in - inputsInst.length;
     inputMessage.className = "text-center";
     inputMessage.appendChild(document.createTextNode("add " + amount + " more inputs"))
     document.getElementById("TTbody").appendChild(inputMessage);
@@ -138,9 +138,10 @@ function createTruthTable() {
 
 function updateGoalTableStates() {
   for(var row = 0; row < Math.pow(2, inputsInst.length); row++) {
-    goalOutStateText[row].nodeValue = goalTable[row];
-    goalOutStateText[row].parentNode.style.color = goalTable[row] ? "red" : "black";
+    goalOutStateText[row].nodeValue = challengeData.truth_table[row];
+    goalOutStateText[row].parentNode.style.color = challengeData.truth_table[row] == "T" ? "red" : "black";
   }
+
   checkChallengeComplete();
 }
 
@@ -171,11 +172,11 @@ function checkChallengeComplete(isSubmitted) {
     }
   }
 
-  document.getElementById("submitButton").disabled = !correct || ((""+inputsInst.length) != goalInputs);
+  document.getElementById("submitButton").disabled = !correct || ((""+inputsInst.length) != challengeData.in);
   if (document.getElementById("submitButton").disabled == true) document.getElementById("submitButton").title = "challenge is incomplete";
   else document.getElementById("submitButton").title = "evaluate challenge correctness";
 
-  if (correct && ((""+inputsInst.length) === (""+goalInputs)) && isSubmitted) {
+  if (correct && ((""+inputsInst.length) === (""+challengeData.in)) && isSubmitted) {
     $("#myModal").modal();
   }
 }

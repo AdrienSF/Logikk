@@ -70,10 +70,9 @@ function createInputLabels() {
 
 
 function updateTableStates() {
-
   // if we are in a challenge and not right amount of input
   if(typeof updateGoalTableStates == 'function')
-    if(inputsInst.length != goalInputs) return;
+    if(inputsInst.length != challengeData.in) return;
 
   var inputStatesOriginal = [];
   for(var i = 0; i < inputsInst.length; i++)
