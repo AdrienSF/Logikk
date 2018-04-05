@@ -7,21 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>LogiKK</title>
 
-  <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="plugins\bootstrap\css\bootstrap.min.css">
+  <script src="plugins/jquery/jquery.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="plugins\bootstrap\js\bootstrap.min.js"></script>
+  <!-- Bootstrap CSS CDN -->
+  <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Bootstrap javascript CDN -->
+  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+  
   <link href="../css/font.css" rel="stylesheet">
 
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins\jquery\jquery.min.js"></script>
 
   <style media="screen">
     .myDark{ background: #dcdcdc }
@@ -69,6 +68,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navigation options -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="home.php">Home<span class="sr-only">(current)</span></a>
@@ -86,20 +86,25 @@
 
       <ul class="navbar-nav ml-auto">
         <?php if (!isset($_SESSION["username"])) { ?>
+        <!-- Sign In button -->
         <li class="nav-item">
-          <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal">
-          <i class="fas fa-sign-in-alt"></i> Sign In
-          </button>
+          <a href="pages/signIn.php">
+            <button class="btn btn-primary-outline" type="button">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+          </a>
         </li>
+        <!-- Sign Up button  -->
         <li class="nav-item">
-          <button class="btn btn-primary-outline" style="margin-left: 0.5vw" type="button" data-toggle="modal" data-target="#signUpModal">
+          <button class="btn btn-primary-outline" style="margin-left: 4px" >
           <i class="fas fa-user-plus"></i> Sign Up
           </button>
         </li>
+
         <?php } else {
-        echo "<li class=\"nav-item\">";
-        echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome ";
-        echo $_SESSION["username"] . "</li></a>";
+          echo "<li class=\"nav-item\">";
+          echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome ";
+          echo $_SESSION["username"] . "</li></a>";
         }
         ?>
       </ul>
@@ -135,99 +140,6 @@
       </a>
     </div>
   <!-- Carousel End -->
-
-  <!-- SignUp Modal -->
-  <div class="modal fade" id="signUpModal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header" style="align:center;">
-          <h3 class="modal-title">Sign Up</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <form class="form-group" id="signUpForm" action="php/signUpEntry.php" method="post">
-        <div class="col-*-12" id="wrapperContents">
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="fas fa-user"></i></span>
-            <input class="form-control" type="text" name='name' placeholder="Name" required/>
-          </div>
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
-            <input class="form-control" type="text" name='username' placeholder="Username" required/>
-          </div>
-          <div class="form-group input-group">
-            <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
-            <input class="form-control" type="email" name='email' placeholder="Email" required/>
-          </div>
-          <fieldset>
-            <div class="form-group input-group">
-              <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-              <input class="form-control" type="password" name='password' id="password" placeholder="Password" required/>
-            </div>
-            <div class="form-group input-group">
-              <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-              <input class="form-control" type="password" name='confirmedPassword' id="confirm_password" placeholder="Retype Password" oninput="check(this);" required/>
-            </div>
-          </fieldset>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" required> I agree to the <a href="#">Terms of use</a>
-            </label>
-          </div>
-        </div>
-
-        </div>
-        <div class="modal-footer">
-        <div class="container-fluid">
-          <div class="form-group">
-            <button type="submit" class="btn btn-dark btn-block">Create account</button>
-          </div>
-        </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SignIn Modal -->
-  <div class="modal fade" id="signInModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="align:center;">
-        <h3 class="modal-title">Sign In</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <form class="form-group" action="php/signInVerify.php" method="post">
-            <div class="col-*-8" id="wrapperContents">
-              <div class="form-group input-group">
-                <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
-                <input class="form-control" type="text" name='username' placeholder="Username" required/>
-              </div>
-              <div class="form-group input-group">
-                <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-                <input class="form-control" type="password" name='password'placeholder="Password" required/>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="container-fluid">
-              <div class="form-group">
-                <button type="submit" class="btn btn-dark btn-block">Sign In</button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
   <script type="text/javascript">
     function check(input) {
