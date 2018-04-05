@@ -9,19 +9,16 @@
 
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="plugins\bootstrap\css\bootstrap.min.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
   <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="plugins\bootstrap\js\bootstrap.min.js"></script>
 
   <link href="../css/font.css" rel="stylesheet">
 
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
   <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins\jquery\jquery.min.js"></script>
 
   <style media="screen">
     .myDark{ background: #dcdcdc }
@@ -73,12 +70,15 @@
         <li class="nav-item active">
           <a class="nav-link" href="home.php">Home<span class="sr-only">(current)</span></a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="pages/sandbox.php">Sandbox</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="pages/challengeLibrary.php">Challenges </a>
+          <a class="nav-link" href="pages/challengeLibrary.php">Challenges</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="pages/tutorial.html">Tutorial</a>
         </li>
@@ -110,6 +110,7 @@
 
   <!-- Carousel -->
     <div id="carouselExampleControls" class="carousel slide vertical-center" data-ride="carousel">
+
       <div class="carousel-inner">
 
         <div class="carousel-item active">
@@ -125,13 +126,14 @@
         </div>
 
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+
+      <a class="left carousel-control" href="#carouselExampleControls" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only"> Previous </span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+      <a class="right carousel-control" href="#carouselExampleControls" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only"> Next </span>
       </a>
     </div>
   <!-- Carousel End -->
