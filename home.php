@@ -8,42 +8,51 @@
   <title>LogiKK</title>
 
   <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="plugins\bootstrap\css\bootstrap.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="plugins\bootstrap\js\bootstrap.min.js"></script>
 
   <link href="../css/font.css" rel="stylesheet">
 
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="plugins\jquery\jquery.min.js"></script>
+
   <style media="screen">
-  .myDark{ background: #dcdcdc }
-.form-group span {
-      margin: auto;
-      padding-right: 5px;
+    .myDark{ background: #dcdcdc }
+    .form-group span {
+        margin: auto;
+        padding-right: 5px;
+      }
+    h1 {
+      text-align: center !important;
     }
-  h1 {
-    text-align: center !important;
-  }
 
-  .infocontainer {
-    min-height: 100vh;
-    padding-top: 8vh;
-  }
+    .infocontainer {
+      min-height: 100vh;
+      padding-top: 8vh;
+    }
 
-  .transitionRow { height: 8vh; }
+    .transitionRow { height: 8vh; }
 
-  #toTop { height: 8vh }
+    #toTop { height: 8vh }
 
-  .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
+    .vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
 
-  display: flex;
-  align-items: center;
-  }
+    display: flex;
+    align-items: center;
+    }
 
-  .body {
-    background-image: ../images/stuff_for_carousel_slide_2/GRID.xcf.;
-  }
+    .body {
+      background-image: ../images/stuff_for_carousel_slide_2/GRID.xcf.;
+    }
 
   </style>
 </head>
@@ -127,68 +136,64 @@
     </div>
   <!-- Carousel End -->
 
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="plugins/bootstrap/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- SignUp Modal -->
+  <div class="modal fade" id="signUpModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="align:center;">
+          <h3 class="modal-title">Sign Up</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
 
-<!-- SignUp Modal -->
-<div class="modal fade" id="signUpModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="align:center;">
-        <h3 class="modal-title">Sign Up</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <form class="form-group" id="signUpForm" action="php/signUpEntry.php" method="post">
-      <div class="col-*-12" id="wrapperContents">
-        <div class="form-group input-group">
-          <span class="input-group-addon"><i class="fas fa-user"></i></span>
-          <input class="form-control" type="text" name='name' placeholder="Name" required/>
-        </div>
-        <div class="form-group input-group">
-          <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
-          <input class="form-control" type="text" name='username' placeholder="Username" required/>
-        </div>
-        <div class="form-group input-group">
-          <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
-          <input class="form-control" type="email" name='email' placeholder="Email" required/>
-        </div>
-        <fieldset>
+          <form class="form-group" id="signUpForm" action="php/signUpEntry.php" method="post">
+        <div class="col-*-12" id="wrapperContents">
           <div class="form-group input-group">
-            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-            <input class="form-control" type="password" name='password' id="password" placeholder="Password" required/>
+            <span class="input-group-addon"><i class="fas fa-user"></i></span>
+            <input class="form-control" type="text" name='name' placeholder="Name" required/>
           </div>
           <div class="form-group input-group">
-            <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-            <input class="form-control" type="password" name='confirmedPassword' id="confirm_password" placeholder="Retype Password" oninput="check(this);" required/>
+            <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
+            <input class="form-control" type="text" name='username' placeholder="Username" required/>
           </div>
-        </fieldset>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" required> I agree to the <a href="#">Terms of use</a>
-          </label>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
+            <input class="form-control" type="email" name='email' placeholder="Email" required/>
+          </div>
+          <fieldset>
+            <div class="form-group input-group">
+              <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+              <input class="form-control" type="password" name='password' id="password" placeholder="Password" required/>
+            </div>
+            <div class="form-group input-group">
+              <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+              <input class="form-control" type="password" name='confirmedPassword' id="confirm_password" placeholder="Retype Password" oninput="check(this);" required/>
+            </div>
+          </fieldset>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" required> I agree to the <a href="#">Terms of use</a>
+            </label>
+          </div>
         </div>
-      </div>
 
-      </div>
-      <div class="modal-footer">
-      <div class="container-fluid">
-        <div class="form-group">
-          <button type="submit" class="btn btn-dark btn-block">Create account</button>
         </div>
-      </div>
-        </form>
+        <div class="modal-footer">
+        <div class="container-fluid">
+          <div class="form-group">
+            <button type="submit" class="btn btn-dark btn-block">Create account</button>
+          </div>
+        </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- SignIn Modal -->
-<div class="modal fade" id="signInModal">
+  <!-- SignIn Modal -->
+  <div class="modal fade" id="signInModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="align:center;">
@@ -225,53 +230,15 @@
 </div>
 
   <script type="text/javascript">
-    $('a[href*="#"]')
-    // Remove links that don't actually link to anything
-    .not('[href="#"]')
-    .not('[href="#0"]')
-    .click(function(event) {
-      // On-page links
-      if (
-        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
-        &&
-        location.hostname == this.hostname
-      ) {
-        // Figure out element to scroll to
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-        // Does a scroll target exist?
-        if (target.length) {
-          // Only prevent default if animation is actually gonna happen
-          event.preventDefault();
-          $('html, body').animate({
-            scrollTop: target.offset().top
-          }, 1000, function() {
-            // Callback after animation
-            // Must change focus!
-            var $target = $(target);
-            $target.focus();
-            if ($target.is(":focus")) { // Checking if the target was focused
-              return false;
-            } else {
-              $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-              $target.focus(); // Set focus again
-            };
-          });
-        }
+    function check(input) {
+          if (input.value != document.getElementById('password').value) {
+              input.setCustomValidity('Password Must be Matching.');
+          } else {
+              // input is valid -- reset the error message
+              input.setCustomValidity('');
+          }
       }
-    });
-</script>
-
-<script type="text/javascript">
-  function check(input) {
-        if (input.value != document.getElementById('password').value) {
-            input.setCustomValidity('Password Must be Matching.');
-        } else {
-            // input is valid -- reset the error message
-            input.setCustomValidity('');
-        }
-    }
-</script>
+  </script>
 
 </body>
 
