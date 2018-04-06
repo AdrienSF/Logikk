@@ -7,33 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>LogiKK</title>
 
-<<<<<<< HEAD
   <script src="plugins/jquery/jquery.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
   <!-- Bootstrap CSS CDN -->
   <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-=======
-  <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
->>>>>>> removed \ links
 
   <!-- Bootstrap javascript CDN -->
   <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-  
+
   <link href="../css/font.css" rel="stylesheet">
 
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
-<<<<<<< HEAD
-=======
-  <script src="plugins/jquery/jquery.min.js"></script>
->>>>>>> removed \ links
 
   <style media="screen">
     .myDark{ background: #dcdcdc }
