@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<head>
 <?php
   session_start();
   // database connection details
@@ -50,5 +48,3 @@
   }
 
 ?>
-<meta http-equiv="refresh" content="0;url=../home.php"/>
-</head>

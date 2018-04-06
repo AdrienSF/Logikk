@@ -136,6 +136,8 @@
     </div>
   <!-- Carousel End -->
 
+  <p style="display: none" id="holder"></p>
+
   <!-- SignUp Modal -->
   <div class="modal fade" id="signUpModal">
     <div class="modal-dialog" role="document">
@@ -149,7 +151,7 @@
 
         <div class="modal-body">
           <form class="form-group" id="signUpForm" action="php/signUpEntry.php" method="post">
-            <div class="col-*-12" id="wrapperContents">
+            <div class="col-*-12" id="wrapperContentsSignUp">
               <!-- Name -->
               <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fas fa-user"></i></span>
@@ -209,8 +211,8 @@
         <div class="modal-body">
           <div class="container">
 
-            <form class="form-group" action="php/signInVerify.php" method="post">
-              <div class="col-*-8" id="wrapperContents">
+            <form class="form-group" action="php/signInVerify.php" method="post" id="signInForm">
+              <div class="col-*-8" id="wrapperContentsSignIn">
                 <!-- Username -->
                 <div class="form-group input-group">
                   <span class="input-group-addon"><i class="fas fa-user-circle"></i></span>
@@ -219,7 +221,7 @@
                 <!-- Password -->
                 <div class="form-group input-group">
                   <span class="input-group-addon"><i class="fas fa-lock"></i></span>
-                  <input class="form-control" type="password" name='password'placeholder="Password" required/>
+                  <input class="form-control" type="password" name='password' placeholder="Password" required/>
                 </div>
               </div>
               <div class="container-fluid">
@@ -227,14 +229,15 @@
                   <button type="submit" class="btn btn-dark btn-block">Sign In</button>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript">
+  <!-- Check password reentry -->
+  <script>
     function check(input) {
           if (input.value != document.getElementById('password').value) {
               input.setCustomValidity('Password Must be Matching.');
@@ -245,6 +248,20 @@
       }
   </script>
 
+  <script>
+    $(document).ready(function () {
+      $("#signUpForm").submit(function(){
+        var content = '';
+        $("#holder").load("php/signUpEntry.php", $("#signUpForm").serializeArray(),
+        function (result) {
+          content = result;
+        });
+        if (content != '') {
+          alert(content);
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

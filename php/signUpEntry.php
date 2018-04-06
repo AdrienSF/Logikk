@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="refresh" content="1;url=../home.php"/>
   <?php
     session_start();
 
@@ -13,13 +9,24 @@
     $pass = $_POST["password"];
     $email = test_input($_POST["email"]);
 
+    // checks if email is unique
+    $uniqueEmailQuery = "SELECT * FROM user_info WHERE Email='$email'";
+    $res = $mysql->query($uniqueEmailQuery);
+
+    if ($res->num_rows != 0) {
+      echo "Username already in use";
+      $mysql->close();
+      exit();
+    }
+
     $queryInsert = "INSERT INTO user_info VALUES ('$user','$email','$password','$name')";
 
     if ($mysql->query($queryInsert) === TRUE ) {
-      $_SESSION['textSignUp'] = "Welcome $name, you've made the Logikkal choice trusting us with your logic circuit!";
+      echo "Welcome $name, you've made the Logikkal choice trusting us with your logic circuits!";
     } else {
-      $_SESSION['textSignUp'] = "Email or Username is not Unique!";
+      echo "Email already in use";
       $mysql->close();
+      exit();
     }
 
     $mysql->close();
@@ -32,8 +39,3 @@
       return $data;
     }
   ?>
-
-</head>
-<body>
-</body>
-</html>
