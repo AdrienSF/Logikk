@@ -260,6 +260,17 @@
           alert(content);
         }
       });
+
+      $("#signInForm").submit(function(){
+        var content = '';
+        $("#holder").load("php/signInVerify.php", $("#signInForm").serializeArray(),
+        function (result) {
+          content = result;
+        });
+        if (content != '') {
+          alert(content);
+        }
+      });
     });
   </script>
 </body>

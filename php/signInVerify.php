@@ -17,25 +17,25 @@
     if ($res->num_rows == 0)
     {
       $_SESSION["accepted"] = false;
-      $_SESSION["err"] = "Incorrect username or password.";
+      echo "Incorrect username or password.";
     }
     elseif ($res->num_rows == 1)
     {
       $_SESSION["username"] = $uid;
       $_SESSION["accepted"] = true;
-      $_SESSION["err"] = "";
+      echo "";
     }
     else
     {
       $_SESSION["accepted"] = false;
-      $_SESSION["err"] = "Something went wrong!";
+      echo "Something went wrong!";
     }
   }
   else
   {
     $send_to = "../pages/signIn.php";
     $_SESSION["accepted"] = false;
-    $_SESSION["err"] = "Incorrect username or password.";
+    echo "Incorrect username or password.";
   }
   $mysql->close();
 
