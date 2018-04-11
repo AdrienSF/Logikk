@@ -18,6 +18,9 @@
   <!-- Bootstrap JS CDN -->
   <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 
+  <!-- Bootstrap javascript CDN -->
+  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+
   <link href="../css/font.css" rel="stylesheet">
 
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
@@ -69,6 +72,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navigation options -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="home.php">Home<span class="sr-only">(current)</span></a>
@@ -86,20 +90,23 @@
 
       <ul class="navbar-nav ml-auto">
         <?php if (!isset($_SESSION["username"])) { ?>
+        <!-- Sign In button -->
         <li class="nav-item">
           <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal" style="margin: 0.5vw 0.2vw">
           <i class="fas fa-sign-in-alt"></i> Sign In
           </button>
         </li>
+        <!-- Sign Up button  -->
         <li class="nav-item">
           <button class="btn btn-primary-outline" type="button" style="margin: 0.5vw 0.2vw" data-toggle="modal" data-target="#signUpModal">
           <i class="fas fa-user-plus"></i> Sign Up
           </button>
         </li>
+
         <?php } else {
-        echo "<li class=\"nav-item\">";
-        echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome ";
-        echo $_SESSION["username"] . "</li></a>";
+          echo "<li class=\"nav-item\">";
+          echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome ";
+          echo $_SESSION["username"] . "</li></a>";
         }
         ?>
       </ul>
