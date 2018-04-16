@@ -103,12 +103,19 @@
           </button>
         </li>
 
-        <?php } else {
-          echo "<li class=\"nav-item\">";
-          echo "<a class=\"nav-link\" href=\"pages/signIn.html\"><i class=\"fas fa-user\"></i> Welcome ";
-          echo $_SESSION["username"] . "</li></a>";
-        }
-        ?>
+        <?php } else {?>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> Welcome <?php echo $_SESSION["username"];?>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <a class="dropdown-item" href="pages/challenges.html">Challenges</a>
+              <a class="dropdown-item" href="php/signOut.php">Sign Out</a>
+              <baclass="dropdown-item" href="">Something else here</a>
+            </div>
+          </div>
+
+        <?php } ?>
       </ul>
     </div>
   </nav>
@@ -151,13 +158,13 @@
       <div class="modal-content">
         <div class="modal-header" style="align:center;">
           <h3 class="modal-title">Sign Up</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" id="closeSignUp" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
         <div class="modal-body">
-          <form class="form-group" id="signUpForm" action="php/signUpEntry.php" method="post">
+          <form class="form-group" id="signUpForm" action="javascript:void(0)" method="post">
             <div class="col-*-12" id="wrapperContentsSignUp">
               <!-- Name -->
               <div class="form-group input-group">
@@ -211,14 +218,14 @@
       <div class="modal-content">
         <div class="modal-header" style="align:center;">
           <h3 class="modal-title">Sign In</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" id="closeSignIn" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="container">
 
-            <form class="form-group" action="php/signInVerify.php" method="post" id="signInForm">
+            <form class="form-group" action="javascript:void(0)" method="post" id="signInForm">
               <div class="col-*-8" id="wrapperContentsSignIn">
                 <!-- Username -->
                 <div class="form-group input-group">
@@ -261,22 +268,18 @@
         var content = '';
         $("#holder").load("php/signUpEntry.php", $("#signUpForm").serializeArray(),
         function (result) {
-          content = result;
+          alert(result);
+          window.location.reload();
         });
-        if (content != '') {
-          alert(content);
-        }
       });
 
       $("#signInForm").submit(function(){
         var content = '';
         $("#holder").load("php/signInVerify.php", $("#signInForm").serializeArray(),
         function (result) {
-          content = result;
+          alert(result);
+          window.location.reload();
         });
-        if (content != '') {
-          alert(content);
-        }
       });
     });
   </script>

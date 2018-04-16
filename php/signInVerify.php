@@ -23,7 +23,7 @@
     {
       $_SESSION["username"] = $uid;
       $_SESSION["accepted"] = true;
-      echo "";
+      echo "Welcome to Logikk!";
     }
     else
     {

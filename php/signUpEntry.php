@@ -14,17 +14,17 @@
     $res = $mysql->query($uniqueEmailQuery);
 
     if ($res->num_rows != 0) {
-      echo "Username already in use";
+      echo "Email already in use";
       $mysql->close();
       exit();
     }
 
-    $queryInsert = "INSERT INTO user_info VALUES ('$user','$email','$password','$name')";
+    $queryInsert = "INSERT INTO user_info VALUES ('$user','$email','$pass','$name')";
 
     if ($mysql->query($queryInsert) === TRUE ) {
       echo "Welcome $name, you've made the Logikkal choice trusting us with your logic circuits!";
     } else {
-      echo "Email already in use";
+      echo "Username already in use";
       $mysql->close();
       exit();
     }
