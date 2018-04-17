@@ -50,9 +50,11 @@
         <li class="nav-item active">
           <a class="nav-link" href="sandbox.php">Sandbox <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="challengeLibrary.php">Challenges </a>
-        </li>
+        <?php if (isset($_SESSION["username"])): ?>
+          <a class="nav-link" href="challengeLibrary.php" id="challengesNav">Challenges</a>
+        <?php else: ?>
+          <a class="nav-link" id="challengesNav" onclick="alert('Please sign in to continue to Challenges');" style="cursor: pointer">Challenges</a>
+        <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link" href="tutorial.html">Tutorial</a>
         </li>
