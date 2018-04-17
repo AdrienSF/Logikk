@@ -67,9 +67,8 @@
               <i class="fas fa-user"></i> Welcome <?php echo $_SESSION["username"];?>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <a class="dropdown-item" href="challenges.html">Challenges</a>
+              <a class="dropdown-item" href="challengeLibrary.php">Challenges</a>
               <a class="dropdown-item" href="../php/signOut.php">Sign Out</a>
-              <baclass="dropdown-item" href="">Something else here</a>
             </div>
           </div>
 
