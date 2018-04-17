@@ -23,6 +23,7 @@
 
     if ($mysql->query($queryInsert) === TRUE ) {
       echo "Welcome $name, you've made the Logikkal choice trusting us with your logic circuits!";
+      $_SESSION['username'] = $user;
     } else {
       echo "Username already in use";
       $mysql->close();

@@ -111,7 +111,6 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <a class="dropdown-item" href="pages/challenges.html">Challenges</a>
               <a class="dropdown-item" href="php/signOut.php">Sign Out</a>
-              <baclass="dropdown-item" href="">Something else here</a>
             </div>
           </div>
 
@@ -164,7 +163,7 @@
         </div>
 
         <div class="modal-body">
-          <form class="form-group" id="signUpForm" action="javascript:void(0)" method="post">
+          <form class="form-group" id="signUpForm" action="javascript:void(0)" method="post" autocomplete="off">
             <div class="col-*-12" id="wrapperContentsSignUp">
               <!-- Name -->
               <div class="form-group input-group">
@@ -225,7 +224,7 @@
         <div class="modal-body">
           <div class="container">
 
-            <form class="form-group" action="javascript:void(0)" method="post" id="signInForm">
+            <form class="form-group" action="javascript:void(0)" method="post" id="signInForm" autocomplete="off">
               <div class="col-*-8" id="wrapperContentsSignIn">
                 <!-- Username -->
                 <div class="form-group input-group">
@@ -277,8 +276,13 @@
         var content = '';
         $("#holder").load("php/signInVerify.php", $("#signInForm").serializeArray(),
         function (result) {
+          console.log(result);
           alert(result);
-          window.location.reload();
+          if (result == "Welcome to Logikk!") {
+            window.location.reload();
+          } else {
+            document.getElementById('signInForm').reset();
+          }
         });
       });
     });
