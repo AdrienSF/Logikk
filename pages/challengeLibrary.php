@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php session_start(); ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" type="image/ico" href="../favicon.ico"/>
@@ -42,20 +43,34 @@
         <li class="nav-item">
           <a class="nav-link" href="sandbox.php">Sandbox </a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="challengeLibrary.php">Challenges <span class="sr-only">(current)</span></a>
-        </li>
+        <?php if (isset($_SESSION["username"])) { ?>
+          <li class="nav-item active">
+            <a class="nav-link" href="challengeLibrary.php">Challenges <span class="sr-only">(current)</span></a>
+          </li>
+        <?php }?>
         <li class="nav-item">
           <a class="nav-link" href="tutorial.html">Tutorial</a>
         </li>
       </ul>
 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal">
-          <i class="fas fa-sign-in-alt"></i> Sign In
-          </button>
-        </li>
+        <?php if (!isset($_SESSION["username"])) { ?>
+          <script>
+            window.location.replace("../home.php")
+          </script>
+
+        <?php } else {?>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> Welcome <?php echo $_SESSION["username"];?>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <a class="dropdown-item" href="pages/challenges.html">Challenges</a>
+              <a class="dropdown-item" href="php/signOut.php">Sign Out</a>
+            </div>
+          </div>
+
+        <?php } ?>
       </ul>
     </div>
   </nav>
