@@ -81,7 +81,11 @@
           <a class="nav-link" href="pages/sandbox.php">Sandbox</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/challengeLibrary.php">Challenges </a>
+          <?php if (isset($_SESSION["username"])): ?>
+            <a class="nav-link" href="challengeLibrary.php" id="challengesNav">Challenges</a>
+          <?php else: ?>
+            <a class="nav-link" id="challengesNav" onclick="alert('Please sign in to continue to Challenges');" style="cursor: pointer">Challenges</a>
+          <?php endif; ?>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pages/tutorial.html">Tutorial</a>
@@ -92,13 +96,13 @@
         <?php if (!isset($_SESSION["username"])) { ?>
         <!-- Sign In button -->
         <li class="nav-item">
-          <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal" style="margin: 0.5vw 0.2vw">
+          <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal" style="margin: 0.5vw 0.2vw" id="signInButton">
           <i class="fas fa-sign-in-alt"></i> Sign In
           </button>
         </li>
         <!-- Sign Up button  -->
         <li class="nav-item">
-          <button class="btn btn-primary-outline" type="button" style="margin: 0.5vw 0.2vw" data-toggle="modal" data-target="#signUpModal">
+          <button class="btn btn-primary-outline" type="button" style="margin: 0.5vw 0.2vw" data-toggle="modal" data-target="#signUpModal" id="signUpButton">
           <i class="fas fa-user-plus"></i> Sign Up
           </button>
         </li>
@@ -109,7 +113,7 @@
               <i class="fas fa-user"></i> Welcome <?php echo $_SESSION["username"];?>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <a class="dropdown-item" href="pages/challenges.html">Challenges</a>
+              <a class="dropdown-item" href="pages/challengeLibrary.php">Challenges</a>
               <a class="dropdown-item" href="php/signOut.php">Sign Out</a>
             </div>
           </div>
@@ -153,7 +157,7 @@
 
   <!-- SignUp Modal -->
   <div class="modal fade" id="signUpModal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header" style="align:center;">
           <h3 class="modal-title">Sign Up</h3>
@@ -213,7 +217,7 @@
 
   <!-- SignIn Modal -->
   <div class="modal fade" id="signInModal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header" style="align:center;">
           <h3 class="modal-title">Sign In</h3>
@@ -252,13 +256,13 @@
   <!-- Check password reentry -->
   <script>
     function check(input) {
-          if (input.value != document.getElementById('password').value) {
-              input.setCustomValidity('Password Must be Matching.');
-          } else {
-              // input is valid -- reset the error message
-              input.setCustomValidity('');
-          }
+      if (input.value != document.getElementById('password').value) {
+          input.setCustomValidity('Password Must be Matching.');
+      } else {
+          // input is valid -- reset the error message
+          input.setCustomValidity('');
       }
+    }
   </script>
 
   <script>
@@ -268,7 +272,11 @@
         $("#holder").load("php/signUpEntry.php", $("#signUpForm").serializeArray(),
         function (result) {
           alert(result);
-          window.location.reload();
+          if (result == "Email already in use" || result == "Username already in use") {
+            document.getElementById('signUpForm').reset();
+          } else {
+            window.location.reload();
+          }
         });
       });
 
