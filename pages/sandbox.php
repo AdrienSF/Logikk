@@ -10,6 +10,9 @@
   <!-- Jquery -->
   <script src="../plugins/jquery/jquery.min.js"></script>
 
+  <!-- Ajax -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 
@@ -90,13 +93,33 @@
         <div class="modal-body">
           <p>This circuit's code:</p>
           <textarea type="text" readonly="true" width="100%" rows="3" id="saveCircuitText"></textarea>
-
+          <?php if (isset($_SESSION['username'])) { ?>
+            <p>name of Circuit:</p>
+            <textarea name="name" rows="1" cols="20" id="nameCircuit"></textarea>
+            <button type="button" name="saveCircuitButton" id="saveCircuitButton">Save</button>
+          <?php } ?>
           <br><br>
 
           <p>Load Circuit:</p>
           <textarea type="text" width="100%" rows="3" id="loadCircuitText"></textarea><br>
           <!-- these functions are in circuitTranscriber -->
           <button class="btn btn-dark" onclick="loadBtnClicked()" data-dismiss="modal" type="button">Load</button>
+          <br>
+          <?php if (isset($_SESSION['username'])) { ?>
+          <p>Load from database:</p>
+          <?php
+            require_once '../php/databaseDetails.php';
+            $queryCircuit = "SELECT * FROM save_circuits WHERE Username='".$_SESSION['username']."'";
+            $res = $mysql->query($queryCircuit);
+            echo "<select name='circuits'>";
+            if ($res->num_rows > 0 ) {
+              while ($row = $res->fetch_assoc()) {
+                echo "<option value='".$row['Circuit_name']."'>".$row['Circuit_name']."</option>";
+              }
+            }
+            echo "</select>";
+          }
+          ?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -196,11 +219,19 @@
   <script src="../js/circuitTranscriber.js"></script>
   <script src="../js/challengeTranscriber.js"></script>
   <script src="../js/sandbox.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#saveCircuitButton').click(function() {
+        var circuitText = $('#saveCircuitText').val();
+        var circuitName = $('#nameCircuit').val();
+        if (circuitName != '') {
+          $.post('../php/addCircuit.php', { name:circuitName, circuit:circuitText });
+        }
+      });
+    });
+  </script>
   <!-- Sandbox End -->
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
