@@ -5,7 +5,14 @@
   $circuitText = $_POST['circuit'];
   $circuitName = test_input($_POST['name']);
 
-  $queryCheckName = "SELECT * FROM save_circuits WHERE ";
+  $queryCheckName = "SELECT * FROM save_circuits WHERE Username = '".$_SESSION['username']."' AND Circuit_name ='".$circuitName."'";
+
+  $resName = $mysql->query($queryCheckName);
+
+  if ($resName->num_rows > 0) {
+    echo "Sorry this name already exists!";
+    exit();
+  }
 
   $queryCircuitAdd = "INSERT INTO save_circuits VALUES ('','".$_SESSION['username']."','".$circuitName."','".$circuitText."')";
   $res = $mysql->query($queryCircuitAdd);
