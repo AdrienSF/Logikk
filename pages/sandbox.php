@@ -225,7 +225,9 @@
         var circuitText = $('#saveCircuitText').val();
         var circuitName = $('#nameCircuit').val();
         if (circuitName != '') {
-          $.post('../php/addCircuit.php', { name:circuitName, circuit:circuitText });
+          $.post('../php/addCircuit.php', { name:circuitName, circuit:circuitText }, function(res) {
+            alert(res);
+          });
         }
       });
     });

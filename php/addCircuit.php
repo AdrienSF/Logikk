@@ -5,9 +5,9 @@
   $circuitText = $_POST['circuit'];
   $circuitName = test_input($_POST['name']);
 
-  $queryCheckName = "SELECT * FROM save_circuits WHERE "
+  $queryCheckName = "SELECT * FROM save_circuits WHERE ";
 
-  $queryCircuitAdd = "INSERT INTO save_circuits VALUES ('".$_SESSION['username']."','".$circuitName."','".$circuitText."')";
+  $queryCircuitAdd = "INSERT INTO save_circuits VALUES ('','".$_SESSION['username']."','".$circuitName."','".$circuitText."')";
   $res = $mysql->query($queryCircuitAdd);
 
   if ($res) {
