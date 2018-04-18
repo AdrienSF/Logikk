@@ -96,7 +96,7 @@
           <?php if (isset($_SESSION['username'])) { ?>
             <p>name of Circuit:</p>
             <textarea name="name" rows="1" cols="20" id="nameCircuit"></textarea>
-            <button type="button" name="saveCircuitButton" id="saveCircuitButton">Save</button>
+            <button type="button" name="saveCircuitButton" id="saveCircuitButton" style="display: block">Save</button>
           <?php } ?>
           <br><br>
 
@@ -111,7 +111,7 @@
             require_once '../php/databaseDetails.php';
             $queryCircuit = "SELECT * FROM save_circuits WHERE Username='".$_SESSION['username']."'";
             $res = $mysql->query($queryCircuit);
-            echo "<select name='circuits'>";
+            echo "<select name='circuits' id='loadCircuitSelect'>";
             if ($res->num_rows > 0 ) {
               while ($row = $res->fetch_assoc()) {
                 echo "<option value='".$row['Circuit_name']."'>".$row['Circuit_name']."</option>";
@@ -224,12 +224,23 @@
       $('#saveCircuitButton').click(function() {
         var circuitText = $('#saveCircuitText').val();
         var circuitName = $('#nameCircuit').val();
-        if (circuitName != '') {
+        if (circuitName != "") {
           $.post('../php/addCircuit.php', { name:circuitName, circuit:circuitText }, function(res) {
             alert(res);
           });
+        } else {
+          alert("Name Needed!");
         }
       });
+
+      if ($('#loadCircuitSelect').length != 0) {
+        $('#loadCircuitSelect').change(function() {
+          var selected = $('#loadCircuitSelect option:selected').text();
+          $.post("../php/loadCircuit.php", {loadName: selected}, function(res) {
+            $("#loadCircuitText").val(res);
+          });
+        })
+      }
     });
   </script>
   <!-- Sandbox End -->
