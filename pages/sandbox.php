@@ -91,7 +91,7 @@
           <h4 class="modal-title">Save and Load Circuits</h4>
         </div>
         <div class="modal-body">
-          <p>This circuit's code:</p>
+          <p>This circuit's code: (click to copy)</p>
           <textarea type="text" readonly="true" width="100%" rows="3" id="saveCircuitText"></textarea>
           <?php if (isset($_SESSION['username'])) { ?>
             <p>name of Circuit:</p>
@@ -118,8 +118,24 @@
               }
             }
             echo "</select>";
-          }
           ?>
+
+          <p>Delete from database:</p>
+          <?php
+            require_once '../php/databaseDetails.php';
+            $queryCircuit = "SELECT * FROM save_circuits WHERE Username='".$_SESSION['username']."'";
+            $res = $mysql->query($queryCircuit);
+            echo "<select name='circuits' id='deleteCircuitSelect'>";
+            if ($res->num_rows > 0 ) {
+              while ($row = $res->fetch_assoc()) {
+                echo "<option value='".$row['Circuit_name']."'>".$row['Circuit_name']."</option>";
+              }
+            }
+            echo "</select>";
+            $mysql->close();
+          ?>
+          <button type="button" name="deleteCircuit" class="btn btn-dark" style='display: block' id="deleteCircuitButton">Delete</button>
+          <?php } ?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -219,20 +235,23 @@
   <script src="../js/circuitTranscriber.js"></script>
   <script src="../js/challengeTranscriber.js"></script>
   <script src="../js/sandbox.js"></script>
+  <!-- save load delete from database -->
   <script>
     $(document).ready(function() {
+      //saves circuit
       $('#saveCircuitButton').click(function() {
         var circuitText = $('#saveCircuitText').val();
         var circuitName = $('#nameCircuit').val();
         if (circuitName != "") {
           $.post('../php/addCircuit.php', { name:circuitName, circuit:circuitText }, function(res) {
             alert(res);
+            window.location.reload();
           });
         } else {
           alert("Name Needed!");
         }
       });
-
+      //loads circuit
       if ($('#loadCircuitSelect').length != 0) {
         $('#loadCircuitSelect').change(function() {
           var selected = $('#loadCircuitSelect option:selected').text();
@@ -241,6 +260,24 @@
           });
         })
       }
+
+      //deletes circuit
+      $("#deleteCircuitButton").click(function() {
+        var selected = $('#deleteCircuitSelect option:selected').text();
+        $.post("../php/deleteCircuit.php", {loadName: selected}, function(res) {
+          alert(res);
+          window.location.reload();
+        });
+      });
+
+      //copy circuit text to clipboard
+      $('#saveCircuitText').click(function() {
+        var copytext = document.getElementById('saveCircuitText');
+
+        copytext.select();
+        document.execCommand('Copy');
+        alert('Copied circuit code!');
+      });
     });
   </script>
   <!-- Sandbox End -->
