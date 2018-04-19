@@ -82,7 +82,7 @@
         </li>
         <li class="nav-item">
           <?php if (isset($_SESSION["username"])): ?>
-            <a class="nav-link" href="challengeLibrary.php" id="challengesNav">Challenges</a>
+            <a class="nav-link" href="pages/challengeLibrary.php" id="challengesNav">Challenges</a>
           <?php else: ?>
             <a class="nav-link" id="challengesNav" onclick="alert('Please sign in to continue to Challenges');" style="cursor: pointer">Challenges</a>
           <?php endif; ?>
