@@ -1,8 +1,9 @@
 <?php
   session_start();
   require_once 'databaseDetails.php';
+  require_once 'testInput.php';
 
-  $circuitName = $_POST['loadName'];
+  $circuitName = test_input($_POST['loadName']);
 
   $queryLoadCircuit = "SELECT * FROM save_circuits WHERE Username = '".$_SESSION['username']."' AND Circuit_name = '".$circuitName."'";
 
