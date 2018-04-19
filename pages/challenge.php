@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php session_start(); ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" type="image/ico" href="../favicon.ico"/>
@@ -47,7 +48,11 @@
           <a class="nav-link" href="sandbox.php">Sandbox</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="challengeLibrary.php">Challenges <span class="sr-only">(current)</span></a>
+          <?php if (isset($_SESSION["username"])): ?>
+            <a class="nav-link" href="challengeLibrary.php" id="challengesNav">Challenges</a>
+          <?php else: ?>
+            <a class="nav-link" id="challengesNav" onclick="alert('Please sign in to continue to Challenges');" style="cursor: pointer">Challenges</a>
+          <?php endif; ?>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="tutorial.html">Tutorial</a>
@@ -55,11 +60,24 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
+        <?php if (isset($_SESSION["username"])) { ?>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> Welcome <?php echo $_SESSION["username"];?>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <a class="dropdown-item" href="../php/signOut.php">Sign Out</a>
+            </div>
+          </div>
+
+        <?php } else {?>
+        <!-- Sign In button -->
         <li class="nav-item">
-          <button class="btn btn-primary-outline" type="button" data-toggle="modal" data-target="#signInModal">
+          <button class="btn btn-primary-outline" type="button" onclick="alert('Please go to hompepage to sign in.');"style="margin: 0.5vw 0.2vw" id="signInButton">
           <i class="fas fa-sign-in-alt"></i> Sign In
           </button>
         </li>
+        <?php } ?>
       </ul>
     </div>
   </nav>

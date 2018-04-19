@@ -70,11 +70,17 @@
               <i class="fas fa-user"></i> Welcome <?php echo $_SESSION["username"];?>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <a class="dropdown-item" href="challengeLibrary.php">Challenges</a>
               <a class="dropdown-item" href="../php/signOut.php">Sign Out</a>
             </div>
           </div>
 
+        <?php } else {?>
+        <!-- Sign In button -->
+        <li class="nav-item">
+          <button class="btn btn-primary-outline" type="button" onclick="alert('Please go to hompepage to sign in.');"style="margin: 0.5vw 0.2vw" id="signInButton">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>
+        </li>
         <?php } ?>
       </ul>
     </div>
