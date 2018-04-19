@@ -164,7 +164,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="closeCreateChallenge">Close</button>
         </div>
       </div>
 
@@ -283,6 +283,17 @@
         copytext.select();
         document.execCommand('Copy');
         alert('Copied circuit code!');
+      });
+
+      //copy to clipboard challenges
+      $('#challengeCode').click(function() {
+        var copytext = document.getElementById('challengeCode');
+
+        copytext.select();
+        document.execCommand('Copy');
+        alert('Copied challenge code!');
+        $('#closeCreateChallenge').trigger('click');
+
       });
     });
   </script>
