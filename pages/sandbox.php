@@ -109,7 +109,7 @@
           <p>Load Circuit:</p>
           <textarea type="text" width="100%" rows="3" id="loadCircuitText"></textarea><br>
           <!-- these functions are in circuitTranscriber -->
-          <button class="btn btn-dark" onclick="loadBtnClicked()" data-dismiss="modal" type="button">Load</button>
+          <button class="btn btn-dark" onclick="loadBtnClicked()" data-dismiss="modal" type="button" id="loadCircuitBtn">Load</button>
           <br>
           <?php if (isset($_SESSION['username'])) { ?>
           <p>Load from database:</p>
@@ -125,6 +125,7 @@
             }
             echo "</select>";
           ?>
+          <button type="button" id="loadCircuitDatabaseBtn" class="btn btn-dark" style="display: block">Load</button>
 
           <p>Delete from database:</p>
           <?php
@@ -248,21 +249,22 @@
       $('#saveCircuitButton').click(function() {
         var circuitText = $('#saveCircuitText').val();
         var circuitName = $('#nameCircuit').val();
-        if (circuitName != "") {
+        if (circuitName != "" && circuitName != "Select") {
           $.post('../php/addCircuit.php', { name:circuitName, circuit:circuitText }, function(res) {
             alert(res);
             window.location.reload();
           });
         } else {
-          alert("Name Needed!");
+          alert("Name Needed and cannot be 'Select'!");
         }
       });
       //loads circuit
       if ($('#loadCircuitSelect').length != 0) {
-        $('#loadCircuitSelect').change(function() {
+        $('#loadCircuitDatabaseBtn').click(function() {
           var selected = $('#loadCircuitSelect option:selected').text();
           $.post("../php/loadCircuit.php", {loadName: selected}, function(res) {
             $("#loadCircuitText").val(res);
+            $('#loadCircuitBtn').trigger('click');
           });
         })
       }
