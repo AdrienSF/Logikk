@@ -198,7 +198,7 @@
               <!-- Terms of Use -->
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" required> I agree to the <a href="pages/termsOfUse">Terms of use</a>
+                  <input type="checkbox" required> I agree to the <a href="pages/termsOfUse.html">Terms of use</a>
                 </label>
               </div>
 
