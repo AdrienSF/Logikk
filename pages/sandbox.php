@@ -77,7 +77,7 @@
         <?php } else {?>
         <!-- Sign In button -->
         <li class="nav-item">
-          <button class="btn btn-primary-outline" type="button" onclick="alert('Please go to hompepage to sign in.');"style="margin: 0.5vw 0.2vw" id="signInButton">
+          <button class="btn btn-primary-outline" type="button" onclick="alert('Please go to homepage to sign in.');"style="margin: 0.5vw 0.2vw" id="signInButton">
           <i class="fas fa-sign-in-alt"></i> Sign In
           </button>
         </li>
