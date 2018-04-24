@@ -5,8 +5,8 @@
 
     $name = test_input($_POST["name"]);
     $user = test_input($_POST["username"]);
-    // $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
-    $pass = $_POST["password"];
+    $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    // $pass = $_POST["password"];
     $email = test_input($_POST["email"]);
 
     // checks if email is unique
