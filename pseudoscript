@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "Running \`check-diff' command on server..."
+sleep 1
+echo ". .
+
+Building local zip file...
+adding: run-all-tests (deflated 61%)
+adding: task19.3/run-tests (deflated 49%)
+adding: task19.3/Triple.java (deflated 60%)
+adding: task19.3/IntArrayStats.java (deflated 56%)
+adding: task19.3/MeanMinMaxMinusMean.java (deflated 47%)
+adding: task19.4/run-tests (deflated 49%)
+adding: task19.4/IntArrayStats.java (deflated 56%)
+adding: task19.4/MeanMinMaxMinusMean.java (deflated 45%)
+adding: task19.5/run-tests (deflated 24%)
+adding: task19.5/MoodyGroup.java (deflated 60%)
+adding: task19.5/TestMoodyGroup.java (deflated 73%)
+Running \`diff' command on server..."
+
+sleep 1
+echo ". .
+There is no difference between this submission and the most recent previous
+one."
