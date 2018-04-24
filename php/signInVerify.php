@@ -10,10 +10,12 @@
   if (!empty($_POST))
   {
     $uid = test_input($_POST["username"]);
-    $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    $pass = $_POST["password"];
     // $pass = $_POST["password"];
-    $query = "SELECT * FROM ".$table." WHERE Username = '".$uid."' AND Password='".$pass."'";
+    $query = "SELECT * FROM ".$table." WHERE Username = '".$uid."'";
     $res = $mysql->query($query);
+    $resultArray = $res->fetch_assoc();
+
     if ($res->num_rows == 0)
     {
       $_SESSION["accepted"] = false;
@@ -21,9 +23,12 @@
     }
     elseif ($res->num_rows == 1)
     {
-      $_SESSION["username"] = $uid;
-      $_SESSION["accepted"] = true;
-      echo "Welcome to Logikk!";
+      if (password_verify($pass, $resultArray['Password'])) {
+        $_SESSION["username"] = $uid;
+        echo "Welcome to Logikk!";
+      } else {
+        echo "Incorrect username or password.";
+      }
     }
     else
     {
