@@ -27,6 +27,13 @@
    background-color: #ccc;
 }
 
+/* Style the close button */
+.topright {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;
+}
+
 /* Style the tab content */
 .tabcontent {
    display: none;

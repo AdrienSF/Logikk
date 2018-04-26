@@ -56,30 +56,14 @@
 
 <!------------------------------------------------------->
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <div class="card">
-            <h3 class="text-center"> Want to get involved? </h3>
-            <div class="main-wrap">
-              <div class="sidebar" style="width:100%;"><br>While it is possible to use the sandbox mode as a guest, it is recommended to have an account on <b>Logikk</b> in order to store logic gates and get hands-on experience of the Challenge Mode.<br>
-              To sign up, go to the homepage. Rest assured, your logic gates are safe with us.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <div class="card">
-          </div>
-        </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 offset-1">
           <div class="card">
             <h3 class="text-center"> Sandbox Mode </h3>
             <div class="main-wrap">
 
               <!-- Tab links -->
               <div class="tab">
-               <button class="tablinks" onclick="openCity(event, 'AddNodes')">Add Gates</button>
+               <button class="tablinks" onclick="openCity(event, 'AddNodes')" id="defaultOpen">Add Gates</button>
                <button class="tablinks" onclick="openCity(event, 'AddLines')">Make Connections</button>
                <button class="tablinks" onclick="openCity(event, 'RemoveNodes')">Remove Gates</button>
                <button class="tablinks" onclick="openCity(event, 'Colours')">Colours</button>
@@ -90,24 +74,28 @@
 
               <!-- Tab content -->
               <div id="AddNodes" class="tabcontent">
-                <h3>Add Input Nodes and Logic Gates</h3>
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                <h3>Add Input Nodes and Logic Gates </h3>
                 <p>It is simple to add nodes. Just click on the corresponding button from the top right corner and the respective node would appear in the sandbox! <br> The inputs are labelled from A to H (8 Input Nodes) while the gates are labelled by their names for simplicity. </p>
                 <img src="../images/images-for-tutorial/addgate.gif" width='100%' height='100%' align="center">
               </div>
 
               <div id="AddLines" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>Make Connections</h3>
                 <p> To connect two nodes, just click on the output (the right slot) of the node, drag and drop it on the input (the left slot) of another node. To remove them you just have to click on the connection. Remember, you can not connect incorrect slots or create cycles. </p>
                   <img src="../images/images-for-tutorial/connections.gif" width='100%' height='100%' align="center">
                 </div>
 
               <div id="RemoveNodes" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>Remove Nodes</h3>
                 <p>Sometimes having unnecessary inputs and gates lurking around in the sandbox can be annoying and confusing, which is why we need a way to get rid of them. Right clicking on the nodes does the trick. <br> Be careful because removing nodes could break your circuit! </p>
                 <img src="../images/images-for-tutorial/removegate.gif" width='100%' height='100%' align="center">
               </div>
 
               <div id="Colours" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>Colours</h3>
                 <p> Input nodes are always <font color="#0066ff"><b>blue</b></font> but logic gates are <font color="#6600ff"><b>violet</b></font> when spawned. Upon sufficient inputs connected to them they turn <font color="#0066ff"><b>blue</b></font>. Same is true for OUT too. It turns <font color="#0066ff"><b>blue</b></font> when a valid logic circuit is created and connected to it. <br>
                 A connection is <b>black</b> if the input it is drawn from represents <b>FALSE</b>, <font color="##ff0000"><b>red</b></font> for <b>TRUE</b>. </p>
@@ -115,6 +103,7 @@
               </div>
 
               <div id="TruthTable" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>Truth Table</h3>
                 <p>As logic gate circuits keep getting more complex, it is only human to lose track of what they were supposed to represent and become confused. This has been simplified for you as a neat boolean expression is generated above the sandbox along with a truth table for you to stare at and get more confused. </p>
                 <img src="../images/images-for-tutorial/truthtable.png" width='100%' height='100%' align='center'>
@@ -122,12 +111,14 @@
               </div>
 
               <div id="SaveCircuit" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>How to save your circuits?</h3>
                 <p>In a moment of haste like the building catching fire or a meteor strike it is imperative to save your logic gate circuits. To ensure this functionality there is a <b>'Save/Load' button </b> that one should take advantage of. Make sure you are logged in before attempting to save your circuits. </p>
                 <img src="../images/images-for-tutorial/save.gif" width='100%' height='100%' align="center">
               </div>
 
               <div id="LoadCircuit" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>How to load your circuits?</h3>
                 <p>Loading your previously saved circuits is simple. Just go to Save/Load, select your circuit from the drop-down menu and click on Load. <br>
                 Alternatively you can copy the circuit code that your friend sends you over. </p>
@@ -137,33 +128,54 @@
           </div>
         </div>
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 offset-1">
           <div class="card">
             <h3 class="text-center"> Challenge Mode </h3>
             <div class="main-wrap">
                 <!-- Tab links -->
               <div class="tab">
-                 <button class="tablinks" onclick="openCity(event, 'Intro')">Intro</button>
+                 <button class="tablinks" onclick="openCity(event, 'Challenge')" id="defaultOpen">Loading a Challenge</button>
                  <button class="tablinks" onclick="openCity(event, 'Restrictions')">Restrictions</button>
-                 <button class="tablinks" onclick="openCity(event, 'Colours')">Colours</button>
-                 <button class="tablinks" onclick="openCity(event, 'Tokyo')">Truth Table</button>
-                 <button class="tablinks" onclick="openCity(event, 'Tokyo')">Save Circuits</button>
-                 <button class="tablinks" onclick="openCity(event, 'Tokyo')">Load Circuits</button>
+                 <button class="tablinks" onclick="openCity(event, 'Alert')">Red Truth Table?</button>
+                 <button class="tablinks" onclick="openCity(event, 'Solve')">Solving a Challenge</button>
+                 <button class="tablinks" onclick="openCity(event, 'Submission')">How to Submit?</button>
+                 <button class="tablinks" onclick="openCity(event, 'Custom')">Custom Challenge</button>
               </div>
 
               <!-- Tab content -->
-              <div id="Intro" class="tabcontent">
-                 <h3>Intro</h3>
+              <div id="Challenge" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                 <h3>Loading a Challenge</h3>
                  <p>AddNodes is the capital city of England.</p>
               </div>
 
               <div id="Restrictions" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                  <h3>Restrictions</h3>
                  <p>RemoveGates is the capital of France.</p>
               </div>
 
-              <div id="Tokyo" class="tabcontent">
-                 <h3>Tokyo</h3>
+              <div id="Alert" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                <h3>Red Truth Table?</h3>
+                <p>Tokyo is the capital of Japan.</p>
+              </div>
+
+              <div id="Solve" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                 <h3>Solving a Challenge</h3>
+                 <p>Tokyo is the capital of Japan.</p>
+              </div>
+
+              <div id="Submission" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                <h3>Custom Challenge</h3>
+                <p>Tokyo is the capital of Japan.</p>
+              </div>
+
+              <div id="Custom" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                 <h3>Custom Challenge</h3>
                  <p>Tokyo is the capital of Japan.</p>
               </div>
             </div>
@@ -172,7 +184,7 @@
 
 <!----------------------------------------------------------->
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 offset-1">
           <div class="card">
             <h3 class="text-center">Finally, what makes our website so great</h3>
             <div class="main-wrap">
@@ -201,25 +213,28 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <script> function openCity(evt, cityName) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
+  // Declare all variables
+  var i, tabcontent, tablinks;
 
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+  // Get the element with id="defaultOpen" and click on it
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
 
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+} // openCity
 
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-} </script>
+  document.getElementById("defaultOpen").click();
+</script>
 </body>
 
 </html>
