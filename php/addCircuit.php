@@ -14,7 +14,7 @@
     exit();
   }
 
-  $queryCircuitAdd = "INSERT INTO save_circuits VALUES ('','".$_SESSION['username']."','".$circuitName."','".$circuitText."')";
+  $queryCircuitAdd = "INSERT INTO save_circuits VALUES ('0','".$_SESSION['username']."','".$circuitName."','".$circuitText."')";
   $res = $mysql->query($queryCircuitAdd);
 
   if ($res) {
