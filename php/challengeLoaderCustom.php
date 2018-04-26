@@ -1,6 +1,5 @@
 <?php
   $data = $_POST['data'];
-  echo json_encode($data);
 ?>
 
 <script>
