@@ -11,6 +11,7 @@
 
   <!-- Ajax -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
