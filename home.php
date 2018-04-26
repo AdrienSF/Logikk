@@ -22,7 +22,7 @@
   <!-- Bootstrap javascript CDN -->
   <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 
-  <link href="../css/font.css" rel="stylesheet">
+  <link href="css/font.css" rel="stylesheet">
 
 
   <style media="screen">
