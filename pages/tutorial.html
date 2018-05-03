@@ -134,49 +134,48 @@
             <div class="main-wrap">
                 <!-- Tab links -->
               <div class="tab">
-                 <button class="tablinks" onclick="openCity(event, 'Challenge')" id="defaultOpen">Loading a Challenge</button>
+                 <button class="tablinks" onclick="openCity(event, 'Challenge')" id="defaultOpen">The Challenge Library</button>
                  <button class="tablinks" onclick="openCity(event, 'Restrictions')">Restrictions</button>
                  <button class="tablinks" onclick="openCity(event, 'Alert')">Red Truth Table?</button>
                  <button class="tablinks" onclick="openCity(event, 'Solve')">Solving a Challenge</button>
-                 <button class="tablinks" onclick="openCity(event, 'Submission')">How to Submit?</button>
                  <button class="tablinks" onclick="openCity(event, 'Custom')">Custom Challenge</button>
               </div>
 
               <!-- Tab content -->
               <div id="Challenge" class="tabcontent">
                 <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
-                 <h3>Loading a Challenge</h3>
-                 <p>AddNodes is the capital city of England.</p>
+                 <h3>The Challenge Library</h3>
+                 <p>We have a challenge library where all our challenges are listed. Check them out!</p>
+                 <img src="../images/images-for-tutorial/library.png" width='100%' height='100%' align="center">
               </div>
 
               <div id="Restrictions" class="tabcontent">
                 <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                  <h3>Restrictions</h3>
-                 <p>RemoveGates is the capital of France.</p>
+                 <p>Every challenge has some specified restrictions for the number of input nodes and logic gates that the user can spawn. The spawning button gets disabled as soon as the restriction is hit.</p>
+                 <img src="../images/images-for-tutorial/restrict.gif" width='100%' height='100%' align="center">
+
               </div>
 
               <div id="Alert" class="tabcontent">
                 <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>Red Truth Table?</h3>
-                <p>Tokyo is the capital of Japan.</p>
+                <p>The truth table rows don't only indicate the logic gate circuit equivalence in the Challenge Mode, they have an additional feature. Rows in the output table remain red until the corresponding Output column element matches the desired output in the Goal column.</p>
+                <img src="../images/images-for-tutorial/redtruth.gif" width='100%' height='100%' align="center">
               </div>
 
               <div id="Solve" class="tabcontent">
                 <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                  <h3>Solving a Challenge</h3>
-                 <p>Tokyo is the capital of Japan.</p>
-              </div>
-
-              <div id="Submission" class="tabcontent">
-                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
-                <h3>Custom Challenge</h3>
-                <p>Tokyo is the capital of Japan.</p>
+                 <p>In order to solve a challenge, one needs to match the OUT column to the GOAL column in the truth table which enables the Submit button. Have fun solving our pre-made challenges! (The image is cropped intentionally to not give away the solution, we are aware our users are most probably cheeky)</p>
+                 <img src="../images/images-for-tutorial/solve.gif" width='75%' height='50%' align="right">
               </div>
 
               <div id="Custom" class="tabcontent">
                 <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                  <h3>Custom Challenge</h3>
-                 <p>Tokyo is the capital of Japan.</p>
+                 <p>There is another cool feature of Logikk if you are not fascinated by it already. You can generate a custom challenge by going to the sandbox and creating a logic gate circuit, then clicking on <b>'Create Custom Challenge'</b>. A challenge code would be generated which you can copy and share with your friends. In order to load a custom challenge all they need to do it go to the Challenges and paste the code in the <b>'Load Custom Challenge'</b> modal.</p>
+                 <img src="../images/images-for-tutorial/custom.gif" width='100%' height='100%' align="center">
               </div>
             </div>
           </div>
