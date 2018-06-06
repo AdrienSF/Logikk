@@ -12,7 +12,7 @@
     $rows[$i]['id'] = $row['id'];
     $rows[$i]['name'] = $row['name'];
     $rows[$i]['text'] = $row['description'];
-    // $rows[$i]['in'] = $row['in_num'];
+    $rows[$i]['in'] = $row['in_num'];
     // $rows[$i]['and'] = $row['and_num'];
     // $rows[$i]['or'] = $row['or_num'];
     // $rows[$i]['xor'] = $row['xor_num'];
@@ -29,6 +29,7 @@
     var id   = arr[i]['id'];
     var name = arr[i]['name'];
     var text = arr[i]['text'];
-    appendChallenge(id, name, text);
+    var complexity = arr[i]['in'];
+    appendChallenge(id, name, text, complexity);
   }
 </script>
