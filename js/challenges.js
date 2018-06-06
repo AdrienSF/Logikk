@@ -1,6 +1,6 @@
 var row = document.getElementById("challengeCards");
 
-function appendChallenge(id, name, description) {
+function appendChallenge(id, name, description, complexity) {
   var column = document.createElement("div");
   column.className = "col-lg-4 col-md-4 col-sm-4 col-xs-4";
 
@@ -10,7 +10,7 @@ function appendChallenge(id, name, description) {
 
   var card = document.createElement("div");
   card.className = "card";
-  card.style = getBackgroundColor(id);
+  card.style = getBackgroundColor(complexity);
 
   var h3 = document.createElement("h3");
   h3.className = "text-center";
@@ -30,11 +30,11 @@ function appendChallenge(id, name, description) {
   row.appendChild(column);
 }
 
-function getBackgroundColor(challengeID)
+function getBackgroundColor(complexity)
 {
-  var inputs = 3;//get number of inputs from a table called challengeID in database if it exists
+  var inputs = complexity;
   var colorCode = "F9F9F9";
-  if (inputs === 2) colorCode = "5CB85C";//should really be switch/case
+  if (inputs === 2) colorCode = "5CB85C";
   if (inputs === 3) colorCode = "5BC0DE";
   if (inputs === 4) colorCode = "428BCA";
   if (inputs === 5) colorCode = "D9534F";
