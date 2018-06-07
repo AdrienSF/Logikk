@@ -55,33 +55,45 @@
         <div class="row clearfix">
           <h2>TERMS OF USE</h2>
           <div class="right">
-            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+            <a id="ccBadge" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
           </div>
         </div>
       </div>
-    <!-- name, username, email, completed challenges, created challenges -->
-    <div class="row clearfix">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
+      <!-- name, username, email, completed challenges, created challenges -->
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
 
-          <p></p>
-          <h2 class="text-center">Terms of use</h2>
+            <p></p>
+            <h2 class="text-center">Terms of use</h2>
 
-          <p class="text-center">This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></p>
-          <p class="text-center">
-            The website and its features are to be used for non-commercial educational purposes only.<br>
-            User shall not attempt to seek and/or exploit security vulnerabilities that may arise in the website, in the event that the user may find such a vulnerability they are entitled to inform the website developers of said vulnerability.<br>
-            The website (with all its might) is unable to track human intent and hence will not be liable for the desired purpose of the logic gate construction.<br>
-            In the case of violation by user of any of the T and C’s the website holds the right to prevent the said user from access to the services of the website.<br>
-          </p>
+            <p class="text-center">This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></p>
+            <p class="text-center">
+              The website and its features are to be used for non-commercial educational purposes only.<br>
+              User shall not attempt to seek and/or exploit security vulnerabilities that may arise in the website, in the event that the user may find such a vulnerability they are entitled to inform the website developers of said vulnerability.<br>
+              The website (with all its might) is unable to track human intent and hence will not be liable for the desired purpose of the logic gate construction.<br>
+              In the case of violation by user of any of the T and C’s the website holds the right to prevent the said user from access to the services of the website.<br>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <div id="derp"></div>
+
 
   </section>
   <!-- profile End -->
 
+  <script>
+
+  for (i = 0; i < 1111; i++){
+    var ccBadge = document.getElementById("ccBadge");
+    var ccBadgeCln = ccBadge.cloneNode(true);
+    document.getElementById("derp").appendChild(ccBadgeCln);
+  }
+
+  </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
